@@ -14,6 +14,9 @@
 class Major < ApplicationRecord
   enum category: { disciplinary: 0, interdisciplinary: 1 }
 
+  has_many :major_users, dependent: :destroy
+  has_many :users, through: :major_users
+
   validates :category, :description, :video_url_code, presence: true
 
   validates :name, presence: true,

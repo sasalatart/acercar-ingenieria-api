@@ -12,6 +12,11 @@ class UsersController < ApplicationController
     json_response @user
   end
 
+  def update
+    @user.update!(user_params)
+    json_response(@user, :ok)
+  end
+
   def activate
     @user.toggle_active(true)
     json_response @user
@@ -27,5 +32,14 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user)
+          .permit(:email,
+                  :first_name,
+                  :last_name,
+                  :generation,
+                  major_users_attributes: %i[id major_id _destroy])
   end
 end

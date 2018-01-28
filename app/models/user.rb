@@ -37,6 +37,11 @@ class User < ActiveRecord::Base
 
   before_create :capitalize
 
+  has_many :major_users, dependent: :destroy
+  has_many :majors, through: :major_users
+
+  accepts_nested_attributes_for :major_users, allow_destroy: true
+
   validates :email, presence: true,
                     format: { with: /[0-9._%a-z\-]+@(?:uc|puc|ing.puc)\.cl/i }
 

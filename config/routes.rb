@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  resources :users, only: %i[index show] do
+  resources :users, only: %i[index show update] do
     member do
       put :activate
       put :deactivate
