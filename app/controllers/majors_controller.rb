@@ -34,6 +34,10 @@ class MajorsController < ApplicationController
   end
 
   def major_params
-    params.permit(:name, :category, :description, :video_url_code)
+    params.permit(:name,
+                  :category,
+                  :description,
+                  :video_url_code,
+                  :logo)
   end
 end

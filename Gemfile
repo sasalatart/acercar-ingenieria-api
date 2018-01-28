@@ -16,6 +16,8 @@ gem 'rolify'
 gem 'kaminari'
 gem 'api-pagination'
 
+gem 'paperclip', '~> 5.0.0'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
