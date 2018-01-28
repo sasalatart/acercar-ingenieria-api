@@ -13,6 +13,9 @@ gem 'devise_token_auth'
 gem 'cancancan', '~> 2.0'
 gem 'rolify'
 
+gem 'kaminari'
+gem 'api-pagination'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show activate deactivate]
 
   def index
-    render json: User.all
+    paginate json: User.all
   end
 
   def show
