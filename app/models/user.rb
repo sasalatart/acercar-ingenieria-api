@@ -41,4 +41,16 @@ class User < ActiveRecord::Base
   validates :generation, presence: true,
                          numericality: { greater_than_or_equal_to: 1904,
                                          less_than_or_equal_to: Time.now.year }
+
+  def toggle_active(active)
+    update(active: active)
+  end
+
+  def active_for_authentication?
+    super && active
+  end
+
+  def inactive_message
+    'Sorry, this account has been deactivated.'
+  end
 end
