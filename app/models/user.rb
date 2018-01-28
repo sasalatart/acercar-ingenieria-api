@@ -28,10 +28,11 @@
 #
 
 class User < ActiveRecord::Base
-  # Include default devise modules.
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable
   include DeviseTokenAuth::Concerns::User
+
+  rolify
 
   validates :email, presence: true,
                     format: { with: /[0-9._%a-z\-]+@(?:uc|puc|ing.puc)\.cl/i }
