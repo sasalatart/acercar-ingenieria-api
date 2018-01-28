@@ -5,22 +5,22 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show activate deactivate]
 
   def index
-    paginate json: User.all
+    paginated_json_response User.all
   end
 
   def show
-    render json: @user
+    json_response @user
   end
 
   def activate
     @user.toggle_active(true)
-    render json: @user
+    json_response @user
   end
 
   def deactivate
     @user.toggle_active(false)
     sign_out @user
-    render json: @user
+    json_response @user
   end
 
   private
