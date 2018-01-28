@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
 
   rolify
 
+  before_create :capitalize
+
   validates :email, presence: true,
                     format: { with: /[0-9._%a-z\-]+@(?:uc|puc|ing.puc)\.cl/i }
 
@@ -53,5 +55,13 @@ class User < ActiveRecord::Base
 
   def inactive_message
     'Sorry, this account has been deactivated.'
+  end
+
+  private
+
+  def capitalize
+    %i[first_name last_name].each do |name|
+      self[name] = self[name].split.map(&:capitalize).join(' ')
+    end
   end
 end
