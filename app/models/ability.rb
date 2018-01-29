@@ -9,7 +9,8 @@ class Ability
     elsif user.present?
       can [:update], User, id: user.id
       can [:pinned], Announcement
-      can [:index, :show], Major
+      can %i[index show articles], Major
+      can %i[index show], Article
     end
   end
 end

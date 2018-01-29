@@ -14,7 +14,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :majors, only: %i[index show create update destroy]
+  resources :majors, only: %i[index show create update destroy] do
+    member do
+      get :articles
+    end
+  end
+
+  resources :articles, only: %i[index show create update destroy]
+  resources :categories, only: %i[index create update destroy]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

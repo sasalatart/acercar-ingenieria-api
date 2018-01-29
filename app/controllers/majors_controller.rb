@@ -2,10 +2,10 @@ class MajorsController < ApplicationController
   load_and_authorize_resource
 
   before_action :authenticate_user!
-  before_action :set_major, only: %i[show update destroy]
+  before_action :set_major, only: %i[show update destroy, articles]
 
   def index
-    paginate json: User.all
+    paginated_json_response Major.all
   end
 
   def show
@@ -25,6 +25,10 @@ class MajorsController < ApplicationController
   def destroy
     @major.delete
     head :no_content
+  end
+
+  def articles
+    paginated_json_response @major.articles
   end
 
   private

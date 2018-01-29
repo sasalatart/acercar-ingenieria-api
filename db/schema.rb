@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128232432) do
+ActiveRecord::Schema.define(version: 20180129002033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,42 @@ ActiveRecord::Schema.define(version: 20180128232432) do
     t.string "picture_content_type"
     t.integer "picture_file_size"
     t.datetime "picture_updated_at"
+  end
+
+  create_table "article_categories", force: :cascade do |t|
+    t.bigint "article_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_article_categories_on_article_id"
+    t.index ["category_id"], name: "index_article_categories_on_category_id"
+  end
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "short_description"
+    t.text "content"
+    t.bigint "major_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["major_id"], name: "index_articles_on_major_id"
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "attachable_type"
+    t.integer "attachable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "document_file_name"
+    t.string "document_content_type"
+    t.integer "document_file_size"
+    t.datetime "document_updated_at"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "major_users", force: :cascade do |t|
@@ -96,6 +132,9 @@ ActiveRecord::Schema.define(version: 20180128232432) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "article_categories", "articles"
+  add_foreign_key "article_categories", "categories"
+  add_foreign_key "articles", "majors"
   add_foreign_key "major_users", "majors"
   add_foreign_key "major_users", "users"
 end
