@@ -8,6 +8,7 @@ class Ability
       can :manage, :all
     elsif user.present?
       can [:update], User, id: user.id
+      can [:pinned], Announcement
       can [:index, :show], Major
     end
   end
