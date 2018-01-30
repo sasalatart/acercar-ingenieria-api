@@ -10,12 +10,12 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.create!(category_params)
-    json_response(@category, :created)
+    json_response @category, :created
   end
 
   def update
     @category.update!(category_params)
-    json_response(@category, :ok)
+    json_response @category
   end
 
   def destroy

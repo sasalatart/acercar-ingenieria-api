@@ -14,12 +14,12 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.create!(article_params)
-    json_response(@article, :created)
+    json_response @article, :created
   end
 
   def update
     @article.update!(article_params)
-    json_response(@article, :ok)
+    json_response @article
   end
 
   def destroy

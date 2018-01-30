@@ -9,17 +9,17 @@ class MajorsController < ApplicationController
   end
 
   def show
-    render json: @major
+    json_response @major
   end
 
   def create
     @major = Major.create!(major_params)
-    json_response(@major, :created)
+    json_response @major, :created
   end
 
   def update
     @major.update!(major_params)
-    json_response(@major, :ok)
+    json_response @major
   end
 
   def destroy

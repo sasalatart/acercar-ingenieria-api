@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def update
     @user.update!(user_params)
-    json_response(@user, :ok)
+    json_response @user
   end
 
   def admin

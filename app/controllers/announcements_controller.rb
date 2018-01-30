@@ -5,7 +5,7 @@ class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: %i[update destroy]
 
   def index
-    paginated_json_response json: Announcement.all
+    paginated_json_response Announcement.all
   end
 
   def pinned
@@ -14,12 +14,12 @@ class AnnouncementsController < ApplicationController
 
   def create
     @announcement = Announcement.create!(announcement_params)
-    json_response(@announcement, :created)
+    json_response @announcement, :created
   end
 
   def update
     @announcement.update!(announcement_params)
-    json_response(@announcement, :ok)
+    json_response @announcement
   end
 
   def destroy
