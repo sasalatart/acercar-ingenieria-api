@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :majors, only: %i[index show create update destroy] do
     member do
+      get :users
       get :articles
     end
   end

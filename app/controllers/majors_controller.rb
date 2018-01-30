@@ -25,6 +25,10 @@ class MajorsController < ApplicationController
     head :no_content
   end
 
+  def users
+    paginated_json_response @major.users
+  end
+
   def articles
     paginated_json_response @major.articles
   end
