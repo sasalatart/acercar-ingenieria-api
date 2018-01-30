@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   before_action :authenticate_user!
-  before_action :set_user, only: %i[show activate deactivate]
+  before_action :set_user, only: %i[show active]
 
   def index
     paginated_json_response User.all
@@ -26,14 +26,9 @@ class UsersController < ApplicationController
     json_response @user
   end
 
-  def activate
-    @user.toggle_active(true)
-    json_response @user
-  end
-
-  def deactivate
-    @user.toggle_active(false)
-    sign_out @user
+  def active
+    @user.toggle! :active
+    sign_out @user unless @user.active?
     json_response @user
   end
 

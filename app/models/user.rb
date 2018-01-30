@@ -55,10 +55,6 @@ class User < ActiveRecord::Base
     has_role?(:admin) ? remove_role(:admin) : add_role(:admin)
   end
 
-  def toggle_active(active)
-    update(active: active)
-  end
-
   def active_for_authentication?
     super && active
   end

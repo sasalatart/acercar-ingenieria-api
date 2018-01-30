@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show update] do
     member do
-      put :activate
-      put :deactivate
+      patch :active
       put :admin
     end
 
