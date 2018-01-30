@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
-  before_action :authenticate_user!
 
   def index
     paginated_json_response Article.find_by_categories params[:category_ids]
