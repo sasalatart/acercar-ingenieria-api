@@ -33,6 +33,11 @@ class MajorsController < ApplicationController
     paginated_json_response @major.articles
   end
 
+  def admin
+    @major.toggle_admin params[:user_id]
+    json_response @major
+  end
+
   private
 
   def major_params

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     member do
       get :users
       get :articles
+      put 'users/:user_id/admin', to: 'majors#admin'
     end
   end
 

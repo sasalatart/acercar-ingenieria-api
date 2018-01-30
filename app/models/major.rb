@@ -16,6 +16,8 @@
 #
 
 class Major < ApplicationRecord
+  resourcify
+
   enum category: { disciplinary: 0, interdisciplinary: 1 }
 
   has_many :major_users, dependent: :destroy
@@ -37,4 +39,10 @@ class Major < ApplicationRecord
 
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
   validates_attachment_size :logo, less_than: 2.megabytes
+
+  def toggle_admin(user_id)
+    user = User.find(user_id)
+    action = user.has_role?(:major_admin, self) ? 'remove_role' : 'add_role'
+    user.send(action.to_sym, :major_admin, self)
+  end
 end
