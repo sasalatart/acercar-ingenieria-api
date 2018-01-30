@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     member do
       put :activate
       put :deactivate
+      put :admin
     end
   end
 

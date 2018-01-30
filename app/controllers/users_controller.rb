@@ -17,6 +17,11 @@ class UsersController < ApplicationController
     json_response(@user, :ok)
   end
 
+  def admin
+    @user.toggle_admin
+    json_response @user
+  end
+
   def activate
     @user.toggle_active(true)
     json_response @user
