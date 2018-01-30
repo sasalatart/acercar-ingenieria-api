@@ -6,12 +6,15 @@ class Ability
 
     if user.has_role? :admin
       can :manage, :all
-    elsif user.present?
+    elsif !user.new_record?
       can [:update], Major, id: Major.with_role(:major_admin, user).pluck(:id)
+
       can [:update], User, id: user.id
-      can [:pinned], Announcement
-      can %i[index show users articles admins], Major
+      can %i[users articles admins], Major
       can %i[index show], Article
     end
+
+    can %i[index show], Major
+    can [:pinned], Announcement
   end
 end
