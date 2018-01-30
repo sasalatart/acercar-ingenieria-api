@@ -7,6 +7,7 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.present?
+      can [:update], Major, id: Major.with_role(:major_admin, user).pluck(:id)
       can [:update], User, id: user.id
       can [:pinned], Announcement
       can %i[index show users articles admins], Major
