@@ -1,8 +1,6 @@
 class CategoriesController < ApplicationController
   load_and_authorize_resource
-
   before_action :authenticate_user!
-  before_action :set_category, only: %i[update destroy]
 
   def index
     paginated_json_response Category.all
@@ -24,10 +22,6 @@ class CategoriesController < ApplicationController
   end
 
   private
-
-  def set_category
-    @category = Category.find(params[:id])
-  end
 
   def category_params
     params.permit(:name)

@@ -1,8 +1,6 @@
 class MajorsController < ApplicationController
   load_and_authorize_resource
-
   before_action :authenticate_user!
-  before_action :set_major, only: %i[show update destroy, articles]
 
   def index
     paginated_json_response Major.all
@@ -32,10 +30,6 @@ class MajorsController < ApplicationController
   end
 
   private
-
-  def set_major
-    @major = Major.find(params[:id])
-  end
 
   def major_params
     params.permit(:name,

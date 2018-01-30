@@ -1,8 +1,6 @@
 class AnnouncementsController < ApplicationController
   load_and_authorize_resource
-
   before_action :authenticate_user!
-  before_action :set_announcement, only: %i[update destroy]
 
   def index
     paginated_json_response Announcement.all
@@ -28,10 +26,6 @@ class AnnouncementsController < ApplicationController
   end
 
   private
-
-  def set_announcement
-    @announcement = Announcement.find(params[:id])
-  end
 
   def announcement_params
     params.permit(:text, :pinned, :picture)

@@ -1,8 +1,6 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
-
   before_action :authenticate_user!
-  before_action :set_article, only: %i[show update destroy]
 
   def index
     paginated_json_response Article.find_by_categories params[:category_ids]
@@ -28,10 +26,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
-  def set_article
-    @article = Article.find(params[:id])
-  end
 
   def article_params
     params.permit(:id,
