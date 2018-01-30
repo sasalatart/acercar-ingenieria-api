@@ -33,6 +33,10 @@ class MajorsController < ApplicationController
     paginated_json_response @major.articles
   end
 
+  def admins
+    paginated_json_response User.with_role :major_admin, @major
+  end
+
   def admin
     @major.toggle_admin params[:user_id]
     json_response @major
