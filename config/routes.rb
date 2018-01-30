@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       put :deactivate
       put :admin
     end
+
+    collection do
+      get :admins
+    end
   end
 
   resources :announcements, only: %i[index create update destroy] do
