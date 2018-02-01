@@ -1,4 +1,5 @@
 class MajorsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show questions]
   load_and_authorize_resource
 
   def index

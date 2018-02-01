@@ -1,4 +1,5 @@
 class AnnouncementsController < ApplicationController
+  before_action :authenticate_user!, except: [:pinned]
   load_and_authorize_resource
 
   def index
