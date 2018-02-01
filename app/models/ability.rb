@@ -16,6 +16,7 @@ class Ability
       can [:pending_questions], Major, id: majors_user_is_admin
 
       can %i[index show], Article
+      can %i[create update destroy], Article, major_id: majors_user_is_admin
 
       can [:create], Question
       can %i[update destroy], Question, major_id: majors_user_is_admin
