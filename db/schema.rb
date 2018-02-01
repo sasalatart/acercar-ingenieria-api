@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129002033) do
+ActiveRecord::Schema.define(version: 20180131223535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,17 @@ ActiveRecord::Schema.define(version: 20180129002033) do
     t.datetime "logo_updated_at"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
+    t.text "answer"
+    t.bigint "author_id"
+    t.bigint "major_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_questions_on_author_id"
+    t.index ["major_id"], name: "index_questions_on_major_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -137,4 +148,6 @@ ActiveRecord::Schema.define(version: 20180129002033) do
   add_foreign_key "articles", "majors"
   add_foreign_key "major_users", "majors"
   add_foreign_key "major_users", "users"
+  add_foreign_key "questions", "majors"
+  add_foreign_key "questions", "users", column: "author_id"
 end

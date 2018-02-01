@@ -18,11 +18,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :questions, only: %i[index create update destroy] do
+    collection do
+      get :pending
+    end
+  end
+
   resources :majors, only: %i[index show create update destroy] do
     member do
       get :users
-      get :articles
       get :admins
+      get :articles
+      get :questions
+      get 'questions/pending', to: 'majors#pending_questions'
       put 'users/:user_id/admin', to: 'majors#admin'
     end
   end

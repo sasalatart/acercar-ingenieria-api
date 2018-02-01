@@ -45,4 +45,9 @@ class Major < ApplicationRecord
     action = user.has_role?(:major_admin, self) ? 'remove_role' : 'add_role'
     user.send(action.to_sym, :major_admin, self)
   end
+
+  def self.user_admin?(user, major_id)
+    return true if user.has_role? :admin
+    Major.with_role(:major_admin, user).pluck(:id).include? major_id.to_i
+  end
 end

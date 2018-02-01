@@ -28,12 +28,20 @@ class MajorsController < ApplicationController
     paginated_json_response @major.users
   end
 
+  def admins
+    paginated_json_response User.with_role :major_admin, @major
+  end
+
   def articles
     paginated_json_response @major.articles
   end
 
-  def admins
-    paginated_json_response User.with_role :major_admin, @major
+  def questions
+    paginated_json_response Question.of_major(params[:id]).answered
+  end
+
+  def pending_questions
+    paginated_json_response Question.of_major(params[:id]).not_answered
   end
 
   def admin
