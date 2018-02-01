@@ -4,7 +4,10 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    majors_user_is_admin = Major.with_role(:major_admin, user).pluck(:id)
+    majors_user_is_admin = []
+    unless user.new_record?
+      majors_user_is_admin = Major.with_role(:major_admin, user).pluck(:id)
+    end
 
     if user.active? && user.has_role?(:admin)
       can :manage, :all
