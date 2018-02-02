@@ -13,6 +13,7 @@
 #  logo_content_type :string
 #  logo_file_size    :integer
 #  logo_updated_at   :datetime
+#  comments_count    :integer          default(0)
 #
 
 class Major < ApplicationRecord

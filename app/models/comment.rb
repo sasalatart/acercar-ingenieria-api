@@ -18,7 +18,8 @@ class Comment < ApplicationRecord
 
   belongs_to :author, class_name: :User
 
-  belongs_to :commentable, polymorphic: true
+  belongs_to :commentable, polymorphic: true,
+                           counter_cache: true
 
   belongs_to :parent_comment, class_name: :Comment,
                               optional: true

@@ -10,6 +10,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  likes_count       :integer          default(0)
+#  comments_count    :integer          default(0)
 #
 
 class Article < ApplicationRecord

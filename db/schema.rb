@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202010825) do
+ActiveRecord::Schema.define(version: 20180202032327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20180202010825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0
+    t.integer "comments_count", default: 0
     t.index ["major_id"], name: "index_articles_on_major_id"
   end
 
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 20180202010825) do
     t.string "logo_content_type"
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer "comments_count", default: 0
   end
 
   create_table "questions", force: :cascade do |t|
