@@ -28,6 +28,9 @@ class Ability
       can [:create], Comment
       can [:destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
       can %i[update destroy], Comment, author_id: user.id
+
+      can [:create], Like
+      can [:destroy], Like, user_id: user.id
     elsif user.active? && !user.new_record?
       can [:update], User, id: user.id
 
@@ -40,6 +43,9 @@ class Ability
 
       can [:create], Comment
       can %i[update destroy], Comment, author_id: user.id
+
+      can [:create], Like
+      can [:destroy], Like, user_id: user.id
     end
 
     can %i[index show questions], Major

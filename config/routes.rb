@@ -37,13 +37,18 @@ Rails.application.routes.draw do
   end
 
   resources :articles, only: %i[index show create update destroy] do
+    resources :likes, only: %i[create destroy], controller: :likes
+
     member do
       get :comments
     end
   end
 
   resources :categories, only: %i[index create update destroy]
-  resources :comments, only: %i[create update destroy]
+
+  resources :comments, only: %i[create update destroy] do
+    resources :likes, only: %i[create destroy], controller: :likes
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201221756) do
+ActiveRecord::Schema.define(version: 20180202010825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180201221756) do
     t.bigint "major_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
     t.index ["major_id"], name: "index_articles_on_major_id"
   end
 
@@ -70,10 +71,21 @@ ActiveRecord::Schema.define(version: 20180201221756) do
     t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "likeable_type"
+    t.bigint "likeable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "major_users", force: :cascade do |t|
@@ -162,6 +174,7 @@ ActiveRecord::Schema.define(version: 20180201221756) do
   add_foreign_key "articles", "majors"
   add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "likes", "users"
   add_foreign_key "major_users", "majors"
   add_foreign_key "major_users", "users"
   add_foreign_key "questions", "majors"

@@ -9,6 +9,7 @@
 #  major_id          :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  likes_count       :integer          default(0)
 #
 
 class Article < ApplicationRecord
@@ -18,6 +19,7 @@ class Article < ApplicationRecord
   has_many :categories, through: :article_categories
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 
   accepts_nested_attributes_for :article_categories, allow_destroy: true
   accepts_nested_attributes_for :attachments, allow_destroy: true
