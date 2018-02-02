@@ -15,6 +15,7 @@ gem 'rolify'
 
 gem 'kaminari'
 gem 'api-pagination'
+gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'paperclip', '~> 5.0.0'
 

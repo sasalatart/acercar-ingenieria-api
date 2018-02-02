@@ -15,24 +15,31 @@ class Ability
       can [:update], User, id: user.id
 
       can [:update], Major, id: majors_user_is_admin
-      can %i[users admins articles], Major
+      can %i[users admins articles comments], Major
       can [:pending_questions], Major, id: majors_user_is_admin
 
-      can %i[index show], Article
+      can %i[index show comments], Article
       can %i[create update destroy], Article, major_id: majors_user_is_admin
 
       can [:create], Question
       can %i[update destroy], Question, major_id: majors_user_is_admin
       can %i[update destroy], Question, author_id: user.id
+
+      can [:create], Comment
+      can [:destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
+      can %i[update destroy], Comment, author_id: user.id
     elsif user.active? && !user.new_record?
       can [:update], User, id: user.id
 
-      can %i[users admins articles], Major
+      can %i[users admins articles comments], Major
 
       can [:create], Question
       can %i[update destroy], Question, author_id: user.id
 
-      can %i[index show], Article
+      can %i[index show comments], Article
+
+      can [:create], Comment
+      can %i[update destroy], Comment, author_id: user.id
     end
 
     can %i[index show questions], Major

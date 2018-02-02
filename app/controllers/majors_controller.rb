@@ -45,6 +45,10 @@ class MajorsController < ApplicationController
     paginated_json_response Question.of_major(params[:id]).not_answered
   end
 
+  def comments
+    paginated_json_response @major.comments.primary
+  end
+
   def admin
     @major.toggle_admin params[:user_id]
     json_response @major
