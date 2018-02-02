@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  include ActAsPolymorphic
+
   before_action :authenticate_user!
   load_and_authorize_resource
 
@@ -10,17 +12,5 @@ class LikesController < ApplicationController
   def destroy
     @like.destroy
     head :no_content
-  end
-
-  private
-
-  def find_likeable
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return Regexp.last_match(1).classify.constantize.find(value)
-      end
-    end
-
-    nil
   end
 end

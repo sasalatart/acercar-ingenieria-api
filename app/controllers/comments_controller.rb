@@ -1,11 +1,17 @@
 class CommentsController < ApplicationController
+  include ActAsPolymorphic
+
   before_action :authenticate_user!
   load_and_authorize_resource
 
+  def index
+    paginated_json_response find_commentable.comments.primary
+  end
+
   def create
-    @comment = Comment.new(creation_params)
-    @comment.author = current_user
-    @comment.save!
+    parameters = creation_params.merge(author: current_user,
+                                       commentable: find_commentable)
+    @comment = Comment.create!(parameters)
     json_response @comment, :created
   end
 
@@ -22,11 +28,7 @@ class CommentsController < ApplicationController
   private
 
   def creation_params
-    params.permit(:id,
-                  :content,
-                  :parent_comment_id,
-                  :commentable_id,
-                  :commentable_type)
+    params.permit(:content, :parent_comment_id)
   end
 
   def update_params

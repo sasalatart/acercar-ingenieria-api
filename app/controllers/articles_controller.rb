@@ -25,10 +25,6 @@ class ArticlesController < ApplicationController
     head :no_content
   end
 
-  def comments
-    paginated_json_response @article.comments.primary
-  end
-
   private
 
   def article_params

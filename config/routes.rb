@@ -24,29 +24,27 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :majors, only: %i[index show create update destroy] do
+  resources :majors, only: %i[index show create update destroy], shallow: true do
     member do
       get :users
       get :admins
       get :articles
       get :questions
       get 'questions/pending', to: 'majors#pending_questions'
-      get :comments
       put 'users/:user_id/admin', to: 'majors#admin'
     end
+
+    resources :comments, only: %i[index create update destroy], controller: :comments
   end
 
-  resources :articles, only: %i[index show create update destroy] do
-    resources :likes, only: %i[create destroy], controller: :likes
-
-    member do
-      get :comments
-    end
+  resources :articles, only: %i[index show create update destroy], shallow: true do
+    resources :likes, only: %i[index create destroy], controller: :likes
+    resources :comments, only: %i[index create update destroy], controller: :comments
   end
 
   resources :categories, only: %i[index create update destroy]
 
-  resources :comments, only: %i[create update destroy] do
+  resources :comments, only: [], shallow: true do
     resources :likes, only: %i[create destroy], controller: :likes
   end
 
