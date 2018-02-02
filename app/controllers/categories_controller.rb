@@ -17,7 +17,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.delete
+    @category.destroy
     head :no_content
   end
 

@@ -21,7 +21,7 @@ class MajorsController < ApplicationController
   end
 
   def destroy
-    @major.delete
+    @major.destroy
     head :no_content
   end
 

@@ -21,7 +21,7 @@ class AnnouncementsController < ApplicationController
   end
 
   def destroy
-    @announcement.delete
+    @announcement.destroy
     head :no_content
   end
 

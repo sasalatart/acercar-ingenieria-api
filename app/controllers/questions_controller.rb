@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.delete
+    @question.destroy
     head :no_content
   end
 
