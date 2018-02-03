@@ -59,5 +59,12 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create destroy], controller: :likes
   end
 
+  resources :discussions, only: %i[index show create update destroy] do
+    collection do
+      get :mine
+      get :pinned
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

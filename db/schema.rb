@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203112460) do
+ActiveRecord::Schema.define(version: 20180203144625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,45 @@ ActiveRecord::Schema.define(version: 20180203112460) do
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.boolean "pinned", default: false
+    t.integer "likes_count", default: 0
+    t.integer "comments_count", default: 0
+    t.integer "impressions_count", default: 0
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_discussions_on_author_id"
+  end
+
+  create_table "impressions", force: :cascade do |t|
+    t.string "impressionable_type"
+    t.integer "impressionable_id"
+    t.integer "user_id"
+    t.string "controller_name"
+    t.string "action_name"
+    t.string "view_name"
+    t.string "request_hash"
+    t.string "ip_address"
+    t.string "session_hash"
+    t.text "message"
+    t.text "referrer"
+    t.text "params"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
+    t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
+    t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
+    t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
+    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
+    t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
+    t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
+    t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -190,6 +229,7 @@ ActiveRecord::Schema.define(version: 20180203112460) do
   add_foreign_key "articles", "majors"
   add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "comments", "users", column: "author_id"
+  add_foreign_key "discussions", "users", column: "author_id"
   add_foreign_key "likes", "users"
   add_foreign_key "major_users", "majors"
   add_foreign_key "major_users", "users"

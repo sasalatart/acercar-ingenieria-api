@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
 
   has_many :major_users, dependent: :destroy
   has_many :majors, through: :major_users
+  has_many :discussions, foreign_key: :author_id
 
   accepts_nested_attributes_for :major_users, allow_destroy: true
 
@@ -61,6 +62,10 @@ class User < ActiveRecord::Base
     admin = has_role?(:major_admin, @major)
     admin ? remove_role(:major_admin, @major) : add_role(:major_admin, @major)
     self
+  end
+
+  def admin_of_something?
+    has_role?(:admin) || Major.with_role(:major_admin, self).size.nonzero?
   end
 
   def active_for_authentication?
