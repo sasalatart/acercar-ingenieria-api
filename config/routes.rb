@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :majors, only: %i[index show create update destroy], shallow: true do
+  resources :majors, only: %i[index show create update destroy] do
     member do
       get :users
       get :admins
@@ -41,14 +41,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :articles, only: %i[index show create update destroy], shallow: true do
+  resources :articles, only: %i[index show create update destroy] do
     resources :likes, only: %i[index create destroy], controller: :likes
     resources :comments, only: %i[index create update destroy], controller: :comments
   end
 
   resources :categories, only: %i[index create update destroy]
 
-  resources :comments, only: [], shallow: true do
+  resources :comments, only: [] do
     resources :likes, only: %i[create destroy], controller: :likes
   end
 
