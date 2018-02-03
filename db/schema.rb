@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203154721) do
+ActiveRecord::Schema.define(version: 20180203222948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20180203154721) do
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["major_id"], name: "index_articles_on_major_id"
   end
 
@@ -153,6 +155,21 @@ ActiveRecord::Schema.define(version: 20180203154721) do
     t.integer "comments_count", default: 0
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "action_type"
+    t.boolean "seen", default: false
+    t.bigint "owner_id"
+    t.bigint "notificator_id"
+    t.string "notifyable_type"
+    t.bigint "notifyable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notificator_id"], name: "index_notifications_on_notificator_id"
+    t.index ["notifyable_id", "notifyable_type"], name: "index_notifications_on_notifyable_id_and_notifyable_type"
+    t.index ["notifyable_type", "notifyable_id"], name: "index_notifications_on_notifyable_type_and_notifyable_id"
+    t.index ["owner_id"], name: "index_notifications_on_owner_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "question"
     t.text "answer"
@@ -238,6 +255,7 @@ ActiveRecord::Schema.define(version: 20180203154721) do
   end
 
   add_foreign_key "articles", "majors"
+  add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "discussions", "users", column: "author_id"
@@ -245,6 +263,8 @@ ActiveRecord::Schema.define(version: 20180203154721) do
   add_foreign_key "likes", "users"
   add_foreign_key "major_users", "majors"
   add_foreign_key "major_users", "users"
+  add_foreign_key "notifications", "users", column: "notificator_id"
+  add_foreign_key "notifications", "users", column: "owner_id"
   add_foreign_key "questions", "majors"
   add_foreign_key "questions", "users", column: "author_id"
 end

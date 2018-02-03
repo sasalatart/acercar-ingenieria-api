@@ -15,8 +15,10 @@
 
 class Comment < ApplicationRecord
   include Enrollable
+  include Notifyable
 
-  after_create { |comment| !parent_comment_id && enroll!(comment.author) }
+  after_create :enroll_to_parent
+  after_create :notify_interested
 
   scope :primary, -> { where(parent_comment_id: nil) }
 
@@ -40,6 +42,17 @@ class Comment < ApplicationRecord
   validate :parent_comment_can_not_have_parent_comment
 
   private
+
+  def enroll_to_parent
+    parent_comment.enroll!(comment.author) if parent_comment_id
+  end
+
+  def notify_interested
+    return parent_comment.notify(TYPES[:answered], author) if parent_comment_id
+
+    return unless commentable.respond_to?(:notify)
+    commentable.notify(TYPES[:commented], author)
+  end
 
   def parent_comment_can_not_have_parent_comment
     return unless parent_comment && parent_comment.parent_comment_id

@@ -39,7 +39,12 @@ class User < ActiveRecord::Base
 
   has_many :major_users, dependent: :destroy
   has_many :majors, through: :major_users
-  has_many :discussions, foreign_key: :author_id
+
+  has_many :discussions, dependent: :destroy,
+                         foreign_key: :author_id
+
+  has_many :notifications, dependent: :destroy,
+                           foreign_key: :owner_id
 
   accepts_nested_attributes_for :major_users, allow_destroy: true
 

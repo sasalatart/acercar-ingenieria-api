@@ -18,6 +18,7 @@
 
 class Major < ApplicationRecord
   include Enrollable
+  include Notifyable
 
   resourcify
 

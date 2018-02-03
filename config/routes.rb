@@ -12,6 +12,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :notifications, only: %i[index] do
+    member do
+      patch :read
+    end
+
+    collection do
+      get :seen
+      put :clear
+    end
+  end
+
   resources :announcements, only: %i[index create update destroy] do
     collection do
       get :pinned

@@ -11,15 +11,20 @@
 #  updated_at        :datetime         not null
 #  likes_count       :integer          default(0)
 #  comments_count    :integer          default(0)
+#  author_id         :integer
 #
 
 class Article < ApplicationRecord
   include Enrollable
+  include Notifyable
+
+  after_create :notify_interested
 
   scope :of_major, ->(major_id) { where(major_id: major_id) }
 
   acts_as_taggable_on :categories
 
+  belongs_to :author, class_name: :User
   belongs_to :major, optional: true
 
   has_many :attachments, as: :attachable, dependent: :destroy
@@ -35,6 +40,10 @@ class Article < ApplicationRecord
   validate :only_allowed_categories
 
   private
+
+  def notify_interested
+    major && notify(TYPES[:published], author, major.enrolled_users.pluck(:id))
+  end
 
   def only_allowed_categories
     return if (category_list - Category.all.pluck(:name)).empty?
