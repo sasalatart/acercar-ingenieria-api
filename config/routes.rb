@@ -29,12 +29,16 @@ Rails.application.routes.draw do
       get :users
       get :admins
       get :articles
-      get :questions
-      get 'questions/pending', to: 'majors#pending_questions'
       put 'users/:user_id/admin', to: 'majors#admin'
     end
 
     resources :comments, only: %i[index create update destroy], controller: :comments
+
+    resources :questions, only: %i[index create update destroy], controller: :questions do
+      collection do
+        get :pending
+      end
+    end
   end
 
   resources :articles, only: %i[index show create update destroy], shallow: true do

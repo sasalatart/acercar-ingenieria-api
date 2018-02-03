@@ -3,22 +3,20 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response Question.not_of_major.answered
+    paginated_json_response scoped_questions.answered
   end
 
   def pending
-    paginated_json_response Question.not_of_major.not_answered
+    paginated_json_response scoped_questions.not_answered
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.author = current_user
-    @question.save!
+    @question = Question.create!(question_params.merge(author: current_user))
     json_response @question, :created
   end
 
   def update
-    @question.update!(question_params)
+    @question.update!(question_params.except(:major_id))
     json_response @question
   end
 
@@ -28,6 +26,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def scoped_questions
+    params[:major_id] ? Question.of_major(params[:major_id]) : Question.general
+  end
 
   def question_params
     user_admin = Major.user_admin?(current_user, params[:major_id])

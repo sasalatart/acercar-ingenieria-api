@@ -14,7 +14,7 @@
 class Question < ApplicationRecord
   before_save :sanitize
 
-  scope :not_of_major, -> { where(major_id: nil) }
+  scope :general, -> { where(major_id: nil) }
   scope :of_major, ->(major_id) { where(major_id: major_id) }
   scope :not_answered, -> { where(answer: [nil, '']) }
   scope :answered, -> { where.not(answer: [nil, '']) }

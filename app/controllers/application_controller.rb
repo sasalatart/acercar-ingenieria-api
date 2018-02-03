@@ -12,4 +12,8 @@ class ApplicationController < ActionController::API
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: %i[first_name last_name generation])
   end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params)
+  end
 end
