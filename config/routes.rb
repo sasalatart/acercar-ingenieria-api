@@ -27,17 +27,13 @@ Rails.application.routes.draw do
   resources :majors, only: %i[index show create update destroy] do
     get :admins, to: 'admins#index'
 
-    resources :articles, only: %i[index show create update destroy]
-
-    member do
-      get :users
-    end
-
-    resources :users, only: [] do
+    resources :users, only: %i[index] do
       member do
         patch :admin, to: 'admins#toggle'
       end
     end
+
+    resources :articles, only: %i[index show create update destroy]
 
     resources :comments, only: %i[index create update destroy], controller: :comments
 

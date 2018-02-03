@@ -12,12 +12,12 @@ class Ability
     if user.active? && user.has_role?(:admin)
       can :manage, :all
     elsif user.active? && !majors_user_is_admin.empty?
+      can [:index], User
       can [:update], User, id: user.id
 
       can [:index], :admin
 
       can [:update], Major, id: majors_user_is_admin
-      can %i[users], Major
 
       can %i[index show], Article
       can %i[create update destroy], Article, major_id: majors_user_is_admin
@@ -40,11 +40,10 @@ class Ability
       can %i[create], Enrollment
       can %i[destroy], Enrollment, user_id: user.id
     elsif user.active? && !user.new_record?
+      can [:index], User
       can [:update], User, id: user.id
 
       can [:index], :admin
-
-      can %i[users], Major
 
       can %i[index create], Question
       can %i[update destroy], Question, author_id: user.id
