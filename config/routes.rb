@@ -46,17 +46,21 @@ Rails.application.routes.draw do
         get :pending
       end
     end
+
+    resources :enrollments, only: %i[create destroy]
   end
 
   resources :articles, only: %i[index show create update destroy] do
     resources :likes, only: %i[index create destroy], controller: :likes
     resources :comments, only: %i[index create update destroy], controller: :comments
+    resources :enrollments, only: %i[create destroy]
   end
 
   resources :categories, only: %i[index create update destroy]
 
   resources :comments, only: [] do
     resources :likes, only: %i[create destroy], controller: :likes
+    resources :enrollments, only: %i[create destroy]
   end
 
   resources :discussions, only: %i[index show create update destroy] do
@@ -64,6 +68,8 @@ Rails.application.routes.draw do
       get :mine
       get :pinned
     end
+
+    resources :enrollments, only: %i[create destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

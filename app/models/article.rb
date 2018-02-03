@@ -14,6 +14,8 @@
 #
 
 class Article < ApplicationRecord
+  include Enrollable
+
   scope :of_major, ->(major_id) { where(major_id: major_id) }
 
   acts_as_taggable_on :categories

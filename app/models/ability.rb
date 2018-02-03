@@ -36,6 +36,9 @@ class Ability
 
       can %i[index mine pinned show create], Discussion
       can %i[update destroy], Discussion, author_id: user.id
+
+      can %i[create], Enrollment
+      can %i[destroy], Enrollment, user_id: user.id
     elsif user.active? && !user.new_record?
       can [:update], User, id: user.id
 
@@ -56,6 +59,9 @@ class Ability
 
       can %i[index mine pinned show create], Discussion
       can %i[update destroy], Discussion, author_id: user.id
+
+      can %i[create], Enrollment
+      can %i[destroy], Enrollment, user_id: user.id
     end
 
     can %i[index show], Major

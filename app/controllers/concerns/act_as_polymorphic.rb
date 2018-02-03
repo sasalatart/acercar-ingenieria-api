@@ -1,20 +1,20 @@
 module ActAsPolymorphic
-  parse_model_name = ->(model) { "#{model.name.downcase}_id" }
+  parse_model = proc { |model| "#{model.name.downcase}_id" }
 
-  COMMENTABLE_ID_TYPES = [Article, Major].map do |model|
-    parse_model_name.call(model)
+  ID_TYPES = {
+    commentable: [Article, Major].map(&parse_model),
+    likeable: [Article, Comment].map(&parse_model),
+    enrollable: [Major, Article, Comment, Discussion].map(&parse_model)
+  }.freeze
+
+  def method_missing(name)
+    name =~ /find_(commentable|likeable|enrollable)/
+    match = Regexp.last_match(1)
+    match ? find_belongs_to(ID_TYPES[match.to_sym]) : super
   end
 
-  LIKEABLE_ID_TYPES = [Article, Comment].map do |model|
-    parse_model_name.call(model)
-  end
-
-  def find_commentable
-    find_belongs_to COMMENTABLE_ID_TYPES
-  end
-
-  def find_likeable
-    find_belongs_to LIKEABLE_ID_TYPES
+  def respond_to_missing?(method_name, include_private = false)
+    method_name.to_s.start_with?('find_') || super
   end
 
   def find_belongs_to(id_types)

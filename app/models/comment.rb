@@ -14,6 +14,10 @@
 #
 
 class Comment < ApplicationRecord
+  include Enrollable
+
+  after_create { |comment| !parent_comment_id && enroll!(comment.author) }
+
   scope :primary, -> { where(parent_comment_id: nil) }
 
   belongs_to :author, class_name: :User

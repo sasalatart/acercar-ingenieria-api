@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203144625) do
+ActiveRecord::Schema.define(version: 20180203154721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(version: 20180203144625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_discussions_on_author_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "enrollable_type"
+    t.bigint "enrollable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enrollable_id", "enrollable_type"], name: "index_enrollments_on_enrollable_id_and_enrollable_type"
+    t.index ["enrollable_type", "enrollable_id"], name: "index_enrollments_on_enrollable_type_and_enrollable_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -230,6 +241,7 @@ ActiveRecord::Schema.define(version: 20180203144625) do
   add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "discussions", "users", column: "author_id"
+  add_foreign_key "enrollments", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "major_users", "majors"
   add_foreign_key "major_users", "users"

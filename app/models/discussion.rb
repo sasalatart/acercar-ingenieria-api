@@ -15,7 +15,10 @@
 #
 
 class Discussion < ApplicationRecord
+  include Enrollable
+
   before_save :sanitize
+  after_create { |discussion| enroll!(discussion.author) }
 
   scope :pinned, -> { where(pinned: true) }
 

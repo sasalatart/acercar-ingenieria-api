@@ -17,6 +17,8 @@
 #
 
 class Major < ApplicationRecord
+  include Enrollable
+
   resourcify
 
   enum category: { disciplinary: 0, interdisciplinary: 1 }
