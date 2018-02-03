@@ -14,25 +14,28 @@
 #
 
 class Article < ApplicationRecord
+  scope :of_major, ->(major_id) { where(major_id: major_id) }
+
+  acts_as_taggable_on :categories
+
   belongs_to :major, optional: true
 
-  has_many :article_categories, dependent: :destroy
-  has_many :categories, through: :article_categories
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
-  accepts_nested_attributes_for :article_categories, allow_destroy: true
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   validates :title, presence: true, uniqueness: true
   validates :short_description, presence: true, length: { maximum: 300 }
   validates :content, presence: true
 
-  def self.find_by_categories(category_ids)
-    return Article.all unless category_ids
+  validate :only_allowed_categories
 
-    Article.joins(:categories)
-           .where(categories: { id: category_ids })
+  private
+
+  def only_allowed_categories
+    return if (category_list - Category.all.pluck(:name)).empty?
+    errors.add :base, 'invalid categories'
   end
 end

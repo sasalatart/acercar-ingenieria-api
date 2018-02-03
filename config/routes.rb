@@ -27,9 +27,10 @@ Rails.application.routes.draw do
   resources :majors, only: %i[index show create update destroy] do
     get :admins, to: 'admins#index'
 
+    resources :articles, only: %i[index show create update destroy]
+
     member do
       get :users
-      get :articles
     end
 
     resources :users, only: [] do

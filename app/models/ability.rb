@@ -17,7 +17,7 @@ class Ability
       can [:index], :admin
 
       can [:update], Major, id: majors_user_is_admin
-      can %i[users articles], Major
+      can %i[users], Major
 
       can %i[index show], Article
       can %i[create update destroy], Article, major_id: majors_user_is_admin
@@ -38,7 +38,7 @@ class Ability
 
       can [:index], :admin
 
-      can %i[users articles], Major
+      can %i[users], Major
 
       can %i[index create], Question
       can %i[update destroy], Question, author_id: user.id

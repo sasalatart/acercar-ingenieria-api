@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response Article.find_by_categories params[:category_ids]
+    paginated_json_response scoped_articles
   end
 
   def show
@@ -27,13 +27,20 @@ class ArticlesController < ApplicationController
 
   private
 
+  def scoped_articles
+    categories = params[:category_list]
+    @articles = categories ? Article.tagged_with(categories) : Article.all
+    @articles = @articles.of_major(params[:major_id]) if params[:major_id]
+    @articles
+  end
+
   def article_params
     params.permit(:id,
                   :title,
                   :short_description,
                   :content,
                   :major_id,
-                  article_categories_attributes: %i[id category_id _destroy],
+                  :category_list,
                   attachments_attributes: [:content])
   end
 end

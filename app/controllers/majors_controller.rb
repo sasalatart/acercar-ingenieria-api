@@ -29,10 +29,6 @@ class MajorsController < ApplicationController
     paginated_json_response @major.users
   end
 
-  def articles
-    paginated_json_response @major.articles
-  end
-
   private
 
   def major_params
