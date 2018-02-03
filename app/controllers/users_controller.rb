@@ -5,21 +5,12 @@ class UsersController < ApplicationController
     paginated_json_response User.all
   end
 
-  def admins
-    paginated_json_response User.with_role :admin
-  end
-
   def show
     json_response @user
   end
 
   def update
     @user.update!(user_params)
-    json_response @user
-  end
-
-  def admin
-    @user.toggle_admin
     json_response @user
   end
 

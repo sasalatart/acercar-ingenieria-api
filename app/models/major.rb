@@ -42,12 +42,6 @@ class Major < ApplicationRecord
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
   validates_attachment_size :logo, less_than: 2.megabytes
 
-  def toggle_admin(user_id)
-    user = User.find(user_id)
-    action = user.has_role?(:major_admin, self) ? 'remove_role' : 'add_role'
-    user.send(action.to_sym, :major_admin, self)
-  end
-
   def self.user_admin?(user, major_id)
     return true if user.has_role? :admin
     Major.with_role(:major_admin, user).pluck(:id).include? major_id.to_i

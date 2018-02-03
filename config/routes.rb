@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show update] do
     member do
       patch :active
-      put :admin
+      patch :admin, to: 'admins#toggle'
     end
 
     collection do
-      get :admins
+      get :admins, to: 'admins#index'
     end
   end
 
@@ -25,11 +25,17 @@ Rails.application.routes.draw do
   end
 
   resources :majors, only: %i[index show create update destroy] do
+    get :admins, to: 'admins#index'
+
     member do
       get :users
-      get :admins
       get :articles
-      put 'users/:user_id/admin', to: 'majors#admin'
+    end
+
+    resources :users, only: [] do
+      member do
+        patch :admin, to: 'admins#toggle'
+      end
     end
 
     resources :comments, only: %i[index create update destroy], controller: :comments

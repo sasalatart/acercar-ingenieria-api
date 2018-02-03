@@ -14,8 +14,10 @@ class Ability
     elsif user.active? && !majors_user_is_admin.empty?
       can [:update], User, id: user.id
 
+      can [:index], :admin
+
       can [:update], Major, id: majors_user_is_admin
-      can %i[users admins articles], Major
+      can %i[users articles], Major
 
       can %i[index show], Article
       can %i[create update destroy], Article, major_id: majors_user_is_admin
@@ -34,7 +36,9 @@ class Ability
     elsif user.active? && !user.new_record?
       can [:update], User, id: user.id
 
-      can %i[users admins articles], Major
+      can [:index], :admin
+
+      can %i[users articles], Major
 
       can %i[index create], Question
       can %i[update destroy], Question, author_id: user.id
