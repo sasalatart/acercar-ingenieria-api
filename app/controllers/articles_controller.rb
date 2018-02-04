@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.create!(article_params)
+    @article = Article.create!(article_params.merge(author: current_user))
     json_response @article, :created
   end
 
