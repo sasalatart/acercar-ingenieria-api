@@ -11,6 +11,7 @@ class Ability
 
     if user.active? && user.has_role?(:admin)
       can :manage, :all
+      cannot [:toggle], :admin if user.id == params[:id].to_i
     elsif user.active? && !majors_user_is_admin.empty?
       can [:index], User
       can %i[update active], User, id: user.id
