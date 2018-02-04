@@ -41,6 +41,7 @@ class ArticlesController < ApplicationController
                   :content,
                   :major_id,
                   :category_list,
+                  :picture,
                   attachments_attributes: [:content])
   end
 end

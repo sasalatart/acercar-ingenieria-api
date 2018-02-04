@@ -2,16 +2,20 @@
 #
 # Table name: articles
 #
-#  id                :integer          not null, primary key
-#  title             :string
-#  short_description :text
-#  content           :text
-#  major_id          :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  likes_count       :integer          default(0)
-#  comments_count    :integer          default(0)
-#  author_id         :integer
+#  id                   :integer          not null, primary key
+#  title                :string
+#  short_description    :text
+#  content              :text
+#  major_id             :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  likes_count          :integer          default(0)
+#  comments_count       :integer          default(0)
+#  author_id            :integer
+#  picture_file_name    :string
+#  picture_content_type :string
+#  picture_file_size    :integer
+#  picture_updated_at   :datetime
 #
 
 class Article < ApplicationRecord
@@ -33,6 +37,10 @@ class Article < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
+  has_attached_file :picture, styles: { medium: '200x200>' },
+                              convert_options: { display: '-quality 90 -strip' },
+                              dependent: :destroy
+
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   validates :title, presence: true, uniqueness: true
@@ -40,6 +48,9 @@ class Article < ApplicationRecord
   validates :content, presence: true
 
   validate :only_allowed_categories
+
+  validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
+                                 size: { in: 0..2.megabytes }
 
   private
 

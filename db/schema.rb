@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204141835) do
+ActiveRecord::Schema.define(version: 20180204144606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 20180204141835) do
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
     t.bigint "author_id"
+    t.string "picture_file_name"
+    t.string "picture_content_type"
+    t.integer "picture_file_size"
+    t.datetime "picture_updated_at"
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["major_id"], name: "index_articles_on_major_id"
   end
