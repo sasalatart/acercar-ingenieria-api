@@ -27,12 +27,12 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user)
-          .permit(:email,
+    params.permit(:email,
                   :first_name,
                   :last_name,
                   :generation,
                   :bio,
+                  :avatar,
                   major_users_attributes: %i[id major_id _destroy])
   end
 end

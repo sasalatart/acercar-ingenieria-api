@@ -27,6 +27,10 @@
 #  updated_at             :datetime         not null
 #  active                 :boolean          default(TRUE)
 #  bio                    :string
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #
 
 class User < ActiveRecord::Base
@@ -52,6 +56,10 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy,
                            foreign_key: :owner_id
 
+  has_attached_file :avatar, styles: { thumb: '75x75>', medium: '200x200>' },
+                             convert_options: { display: '-quality 90 -strip' },
+                             dependent: :destroy
+
   accepts_nested_attributes_for :major_users, allow_destroy: true
 
   validates :email, presence: true,
@@ -65,6 +73,9 @@ class User < ActiveRecord::Base
 
   validates :bio, allow_blank: true,
                   length: { maximum: 255 }
+
+  validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\z/ },
+                                size: { in: 0..1.megabyte }
 
   def active_for_authentication?
     super && active

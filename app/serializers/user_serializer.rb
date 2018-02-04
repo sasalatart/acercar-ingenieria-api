@@ -27,8 +27,17 @@
 #  updated_at             :datetime         not null
 #  active                 :boolean          default(TRUE)
 #  bio                    :string
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :generation, :bio, :active
+  attributes :id, :email, :first_name, :last_name,
+             :generation, :bio, :avatar, :active
+
+  def avatar
+    { thumb: object.avatar.url(:thumb), medium: object.avatar.url(:medium) }
+  end
 end
