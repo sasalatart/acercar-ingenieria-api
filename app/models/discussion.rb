@@ -15,9 +15,10 @@
 #
 
 class Discussion < ApplicationRecord
+  include Sanitizable
   include Enrollable
 
-  before_save :sanitize
+  before_save :sanitize_attributes
   after_create { |discussion| enroll!(discussion.author) }
 
   scope :pinned, -> { where(pinned: true) }
@@ -43,8 +44,7 @@ class Discussion < ApplicationRecord
 
   private
 
-  def sanitize
-    self.title = Sanitize.fragment(title, Sanitize::Config::RELAXED)
-    self.description = Sanitize.fragment(description, Sanitize::Config::RELAXED)
+  def sanitize_attributes
+    sanitize(:title, :description)
   end
 end

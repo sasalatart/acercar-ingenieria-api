@@ -15,9 +15,11 @@
 #
 
 class Article < ApplicationRecord
+  include Sanitizable
   include Enrollable
   include Notifyable
 
+  before_save :sanitize_attributes
   after_create :notify_interested
 
   scope :of_major, ->(major_id) { where(major_id: major_id) }
@@ -40,6 +42,10 @@ class Article < ApplicationRecord
   validate :only_allowed_categories
 
   private
+
+  def sanitize_attributes
+    sanitize(:title, :short_description, :content)
+  end
 
   def notify_interested
     major && notify(TYPES[:published], author, major.enrolled_users.pluck(:id))

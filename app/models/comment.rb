@@ -14,9 +14,11 @@
 #
 
 class Comment < ApplicationRecord
+  include Sanitizable
   include Enrollable
   include Notifyable
 
+  before_save :sanitize_attributes
   after_create :enroll_to_parent
   after_create :notify_interested
 
@@ -42,6 +44,10 @@ class Comment < ApplicationRecord
   validate :parent_comment_can_not_have_parent_comment
 
   private
+
+  def sanitize_attributes
+    sanitize(:content)
+  end
 
   def enroll_to_parent
     parent_comment.enroll!(comment.author) if parent_comment_id

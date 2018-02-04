@@ -14,6 +14,10 @@
 #
 
 class Announcement < ApplicationRecord
+  include Sanitizable
+
+  before_save :sanitize_attributes
+
   scope :pinned, -> { where(pinned: true) }
 
   has_attached_file :picture,
@@ -23,4 +27,10 @@ class Announcement < ApplicationRecord
 
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
   validates_attachment_size :picture, less_than: 5.megabytes
+
+  private
+
+  def sanitize_attributes
+    sanitize(:text)
+  end
 end

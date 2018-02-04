@@ -12,7 +12,9 @@
 #
 
 class Question < ApplicationRecord
-  before_save :sanitize
+  include Sanitizable
+
+  before_save :sanitize_attributes
 
   scope :general, -> { where(major_id: nil) }
   scope :of_major, ->(major_id) { where(major_id: major_id) }
@@ -30,8 +32,7 @@ class Question < ApplicationRecord
 
   private
 
-  def sanitize
-    self.question = Sanitize.fragment(question, Sanitize::Config::RELAXED)
-    self.answer = Sanitize.fragment(answer, Sanitize::Config::RELAXED) if answer
+  def sanitize_attributes
+    sanitize(:question, :answer)
   end
 end

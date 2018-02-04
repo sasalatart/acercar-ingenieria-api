@@ -17,12 +17,15 @@
 #
 
 class Major < ApplicationRecord
+  include Sanitizable
   include Enrollable
   include Notifyable
 
   resourcify
 
   enum category: { disciplinary: 0, interdisciplinary: 1 }
+
+  before_save :sanitize_attributes
 
   has_many :major_users, dependent: :destroy
   has_many :users, through: :major_users
@@ -48,5 +51,11 @@ class Major < ApplicationRecord
   def self.user_admin?(user, major_id)
     return true if user.has_role? :admin
     Major.with_role(:major_admin, user).pluck(:id).include? major_id.to_i
+  end
+
+  private
+
+  def sanitize_attributes
+    sanitize(:name, :description, :video_url_code)
   end
 end

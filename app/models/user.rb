@@ -32,12 +32,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable
   include DeviseTokenAuth::Concerns::User
+  include Sanitizable
 
   rolify
 
-  scope :active, -> { where(active: true) }
+  before_save :sanitize_attributes
+  before_save :capitalize
 
-  before_create :capitalize
+  scope :active, -> { where(active: true) }
 
   has_many :major_users, dependent: :destroy
   has_many :majors, through: :major_users
@@ -53,7 +55,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true,
                     format: { with: /[0-9._%a-z\-]+@(?:uc|puc|ing.puc)\.cl/i }
 
-  validates :first_name, :last_name, presence: true, length: { maximum: 20 }
+  validates :first_name, :last_name, presence: true, length: { maximum: 25 }
 
   validates :generation, presence: true,
                          numericality: { greater_than_or_equal_to: 1904,
@@ -84,6 +86,10 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def sanitize_attributes
+    sanitize(:email, :first_name, :last_name)
+  end
 
   def capitalize
     %i[first_name last_name].each do |name|
