@@ -14,11 +14,12 @@
 #  logo_file_size    :integer
 #  logo_updated_at   :datetime
 #  comments_count    :integer          default(0)
+#  short_description :text
 #
 
 class MajorSerializer < ActiveModel::Serializer
-  attributes :id, :name, :category, :logo, :description, :video_url_code,
-             :comments_count, :created_at
+  attributes :id, :name, :category, :logo, :short_description, :description,
+             :video_url_code, :comments_count, :created_at
 
   def logo
     { medium: object.logo.url(:medium) }

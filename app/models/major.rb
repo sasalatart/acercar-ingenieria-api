@@ -14,6 +14,7 @@
 #  logo_file_size    :integer
 #  logo_updated_at   :datetime
 #  comments_count    :integer          default(0)
+#  short_description :text
 #
 
 class Major < ApplicationRecord
@@ -36,16 +37,21 @@ class Major < ApplicationRecord
                            convert_options: { display: '-quality 90 -strip' },
                            dependent: :destroy
 
-  validates :category, :description, :video_url_code, presence: true
-
   validates :name, presence: true,
                    uniqueness: true
 
   validates :category, presence: true,
                        inclusion: { in: categories.keys }
 
+  validates :short_description, presence: true,
+                                length: { maximum: 300 }
+
+  validates :description, presence: true
+
   validates_attachment :logo, content_type: { content_type: /\Aimage\/.*\z/ },
                               size: { in: 0..2.megabytes }
+
+  validates :video_url_code, presence: true
 
   def self.user_admin?(user, major_id)
     return true if user.has_role? :admin

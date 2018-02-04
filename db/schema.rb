@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204144606) do
+ActiveRecord::Schema.define(version: 20180204203614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20180204144606) do
     t.integer "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer "comments_count", default: 0
+    t.text "short_description"
   end
 
   create_table "notifications", force: :cascade do |t|
