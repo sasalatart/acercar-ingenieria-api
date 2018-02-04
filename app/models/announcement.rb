@@ -21,12 +21,12 @@ class Announcement < ApplicationRecord
   scope :pinned, -> { where(pinned: true) }
 
   has_attached_file :picture,
-                    styles: { thumb: '1440x880>' },
+                    styles: { large: '1440x880>' },
                     convert_options: { display: '-quality 90 -strip' },
                     dependent: :destroy
 
-  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\z/
-  validates_attachment_size :picture, less_than: 5.megabytes
+  validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
+                                 size: { in: 0..5.megabytes }
 
   private
 
