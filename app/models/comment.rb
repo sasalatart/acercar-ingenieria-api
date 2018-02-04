@@ -50,7 +50,7 @@ class Comment < ApplicationRecord
   end
 
   def enroll_to_parent
-    parent_comment.enroll!(comment.author) if parent_comment_id
+    parent_comment.enroll!(author) if parent_comment_id
   end
 
   def notify_interested
