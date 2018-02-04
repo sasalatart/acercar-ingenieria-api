@@ -19,11 +19,10 @@
 #
 
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :title, :short_description, :content,
+  attributes :id, :title, :short_description, :content, :major_id,
              :likes_count, :comments_count, :picture, :created_at
 
   belongs_to :author, class_name: 'User'
-  belongs_to :major
 
   def picture
     { medium: object.picture.url(:medium) }

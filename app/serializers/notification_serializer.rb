@@ -14,7 +14,7 @@
 #
 
 class NotificationSerializer < ActiveModel::Serializer
-  attributes :id, :action_type, :seen, :notifyable_type
+  attributes :id, :action_type, :seen, :notifyable_type, :created_at
 
   belongs_to :owner, class_name: 'User'
   belongs_to :notificator, class_name: 'User'

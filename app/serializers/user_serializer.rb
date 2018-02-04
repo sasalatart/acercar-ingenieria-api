@@ -34,8 +34,8 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name,
-             :generation, :bio, :avatar, :active
+  attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
+             :active, :created_at
 
   def avatar
     { thumb: object.avatar.url(:thumb), medium: object.avatar.url(:medium) }
