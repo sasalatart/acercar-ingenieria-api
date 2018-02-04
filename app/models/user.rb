@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
 
   rolify
 
+  scope :active, -> { where(active: true) }
+
   before_create :capitalize
 
   has_many :major_users, dependent: :destroy

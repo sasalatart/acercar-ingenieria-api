@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   resources :majors, only: %i[index show create update destroy] do
     get :admins, to: 'admins#index'
 
+    member do
+      post :broadcast
+    end
+
     resources :users, only: %i[index] do
       member do
         patch :admin, to: 'admins#toggle'

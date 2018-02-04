@@ -17,7 +17,7 @@ class Ability
 
       can [:index], :admin
 
-      can [:update], Major, id: majors_user_is_admin
+      can %i[update broadcast], Major, id: majors_user_is_admin
 
       can %i[index show], Article
       can %i[create update destroy], Article, major_id: majors_user_is_admin
