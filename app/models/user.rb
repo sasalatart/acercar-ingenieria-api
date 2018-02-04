@@ -26,6 +26,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  active                 :boolean          default(TRUE)
+#  bio                    :string
 #
 
 class User < ActiveRecord::Base
@@ -61,6 +62,9 @@ class User < ActiveRecord::Base
                          numericality: { greater_than_or_equal_to: 1904,
                                          less_than_or_equal_to: Time.now.year }
 
+  validates :bio, allow_blank: true,
+                  length: { maximum: 255 }
+
   def toggle_admin(major_id)
     unless major_id
       has_role?(:admin) ? remove_role(:admin) : add_role(:admin)
@@ -88,7 +92,7 @@ class User < ActiveRecord::Base
   private
 
   def sanitize_attributes
-    sanitize(:email, :first_name, :last_name)
+    sanitize(:email, :first_name, :last_name, :bio)
   end
 
   def capitalize

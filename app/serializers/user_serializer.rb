@@ -26,8 +26,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  active                 :boolean          default(TRUE)
+#  bio                    :string
 #
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :generation, :active
+  attributes :id, :email, :first_name, :last_name, :generation, :bio, :active
 end

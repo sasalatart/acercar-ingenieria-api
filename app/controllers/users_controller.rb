@@ -32,6 +32,7 @@ class UsersController < ApplicationController
                   :first_name,
                   :last_name,
                   :generation,
+                  :bio,
                   major_users_attributes: %i[id major_id _destroy])
   end
 end
