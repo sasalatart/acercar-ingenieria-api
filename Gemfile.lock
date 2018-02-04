@@ -71,6 +71,8 @@ GEM
       devise (> 3.5.2, <= 4.3)
       rails (< 6)
     erubi (1.7.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -195,6 +197,7 @@ DEPENDENCIES
   byebug
   cancancan (~> 2.0)
   devise_token_auth
+  faker
   hirb
   impressionist
   kaminari
