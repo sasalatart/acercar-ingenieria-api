@@ -32,10 +32,9 @@ class Major < ApplicationRecord
   has_many :articles
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_attached_file :logo,
-                    styles: { thumb: '200x200>' },
-                    convert_options: { display: '-quality 90 -strip' },
-                    dependent: :destroy
+  has_attached_file :logo, styles: { medium: '200x200>' },
+                           convert_options: { display: '-quality 90 -strip' },
+                           dependent: :destroy
 
   validates :category, :description, :video_url_code, presence: true
 
@@ -45,8 +44,8 @@ class Major < ApplicationRecord
   validates :category, presence: true,
                        inclusion: { in: categories.keys }
 
-  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
-  validates_attachment_size :logo, less_than: 2.megabytes
+  validates_attachment :logo, content_type: { content_type: /\Aimage\/.*\z/ },
+                              size: { in: 0..2.megabytes }
 
   def self.user_admin?(user, major_id)
     return true if user.has_role? :admin
