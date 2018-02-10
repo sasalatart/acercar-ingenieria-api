@@ -63,7 +63,15 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :major_users, allow_destroy: true
 
   validates :email, presence: true,
+                    uniqueness: true,
                     format: { with: /[0-9._%a-z\-]+@(?:uc|puc|ing.puc)\.cl/i }
+
+  validates :password, presence: true,
+                       if: :new_record?
+
+  validates :password, confirmation: true,
+                       length: { minimum: 8 },
+                       if: :password_sent?
 
   validates :first_name, :last_name, presence: true, length: { maximum: 25 }
 
@@ -95,5 +103,9 @@ class User < ActiveRecord::Base
     %i[first_name last_name].each do |name|
       self[name] = self[name].split.map(&:capitalize).join(' ')
     end
+  end
+
+  def password_sent?
+    !password.nil?
   end
 end
