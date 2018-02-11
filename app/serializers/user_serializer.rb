@@ -37,6 +37,9 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
              :active, :created_at
 
+  has_many :majors, through: :major_users,
+                    serializer: MajorSummarySerializer
+
   def avatar
     return nil unless object.avatar.exists?
     { thumb: object.avatar.url(:thumb), medium: object.avatar.url(:medium) }
