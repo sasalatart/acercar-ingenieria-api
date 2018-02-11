@@ -13,7 +13,7 @@ class Ability
       can :manage, :all
       cannot [:toggle], :admin if user.id == params[:id].to_i
     elsif user.active? && !majors_user_is_admin.empty?
-      can [:index], User
+      can %i[index show], User
       can %i[update active], User, id: user.id
 
       can [:index], :admin
@@ -44,7 +44,7 @@ class Ability
       can %i[index seen clear], Notification
       can %i[read], Notification, owner_id: user.id
     elsif user.active? && !user.new_record?
-      can [:index], User
+      can %i[index show], User
       can %i[update active], User, id: user.id
 
       can [:index], :admin
