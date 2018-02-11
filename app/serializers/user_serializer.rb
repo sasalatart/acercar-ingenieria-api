@@ -38,6 +38,7 @@ class UserSerializer < ActiveModel::Serializer
              :active, :created_at
 
   def avatar
+    return nil unless object.avatar.exists?
     { thumb: object.avatar.url(:thumb), medium: object.avatar.url(:medium) }
   end
 end

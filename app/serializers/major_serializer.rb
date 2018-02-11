@@ -22,6 +22,7 @@ class MajorSerializer < ActiveModel::Serializer
              :video_url_code, :comments_count, :created_at
 
   def logo
+    return nil unless object.logo.exists?
     { medium: object.logo.url(:medium) }
   end
 end

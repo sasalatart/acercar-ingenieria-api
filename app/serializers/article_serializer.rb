@@ -25,6 +25,7 @@ class ArticleSerializer < ActiveModel::Serializer
   belongs_to :author, class_name: 'User'
 
   def picture
+    return nil unless object.picture.exists?
     { medium: object.picture.url(:medium) }
   end
 end
