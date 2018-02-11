@@ -23,6 +23,6 @@ class MajorSerializer < ActiveModel::Serializer
 
   def logo
     return nil unless object.logo.exists?
-    { medium: object.logo.url(:medium) }
+    { thumb: object.logo.url(:thumb), medium: object.logo.url(:medium) }
   end
 end

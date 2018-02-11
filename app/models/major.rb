@@ -33,7 +33,7 @@ class Major < ApplicationRecord
   has_many :articles
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_attached_file :logo, styles: { medium: '200x200>' },
+  has_attached_file :logo, styles: { thumb: '75x75>', medium: '200x200>' },
                            convert_options: { display: '-quality 90 -strip' },
                            dependent: :destroy
 
