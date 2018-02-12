@@ -35,10 +35,21 @@
 
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
-             :active, :created_at
+             :active, :admin, :admin_of_majors, :created_at
 
   has_many :majors, through: :major_users,
                     serializer: MajorSummarySerializer
+
+  def admin
+    object.has_role? :admin
+  end
+
+  def admin_of_majors
+    ActiveModel::SerializableResource.new(
+      Major.with_role(:major_admin, object),
+      each_serializer: MajorSummarySerializer
+    )
+  end
 
   def avatar
     return nil unless object.avatar.exists?
