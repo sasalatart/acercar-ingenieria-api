@@ -23,7 +23,7 @@ end
 
 @majors[:ciencias_ambientales] = {
   name: 'Ciencias Ambientales',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ciencias Ambientales desarrolla la '\
                      'capacidad de evaluar la sustentabilidad y predecir el '\
                      'impacto de las actividades antropogénicas, proponiendo '\
@@ -35,7 +35,7 @@ end
 
 @majors[:computacion] = {
   name: 'Computación',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Computación desarrolla la capacidad de '\
                      'aplicar soluciones a problemas complejos de la '\
                      'industria, desarrollando proyectos innovadores '\
@@ -48,7 +48,7 @@ end
 
 @majors[:geociencias] = {
   name: 'Geociencias',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'Los Licenciados en Ciencias de la Ingeniería con Major '\
                      'en Geociencias estarán capacitados para trabajar en '\
                      'equipos multidisciplinarios con interacción entre las '\
@@ -60,7 +60,7 @@ end
 
 @majors[:ing_ambiental] = {
   name: 'Ingeniería Ambiental',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Ambiental desarrolla la '\
                      'capacidad de proteger y administrar nuestros recursos '\
                      'naturales, incluyendo el aire, el agua y las fuentes '\
@@ -72,7 +72,7 @@ end
 
 @majors[:ing_arquitectura] = {
   name: 'Ingeniería y Arquitectura',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería y Arquitectura desarrolla la '\
                      'capacidad de diseñar e implementar procesos de diseño '\
                      'y construcción más fluidos, factibles y sustentables.',
@@ -83,7 +83,7 @@ end
 
 @majors[:ing_biologica] = {
   name: 'Ingeniería Biológica',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Biológica desarrolla la '\
                      'capacidad de entender cómo funcionan los sistemas '\
                      'biológicos y aplicar este conocimiento, tanto a la '\
@@ -96,7 +96,7 @@ end
 
 @majors[:ing_biomedica] = {
   name: 'Ingeniería Biomédica',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'Este Major desarrolla la capacidad de aplicar '\
                      'soluciones innovadoras a problemas de la salud humana. '\
                      'Además, les permite articular sus conocimientos para '\
@@ -110,7 +110,7 @@ end
 
 @majors[:ing_civil] = {
   name: 'Ingeniería Civil',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Civil desarrolla la capacidad de '\
                      'aplicar específicamente fundamentos de Ingeniería Civil '\
                      'a la determinación de oportunidades y problemáticas '\
@@ -123,7 +123,7 @@ end
 
 @majors[:ing_construccion] = {
   name: 'Ingeniería de Construcción',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Diseño de Sistemas de Construcción '\
                      'desarrolla la capacidad de planificar y administrar '\
                      'las fases del desarrollo de obras de construcción.',
@@ -134,7 +134,7 @@ end
 
 @majors[:ing_diseno_innovacion] = {
   name: 'Ingeniería, Diseño e Innovación',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería, Diseño e Innovación prepara a '\
                      'sus alumnos para identificar y enfrentar los problemas '\
                      'que afectan a la sociedad, detectando oportunidades '\
@@ -148,7 +148,7 @@ end
 
 @majors[:ing_electrica] = {
   name: 'Ingeniería Eléctrica',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Eléctrica desarrolla la '\
                      'capacidad de analizar los problemas de la Ingeniería '\
                      'Eléctrica y/o Electrónica como sistemas complejos, '\
@@ -161,7 +161,7 @@ end
 
 @majors[:ing_estructural] = {
   name: 'Ingeniería Estructural',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Estructural desarrolla la '\
                      'capacidad de participar en el análisis y diseño '\
                      'estructural de obras civiles.',
@@ -172,7 +172,7 @@ end
 
 @majors[:ing_geotecnica] = {
   name: 'Ingeniería Geotécnica',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Geotécnica desarrolla la '\
                      'capacidad de solucionar problemas relacionados con el '\
                      'comportamiento de suelos y rocas, y con la interacción '\
@@ -185,7 +185,7 @@ end
 
 @majors[:ing_hidraulica] = {
   name: 'Ingeniería Hidráulica',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Hidráulica desarrolla la '\
                      'capacidad de caracterizar y modelar el comportamiento '\
                      'del agua y otros fluidos en sistemas naturales y '\
@@ -197,7 +197,7 @@ end
 
 @majors[:ing_matematica] = {
   name: 'Ingeniería Matemática',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Matemática desarrolla la '\
                      'capacidad de solucionar problemas complejos mediante el '\
                      'uso de matemáticas de alto nivel.',
@@ -208,7 +208,7 @@ end
 
 @majors[:ing_mecanica] = {
   name: 'Ingeniería Mecánica',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Mecánica desarrolla la capacidad '\
                      'de diseñar, fabricar y mantener diversos sistemas '\
                      'mecánicos.',
@@ -219,7 +219,7 @@ end
 
 @majors[:ing_quimica] = {
   name: 'Ingeniería Química',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Ingeniería Química desarrolla la capacidad '\
                      'de diseñar procesos para la producción, transformación '\
                      'y transporte de químicos, bioquímicos, energía y '\
@@ -231,7 +231,7 @@ end
 
 @majors[:investigacion_operativa] = {
   name: 'Investigación Operativa',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Investigación Operativa desarrolla la '\
                      'capacidad de modelar y resolver problemas de asignación '\
                      'de recursos (humanos, financieros y materiales) desde '\
@@ -243,7 +243,7 @@ end
 
 @majors[:mineria] = {
   name: 'Minería',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Minería desarrolla la capacidad de '\
                      'desempeñarse de manera efectiva en el ámbito de la '\
                      'explotación y operaciones mineras.',
@@ -254,7 +254,7 @@ end
 
 @majors[:sistemas_autonomos_roboticos] = {
   name: 'Sistemas Autónomos y Robóticos',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Sistemas Autónomos y Robóticos desarrolla '\
                      'la capacidad de construir y aplicar dispositivos y '\
                      'software en la automatización avanzada de instrumentos, '\
@@ -268,7 +268,7 @@ end
 
 @majors[:sistemas_transporte] = {
   name: 'Sistemas de Transporte',
-  description: Faker::Lorem,
+  description: Faker::Lorem.paragraph(30, false, 10),
   short_description: 'El Major en Sistemas de Transporte desarrolla la '\
                      'capacidad de desempeñarse en los ámbitos específicos '\
                      'del diseño, operación y gestión de sistemas de '\
