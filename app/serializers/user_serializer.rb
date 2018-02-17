@@ -35,17 +35,22 @@
 
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
-             :active, :admin, :admin_of_majors, :created_at
+             :active, :majors_of_interest, :admin, :admin_of_majors,
+             :created_at
 
-  has_many :majors, through: :major_users,
-                    serializer: MajorSummarySerializer
+  def majors_of_interest
+    ActiveModelSerializers::SerializableResource.new(
+      object.major_users,
+      each_serializer: MajorOfInterestSerializer
+    )
+  end
 
   def admin
     object.has_role? :admin
   end
 
   def admin_of_majors
-    ActiveModel::SerializableResource.new(
+    ActiveModelSerializers::SerializableResource.new(
       Major.with_role(:major_admin, object),
       each_serializer: MajorSummarySerializer
     )
