@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
     'Sorry, this account has been deactivated.'
   end
 
+  def token_validation_response
+    UserSerializer.new(self).as_json
+  end
+
   private
 
   def sanitize_attributes
