@@ -6,7 +6,7 @@
 #  name              :string
 #  category          :integer
 #  description       :text
-#  video_url_code    :string
+#  video_url         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  logo_file_name    :string
@@ -19,7 +19,7 @@
 
 class MajorSerializer < ActiveModel::Serializer
   attributes :id, :name, :category, :logo, :short_description, :description,
-             :video_url_code, :comments_count, :created_at
+             :video_url, :comments_count, :created_at
 
   def logo
     return nil unless object.logo.exists?

@@ -36,7 +36,7 @@ class MajorsController < ApplicationController
     params.permit(:name,
                   :category,
                   :description,
-                  :video_url_code,
+                  :video_url,
                   :logo)
   end
 end

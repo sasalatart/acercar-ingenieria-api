@@ -28,7 +28,7 @@ end
                      'capacidad de evaluar la sustentabilidad y predecir el '\
                      'impacto de las actividades antropogénicas, proponiendo '\
                      'soluciones a las problemáticas ambientales.',
-  video_url_code: 'p4F2LEFXpQ8',
+  video_url: 'https://youtu.be/p4F2LEFXpQ8',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ciencias_ambientales', 'png')
 }
@@ -41,7 +41,7 @@ end
                      'industria, desarrollando proyectos innovadores '\
                      'mediante el diseño y modelación de procesos '\
                      'computacionales.',
-  video_url_code: 'NFUkXwYSgPA',
+  video_url: 'https://youtu.be/NFUkXwYSgPA',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'computacion', 'png')
 }
@@ -53,7 +53,7 @@ end
                      'en Geociencias estarán capacitados para trabajar en '\
                      'equipos multidisciplinarios con interacción entre las '\
                      'Geociencias y las áreas de Ingeniería.',
-  video_url_code: 'tJNrrxo4FW4',
+  video_url: 'https://youtu.be/tJNrrxo4FW4',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'geociencias', 'png')
 }
@@ -65,7 +65,7 @@ end
                      'capacidad de proteger y administrar nuestros recursos '\
                      'naturales, incluyendo el aire, el agua y las fuentes '\
                      'de energía.',
-  video_url_code: 'pwv8CtOpN_8',
+  video_url: 'https://youtu.be/pwv8CtOpN_8',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_ambiental', 'png')
 }
@@ -76,7 +76,7 @@ end
   short_description: 'El Major en Ingeniería y Arquitectura desarrolla la '\
                      'capacidad de diseñar e implementar procesos de diseño '\
                      'y construcción más fluidos, factibles y sustentables.',
-  video_url_code: 'nS2r7bE2qt8',
+  video_url: 'https://youtu.be/nS2r7bE2qt8',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'ing_arquitectura', 'png')
 }
@@ -89,7 +89,7 @@ end
                      'biológicos y aplicar este conocimiento, tanto a la '\
                      'solución de problemas, como al desarrollo de '\
                      'tecnologías eficientes inspiradas en la biología.',
-  video_url_code: 'GxExEaTPVoA',
+  video_url: 'https://youtu.be/GxExEaTPVoA',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'ing_biologica', 'png')
 }
@@ -103,7 +103,7 @@ end
                      'desempeñarse en diversos proyectos, pudiendo así '\
                      'solucionar problemas de complejos a través de la '\
                      'formulación y aplicación de modelos matemáticos.',
-  video_url_code: 'AjfGBVzbmA0',
+  video_url: 'https://youtu.be/AjfGBVzbmA0',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'ing_biomedica', 'png')
 }
@@ -116,7 +116,7 @@ end
                      'a la determinación de oportunidades y problemáticas '\
                      'actuales de diseño y ejecución que impactan el '\
                      'desarrollo de proyectos y obras de infraestructura.',
-  video_url_code: 'F4IigtLR1Ag',
+  video_url: 'https://youtu.be/F4IigtLR1Ag',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_civil', 'png')
 }
@@ -127,7 +127,7 @@ end
   short_description: 'El Major en Diseño de Sistemas de Construcción '\
                      'desarrolla la capacidad de planificar y administrar '\
                      'las fases del desarrollo de obras de construcción.',
-  video_url_code: 'ytfexTyTCwA',
+  video_url: 'https://youtu.be/ytfexTyTCwA',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_construccion', 'png')
 }
@@ -141,7 +141,7 @@ end
                      'para diseñar e implementar propuestas centradas en el '\
                      'usuario bajo el alero de la innovación y el '\
                      'emprendimiento.',
-  video_url_code: 'cl6JsUoEkLc',
+  video_url: 'https://youtu.be/cl6JsUoEkLc',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'ing_diseno_innovacion', 'png')
 }
@@ -154,7 +154,7 @@ end
                      'Eléctrica y/o Electrónica como sistemas complejos, '\
                      'estudiando no sólo sus partes individuales, sino '\
                      'también sus interacciones.',
-  video_url_code: 'bh8btllzGZU',
+  video_url: 'https://youtu.be/bh8btllzGZU',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_electrica', 'png')
 }
@@ -165,7 +165,7 @@ end
   short_description: 'El Major en Ingeniería Estructural desarrolla la '\
                      'capacidad de participar en el análisis y diseño '\
                      'estructural de obras civiles.',
-  video_url_code: 'jpbxuxlXwis',
+  video_url: 'https://youtu.be/jpbxuxlXwis',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_estructural', 'png')
 }
@@ -178,7 +178,7 @@ end
                      'comportamiento de suelos y rocas, y con la interacción '\
                      'que existe entre estos materiales y distintas obras de '\
                      'infraestructura.',
-  video_url_code: 'JOSrqwek3jg',
+  video_url: 'https://youtu.be/JOSrqwek3jg',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_geotecnica', 'png')
 }
@@ -190,7 +190,7 @@ end
                      'capacidad de caracterizar y modelar el comportamiento '\
                      'del agua y otros fluidos en sistemas naturales y '\
                      'artificiales.',
-  video_url_code: 'FgKtmUTbLvM',
+  video_url: 'https://youtu.be/FgKtmUTbLvM',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_hidraulica', 'png')
 }
@@ -201,7 +201,7 @@ end
   short_description: 'El Major en Ingeniería Matemática desarrolla la '\
                      'capacidad de solucionar problemas complejos mediante el '\
                      'uso de matemáticas de alto nivel.',
-  video_url_code: 'mbXFnRepnss',
+  video_url: 'https://youtu.be/mbXFnRepnss',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'ing_matematica', 'png')
 }
@@ -212,7 +212,7 @@ end
   short_description: 'El Major en Ingeniería Mecánica desarrolla la capacidad '\
                      'de diseñar, fabricar y mantener diversos sistemas '\
                      'mecánicos.',
-  video_url_code: 'y3J264gptEg',
+  video_url: 'https://youtu.be/y3J264gptEg',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_mecanica', 'png')
 }
@@ -224,7 +224,7 @@ end
                      'de diseñar procesos para la producción, transformación '\
                      'y transporte de químicos, bioquímicos, energía y '\
                      'materiales.',
-  video_url_code: 'tXiJ_uzXfXk',
+  video_url: 'https://youtu.be/tXiJ_uzXfXk',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'ing_quimica', 'png')
 }
@@ -236,7 +236,7 @@ end
                      'capacidad de modelar y resolver problemas de asignación '\
                      'de recursos (humanos, financieros y materiales) desde '\
                      'una perspectiva crítica y sistémica.',
-  video_url_code: 'syAglylSd7c',
+  video_url: 'https://youtu.be/syAglylSd7c',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'investigacion_operativa', 'png')
 }
@@ -247,7 +247,7 @@ end
   short_description: 'El Major en Minería desarrolla la capacidad de '\
                      'desempeñarse de manera efectiva en el ámbito de la '\
                      'explotación y operaciones mineras.',
-  video_url_code: '6Mmrb8ZqDGY',
+  video_url: 'https://youtu.be/6Mmrb8ZqDGY',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'mineria', 'png')
 }
@@ -261,7 +261,7 @@ end
                      'máquinas y procesos productivos complejos, integrando '\
                      'conocimientos de Ingeniería Mecánica, Eléctrica y '\
                      'Computacional.',
-  video_url_code: 'QBdDwVH8s3g',
+  video_url: 'https://youtu.be/QBdDwVH8s3g',
   category: :interdisciplinary,
   logo: create_uploaded_image('major_logos', 'sistemas_autonomos_roboticos', 'png')
 }
@@ -273,7 +273,7 @@ end
                      'capacidad de desempeñarse en los ámbitos específicos '\
                      'del diseño, operación y gestión de sistemas de '\
                      'transporte.',
-  video_url_code: 'erXWL6zBJ30',
+  video_url: 'https://youtu.be/erXWL6zBJ30',
   category: :disciplinary,
   logo: create_uploaded_image('major_logos', 'sistemas_transporte', 'png')
 }

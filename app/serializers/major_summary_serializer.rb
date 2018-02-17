@@ -6,7 +6,7 @@
 #  name              :string
 #  category          :integer
 #  description       :text
-#  video_url_code    :string
+#  video_url         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  logo_file_name    :string

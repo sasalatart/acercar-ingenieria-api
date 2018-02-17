@@ -6,7 +6,7 @@
 #  name              :string
 #  category          :integer
 #  description       :text
-#  video_url_code    :string
+#  video_url         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  logo_file_name    :string
@@ -51,7 +51,7 @@ class Major < ApplicationRecord
   validates_attachment :logo, content_type: { content_type: /\Aimage\/.*\z/ },
                               size: { in: 0..2.megabytes }
 
-  validates :video_url_code, presence: true
+  validates :video_url, presence: true
 
   def self.user_admin?(user, major_id)
     return true if user.has_role? :admin
@@ -61,6 +61,6 @@ class Major < ApplicationRecord
   private
 
   def sanitize_attributes
-    sanitize(:name, :description, :video_url_code)
+    sanitize(:name, :description, :video_url)
   end
 end
