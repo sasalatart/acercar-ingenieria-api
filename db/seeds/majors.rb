@@ -291,7 +291,8 @@ end
             'disciplinas con seguridad. Los alumnos también deben ser fuertes '\
             'en estadísticas, investigación operativa, optimización, '\
             'economía, además de saber utilizar computador y contar con '\
-            'capacidades analíticas.'
+            'capacidades analíticas.',
+    pinned: true
   }, {
     question: '¿Cuáles son las áreas de investigación asociadas al Major?',
     answer: 'Las líneas con más prestigio y tradicionales son dos. Existe la '\
@@ -311,7 +312,8 @@ end
            'también tiene un área de logística que trabaja en conjunto con el '\
            'departamento de Ingeniería Industrial y de Sistemas, se ve el '\
            'transporte de carga, líneas de producción, logística reversa, '\
-           'entre otros temas más.'
+           'entre otros temas más.',
+    pinned: true
   }],
   ing_matematica: [{
     question: '¿Con qué título puedo articular si sigo este Major?',
@@ -320,18 +322,21 @@ end
             'articular con otras especialidades dependiendo del minor que se '\
             'eligió. En general la articulación es bastante amplia, debido a '\
             'que las herramientas que da este Major se pueden usar en '\
-            'múltiples áreas de la ingeniería.'
+            'múltiples áreas de la ingeniería.',
+    pinned: true
   }, {
     question: '¿En qué áreas puedo trabajar si sigo este Major?',
     answer: 'El alumno que termina este Major se podrá insertar en áreas tan '\
             'distintas como mercado financiero, simulación de procesos de '\
             'transporte, dispositivos biomédicos, etc. El campo es bastante '\
-            'amplio.'
+            'amplio.',
+    pinned: true
   }, {
     question: '¿Qué áreas de investigación hay en este Major?',
     answer: 'Las áreas de investigación son muy amplias. Van desde resultados '\
             'teóricos (como teoremas), hasta el estudio de la implementación '\
-            'de técnicas y simulaciones para resolver un problema.'
+            'de técnicas y simulaciones para resolver un problema.',
+    pinned: true
   }],
   ciencias_ambientales: [{
     question: '¿Qué perfil de alumno se busca en este Major?',
@@ -339,7 +344,8 @@ end
             'que tengan una mente abierta para aprender de distintos campos, '\
             'y que tengan en esta amplitud de conocimientos y de campos '\
             'tengan la vocación necesaria para profundizar en cosas que sean '\
-            'de su interés.'
+            'de su interés.',
+    pinned: true
   }, {
     question: '¿Cuál es la diferencia entre Ingeniería Ambiental y Ciencias '\
               'Ambientales?',
@@ -349,7 +355,8 @@ end
             'evaluar la sustentabilidad. No se tiene un enfoque de producir '\
             'soluciones tecnológicas, sino más bien uno de producir '\
             'información que luego permita tomar decisiones que apunten hacia '\
-            'la sustentabilidad.'
+            'la sustentabilidad.',
+    pinned: true
   }, {
     question: '¿Dónde puedo trabajar con una licenciatura en ciencias '\
               'ambientales?',
@@ -358,7 +365,8 @@ end
             'públicas, se incorpore gente que entienda la mecánica del medio '\
             'ambiente. Los ministerios y la labor pública se presentan como '\
             'lugares donde se podría trabajar solo con la licenciatura, sin '\
-            'la necesidad de obtener el título.'
+            'la necesidad de obtener el título.',
+    pinned: true
   }],
   computacion: [{
     question: '¿Qué perfil de alumno se busca para este Major?',
@@ -368,7 +376,8 @@ end
             'minería, los juegos de video, etc. Se busca reforzar el '\
             'aprendizaje de los conceptos, modelos y técnicas que se les '\
             'enseñan a los alumnos con el desarrollo de proyectos prácticos '\
-            'reales.'
+            'reales.',
+    pinned: true
   }, {
     question: '¿Con qué título se puede articular este Major?',
     answer: 'Este Major se puede articular de preferencia con los títulos '\
@@ -382,7 +391,8 @@ end
             'Tecnologías de la Información (TI): Va orientado a las '\
             'tecnologías de la información en las organizaciones.'\
             "\r\n\r\nEl Major le sirve exactamente igual a estos tres títulos "\
-            'profesionales.'
+            'profesionales.',
+    pinned: true
   }, {
     question: '¿Cómo es el campo laboral?',
     answer: 'Hay muchos alumnos que se han dedicado al emprendimiento, ellos '\
@@ -391,7 +401,8 @@ end
             'grandes áreas de informática como las líneas aéreas, los bancos, '\
             'retail, etc. Luego están las empresas que sí son desarrolladoras '\
             'de software, como Google, Microsoft, Amazon, etc. Estas han '\
-            'venido a buscar alumnos de la universidad para emplearlos.'
+            'venido a buscar alumnos de la universidad para emplearlos.',
+    pinned: true
   }, {
     question: '¿Cuáles son las diferencias con el Major de Sistemas Autónomos '\
     'y Robóticos?',
@@ -403,7 +414,8 @@ end
             'un énfasis en cómo aplicar ciertos aspectos del desarrollo de '\
             'software a la robótica y a la automatización. Sin embargo, los '\
             'egresados del Major de sistemas autónomos y robóticos también '\
-            'pueden optar a los títulos en computación.'
+            'pueden optar a los títulos en computación.',
+    pinned: true
   }],
   ing_diseno_innovacion: [{
     question: '¿Qué habilidades entrega este Major?',
@@ -416,7 +428,8 @@ end
             "\r\nTambién adquirirá habilidades en cuanto al Emprendimiento "\
             'dentro del campo laboral, o bien inter-emprendimiento formando '\
             'nuevas áreas dentro de una empresa. Además aprenderá a trabajar '\
-            'con personas para lograr innovar.'
+            'con personas para lograr innovar.',
+    pinned: true
   }, {
     question: '¿Cómo es el campo laboral si salgo de este Major?',
     answer: 'En Chile son requeridas personas que cumplan con el perfil '\
@@ -425,18 +438,21 @@ end
             'Development que se están creando dentro de las empresas. '\
             'Actualmente en el país no son tan requeridos como en el '\
             'extranjero por lo que se recomienda comenzar a formar redes '\
-            'desde los primeros años de estudio.'
+            'desde los primeros años de estudio.',
+    pinned: true
   }, {
     question: '¿Con qué título puedo articular si sigo este Major?',
     answer: 'Este Major no conduce a titulación, por lo que se debe tomar un '\
             'minor que sí lo haga. El Major contiene “tracks” de mecánica, '\
             'TI, diseño, y uno mixto (Ingeniería-Diseño) los cuáles facilitan '\
-            'el cambio a algunas de estas áreas.'
+            'el cambio a algunas de estas áreas.',
+    pinned: true
   }, {
     question: '¿Qué perfil de alumno busca este Major?',
     answer: 'Busca alumnos con liderazgo, comprometidos y dinámicos en las '\
             'clases. Éste Major cuenta con una postulación donde se evaluará '\
-            'si se cumple con el perfil.'
+            'si se cumple con el perfil.',
+    pinned: true
   }],
   ing_construccion: [{
     question: '¿Cuál es el perfil de alumno que se busca para este Major?',
@@ -446,14 +462,16 @@ end
             'Al mismo tiempo también se busca que sea inquieto en '\
             'emprendimiento, que esté en busca de oportunidades y nuevos '\
             'desarrollos para emprender en un ámbito tan rico como es la '\
-            'construcción.'
+            'construcción.',
+    pinned: true
   }, {
     question: '¿Con qué títulos profesionales se puede articular este Major?',
     answer: 'Los más directos son los títulos de Ingeniero Civil en '\
             'Ingeniería y Gestión de la Construcción o Ingeniero Industrial '\
             'en Ingeniería y Gestión de la Construcción. Sin embargo, igual '\
             'se puede articular con cualquier otra especialidad civil, solo '\
-            'que esto podría significar invertir algunos cursos adicionales.'
+            'que esto podría significar invertir algunos cursos adicionales.',
+    pinned: true
   }, {
     question: '¿Cómo es el campo laboral?',
     answer: 'Este Major les permite a los alumnos trabajar en distintos '\
@@ -464,7 +482,8 @@ end
             'aspectos para el estudio de nuevos proyectos. Tienen '\
             'conocimientos de Ingeniería Ambiental, planificación e '\
             'Ingeniería en Construcción, por lo que tienen una visión más '\
-            'completa para el estudio de proyectos.'
+            'completa para el estudio de proyectos.',
+    pinned: true
   }],
   ing_estructural: [{
     question: '¿Dónde puedo trabajar si sigo este Major?',
@@ -472,14 +491,16 @@ end
             'Oficinas de Ingenieria que se preocupen del diseño y '\
             'construcción de obras civiles, tanto nacionales como '\
             'internacionales. También puede participar en consultoras de '\
-            'ingeniería, minería u obras públicas.'
+            'ingeniería, minería u obras públicas.',
+    pinned: true
   }, {
     question: '¿Cuáles son las áreas de investigación asociadas al Major?',
     answer: 'La principal preocupación de la Ing. estructural es el diseño '\
             'sísmico de las estructuras, debido a que Chile se expone '\
             'constantemente a estas situaciones, lo cual permite probar '\
             'nuevas tecnologías y verificar el comportamiento de las '\
-            'estructuras.'
+            'estructuras.',
+    pinned: true
   }],
   ing_mecanica: [{
     question: '¿Para qué labores quedan capacitados los alumnos que egresen '\
@@ -491,41 +512,47 @@ end
             'líneas: '\
             "\r\n\r\n- Diseño mecánico/diseño mecatrónico"\
             "\r\n- Sistemas técnicos de energía"\
-            "\r\n- Manufactura y producción de productos y materiales"
+            "\r\n- Manufactura y producción de productos y materiales",
+    pinned: true
   }, {
     question: '¿Dónde se desempeñan los egresados del área de mecánica?',
     answer: 'Los egresados de este departamento se han empleado en labores '\
             'diversas dentro del ámbito de la producción. Por ejemplo: '\
             'montaje de sistemas productivos, reparación de estos sistemas, '\
             'etc. Hay muchos egresados que se emplean en áreas de mantención, '\
-            'producción o de gerencia operativa.'
+            'producción o de gerencia operativa.',
+    pinned: true
   }, {
     question: '¿Cuáles son los desafíos de la Ingeniería Mecánica en Chile?',
     answer: 'Chile no es un país que no fabrica automóviles, aviones o '\
             'barcos. Aquí hay un desafío para los futuros alumnos de mecánica '\
             'para que ellos sean los futuros emprendedores en PYMEs que '\
-            'apunten al desarrollo de productos de esta naturaleza.'
+            'apunten al desarrollo de productos de esta naturaleza.',
+    pinned: true
   }],
   sistemas_autonomos_roboticos: [{
     question: '¿Qué oportunidades de emprendimiento existen en esta área?',
     answer: 'En Chile la robótica está un poco atrasada con respecto a otros '\
             'países, en ese sentido hay mucho potencial para seguir '\
             'creciendo. Hay alumnos de la universidad que ya han empezado a '\
-            'emprender en este tema.'
+            'emprender en este tema.',
+    pinned: true
   }, {
     question: '¿Cuáles son las áreas de investigación asociadas a este Major?',
     answer: 'Hay múltiples áreas de investigación en robótica debido a las '\
             'distintas aplicaciones que esta puede tener. En la PUC se están '\
             'estudiando principalmente manipuladores móviles. Hay temas de la '\
             'robótica que aún no están resueltos y todos estos presentan una '\
-            'oportunidad para avanzar.'
+            'oportunidad para avanzar.',
+    pinned: true
   }, {
     question: '¿Es necesario tomar el curso exploratorio "Introduccion a la '\
               'Robótica"?',
     answer: 'Este curso es un curso de fundamentos de la robótica, el cual '\
             'establece las bases de este Major, por lo que sí es necesario '\
             'hacerlo. En este caso el curso cumple un rol dual de '\
-            'exploratorio y de fundamentos.'
+            'exploratorio y de fundamentos.',
+    pinned: true
   }, {
     question: '¿Con qué título profesional puedo articular si tomo este Major?',
     answer: 'Este Major está diseñado para articular de la mejor manera con '\
@@ -533,13 +560,15 @@ end
             'Electricista. La idea es que en el futuro también se pueda '\
             'lograr una mejor articulación con el Ingeniero Civil Mecánico. '\
             'La robótica es un área en la cual convergen estas tres '\
-            'disciplinas.'
+            'disciplinas.',
+    pinned: true
   }],
   ing_ambiental: [{
     question: '¿Se le da mucho énfasis a la química en este Major?',
     answer: 'Se deben integrar distintas disciplinas y, en este sentido, la '\
             'química es parte de esta necesidad. Se utiliza la química pero '\
-            'de forma aplicada a distintas disciplinas.'
+            'de forma aplicada a distintas disciplinas.',
+    pinned: true
   }, {
     question: '¿Cuál es el campo laboral para quienes salen de este Major?',
     answer: 'Hay campo en la industria privada, en el área de la búsqueda de '\
@@ -548,7 +577,8 @@ end
             'servicios, a la hora de operar plantas de distinto tipo y '\
             'finalmente, en el sector público, trabajando en políticas '\
             'públicas en variados sectores que buscan minimizar el impacto '\
-            'ambiental.'
+            'ambiental.',
+    pinned: true
   }, {
     question: '¿Qué áreas de investigación existen actualmente en este Major?',
     answer: 'Celdas de combustible para generar energía desde los residuos. '\
@@ -556,7 +586,8 @@ end
             'con los riesgos ambientales a los que las personas están '\
             'expuestos según donde viven y la geoquímica de los ríos, que '\
             'analiza cómo se comportan los contaminantes y cómo llegan a las '\
-            'distintas fuentes de agua.'
+            'distintas fuentes de agua.',
+    pinned: true
   }],
   ing_quimica: [{
     question: '¿Con qué títulos profesionales puedo articular si elijo este '\
@@ -565,32 +596,37 @@ end
             'Títulos distintos, Industrial mención Química y mención '\
             'Bioprocesos. Son posibles otras articulaciones que pueden llevar '\
             'a obtener el Título de Ingeniero Civil en Biotecnología o '\
-            'Ingeniero Civil Ambiental.'
+            'Ingeniero Civil Ambiental.',
+    pinned: true
   }, {
     question: '¿En qué áreas puedo trabajar al egresar con este Major?',
     answer: 'En cualquier tipo de empresas productivas, consultoras o '\
             'gubernamentales que se relacionen con la producción química, '\
             'tratamiento de residuos, producción de agua potable, problemas '\
             'relacionados con el ambiente, medicina, minería, productos '\
-            'cosméticos y farmacéuticos, entre muchas otras áreas.'
+            'cosméticos y farmacéuticos, entre muchas otras áreas.',
+    pinned: true
   }, {
     question: '¿Cuáles son las áreas de investigación de los profesores de '\
               'esta área?',
     answer: 'Alimentos, ingeniería ambiental, biotecnología, biomateriales, '\
-            'productos naturales y modelamiento.'
+            'productos naturales y modelamiento.',
+    pinned: true
   }, {
     question: '¿Cómo se diferencia con otros Majors?',
     answer: 'Este Major tiene énfasis en balances de masa, balances de '\
             'energía y en procesos de equilibrio fisicoquímico y fenómenos de '\
             'transporte. En su aplicación, se centra en el diseño de procesos '\
-            'de separación y reacción química.'
+            'de separación y reacción química.',
+    pinned: true
   }, {
     question: '¿Cuál es el perfil del alumno de este Major?',
     answer: 'Se buscan alumnos que tengan alto compromiso por la disciplina y '\
             'que busquen trabajar por mejorar la industria y el bienestar '\
             'general de la población. Pueden tener habilidades '\
             'computacionales o de laboratorio, ambos son bienvenidos mientras '\
-            'tengan ganas de trabajar.'
+            'tengan ganas de trabajar.',
+    pinned: true
   }],
   ing_biologica: [{
     question: '¿Por qué elegir este Major?',
@@ -598,20 +634,23 @@ end
             'esta área está en gran aumento. La proyección de lo que se viene '\
             'se basa en tecnologías de información y en biotecnología. A '\
             'aquellos que les motive, deben atreverse a ser parte de este '\
-            'futuro.'
+            'futuro.',
+    pinned: true
   }, {
     question: '¿Con qué título puedo articular si elijo este Major?',
     answer: 'La articulación más común es el título de Ingeniero Civil en '\
             'Biotecnología, que tiene dos menciones, Ambiental y Procesos. '\
             'En segundo lugar, se puede articular con Ingeniería Civil '\
             'Industrial Química y Bioprocesos. Finalmente, con un poco más de '\
-            'esfuerzo, se puede articular con Ingeniería Ambiental.'
+            'esfuerzo, se puede articular con Ingeniería Ambiental.',
+    pinned: true
   }, {
     question: '¿Cuáles son las aplicaciones de este Major?',
     answer: 'Desde prevención, diagnóstico y curación de enfermedades hasta '\
             'procesos de manufactura, como bioplásticos o biocombustibles e '\
             'incluso síntesis de fármacos. También se aplica a la '\
-            'sustentabilidad ambiental.'
+            'sustentabilidad ambiental.',
+    pinned: true
   }],
   ing_biomedica: [{
     question: '¿Cuál es el campo laboral para este Major?',
@@ -619,7 +658,8 @@ end
             'trabajando en el área biomédica, se puede trabajar en redes de '\
             'salud pública y privada, en empresas de comercialización de '\
             'productos médicos, en el emprendimiento propio en materia '\
-            'biomédica y también en el área de investigación.'
+            'biomédica y también en el área de investigación.',
+    pinned: true
   }, {
     question: '¿Cuáles son las áreas de investigación?',
     answer: 'A nivel universidad, están las imágenes médicas (radiografías, '\
@@ -628,13 +668,15 @@ end
             'las células y las fuerzas. A nivel mundial, está el control a '\
             'través del cerebro de prótesis, bioinformática, políticas de '\
             'salud, gestión operativa de hospitales, entre muchos otros '\
-            'temas.'
+            'temas.',
+    pinned: true
   }, {
     question: '¿Cómo afrontar el número limitado de cupos del Major?',
     answer: 'Ser optimistas, creer en que quedarán y recordar que el Major no '\
             'es un título, por lo que pueden articular mediante otros Majors '\
             'con ramos de este, obtener un Magister o un Doctorado, entre '\
-            'otras posibilidades.'
+            'otras posibilidades.',
+    pinned: true
   }],
   ing_civil: [{
     question: '¿Qué es lo distinto de este Major?',
@@ -649,7 +691,8 @@ end
             'ingenieros existirán ciertas diferencias entre ellos dado al: '\
             'tiempo, la profundización de ciertos tópicos y el perfil de cada '\
             'universidad. El Major tiene la tarea de conservar esta visión '\
-            'amplia de ingeniería.'
+            'amplia de ingeniería.',
+    pinned: true
   }, {
     question: '¿Qué mensaje le daría a los estudiantes para elegir este Major?',
     answer: 'Mauricio López considera que, por un lado, este currículo abre '\
@@ -659,7 +702,8 @@ end
             'y que el estudiante no pueda cambiar. De hecho, es bastante '\
             'fácil cambiar el foco del Major y agrega diciendo que de esa '\
             'forma el alumno puede reinventarse de manera fácil dentro de la '\
-            'Ingeniería Civil.'
+            'Ingeniería Civil.',
+    pinned: true
   }, {
     question: '¿Cuáles son las posibilidades de investigación en este Major?',
     answer: 'Si bien Ingeniería Civil es una carrera tradicional es una '\
@@ -670,7 +714,8 @@ end
             'necesario y este Major puede fomentar el espíritu de '\
             'investigación y a tratar de responder distintas preguntas, por '\
             'ejemplo cómo compatibilizar una cosa técnica con temas mayores y '\
-            'con la sociedad.'
+            'con la sociedad.',
+    pinned: true
   }],
   ing_arquitectura: [{
     question: '¿Cómo es la selección y postulación a este Major?',
@@ -678,22 +723,26 @@ end
             'razones por las cuáles se encuentra interesado en el Major, '\
             'luego a través de los antecedentes académicos el comité '\
             'seleccionará a 15 candidatos de los cuales sólo 8 podrán acceder '\
-            'al Major.'
+            'al Major.',
+    pinned: true
   }, {
     question: '¿Es necesario articular Arquitectura para estudiar '\
               'Planificación Urbana?',
     answer: 'Esta área se puede desarrollar desde ambas disciplinas, '\
             'ingeniería o arquitectura, por lo que no es necesario articular '\
-            'pero los enfoques de los roles pueden ser distintos.'
+            'pero los enfoques de los roles pueden ser distintos.',
+    pinned: true
   }, {
     question: '¿Cuál es el costo en créditos de articular con Arquitectura?',
     answer: 'Aún no está estipulado esté costo, aunque puede estar cercano a '\
             '270 créditos y 16 semestres al tratarse de un Major de '\
-            'interdisciplina.'
+            'interdisciplina.',
+    pinned: true
   }, {
     question: '¿Hay ramos de taller en este Major?',
     answer: 'Sí, existe un ramo de taller y según el minor se pueden tener '\
-            'hasta dos más sin incluir los Optativos que se pueden tomar.'
+            'hasta dos más sin incluir los Optativos que se pueden tomar.',
+    pinned: true
   }, {
     question: '¿Qué diferencias tiene este Major con otros similares?',
     answer: 'La diferencia de éste Major respecto a otros disciplinarios '\
@@ -701,7 +750,8 @@ end
             'respectivos diplomas, que aprenden a entender e interactuar con '\
             'otras disciplinas de mejor forma, gracias a la interdisciplina. '\
             'Los otros buscan una forma directa y formal para formar alumnos '\
-            'en sus respectivas áreas.'
+            'en sus respectivas áreas.',
+    pinned: true
   }],
   ing_geotecnica: [{
     question: '¿Qué tipo de proyectos se realizan en esta disciplina?',
@@ -709,19 +759,22 @@ end
             'expansión de líneas de metro, tranques y depósitos grandes de '\
             'desechos, y grandes obras civiles. Últimamente se ha '\
             'profundizado en puertos al tener una componente hidráulica y de '\
-            'suelo importante.'
+            'suelo importante.',
+    pinned: true
   }, {
     question: '¿Cuál es el perfil de alumno que busca este Major?',
     answer: 'Este Major se encuentra en el área civil, por tanto se busca '\
             'interesados en obras que ayuden al desarrollo del país. El foco '\
             'se encuentra en la modelación del comportamiento de suelos y '\
-            'rocas para resolver las distintas problemáticas estructurales.'
+            'rocas para resolver las distintas problemáticas estructurales.',
+    pinned: true
   }, {
     question: '¿Cuáles son las posibilidades de empleo en este Major?',
     answer: 'Los egresados de este Major principalmente trabajan en la '\
             'operación y desarrollo de proyectos mineros. También se puede '\
             'trabajar en oficinas consultoras de Ingeniería en geotecnia para '\
-            'obras de infraestructura más tradicionales.'
+            'obras de infraestructura más tradicionales.',
+    pinned: true
   }, {
     question: '¿Cuáles son las diferencias con Geociencias y Geoingeniería?',
     answer: 'El Major de Geociencias tiene un foco más descriptivo y '\
@@ -730,7 +783,8 @@ end
             'dentro de un proyecto.'\
             "\r\nLa diferencia con Geoingeniería es el tipo de proyecto, "\
             'puesto que en Geotecnia tiene un foco en proyectos de Ingeniería '\
-            'Civil, grandes obras de infraestructura.'
+            'Civil, grandes obras de infraestructura.',
+    pinned: true
   }],
   investigacion_operativa: [{
     question: '¿Qué tipo de formación entrega este Major?',
@@ -738,7 +792,8 @@ end
             'analíticas de modelación y resolución de problemas, dando una '\
             'flexibilidad para moverse dentro de diversas áreas. Todo esto '\
             'gracias a los fundamentos de la modelación que entrega este '\
-            'Major.'
+            'Major.',
+    pinned: true
   }, {
     question: '¿En qué proyectos concretos se aplica la investigación '\
               'operativa?',
@@ -747,18 +802,21 @@ end
             'tradicionales industriales como en minería, líneas áreas, etc, '\
             'en donde se maneja una vasta cantidad de recursos. También se '\
             'aplica en el sector público, como el área de la salud, haciendo '\
-            'un buen uso de los recursos y mejorando la planificación.'
+            'un buen uso de los recursos y mejorando la planificación.',
+    pinned: true
   }, {
     question: '¿Cómo articula este Major con títulos profesionales?',
     answer: 'El Major se puede articular con cualquier título debido a su '\
             'amplitud. Sin embargo tiene una mayor afinidad con el área de '\
             'Ingeniería Matemática y en Transportes por mencionar algunas. Es '\
-            'importante la planificación para poder articular correctamente.'
+            'importante la planificación para poder articular correctamente.',
+    pinned: true
   }, {
     question: '¿Cómo enfocar la elección de Major?',
     answer: 'Lo mejor que se puede hacer es analizar las opciones y elegir lo '\
             'que realmente les gusta y aprovechar el potencial de ser '\
-            'Ingeniero UC.'
+            'Ingeniero UC.',
+    pinned: true
   }],
   mineria: [{
     question: '¿Cómo es el trabajo en minería?',
@@ -770,7 +828,8 @@ end
             'bases en Santiago pero les puede tocar mucho viajar.'\
             "\r\nLa minería da la opción para que alumnos al año de egresados "\
             'sean capaces de tomar decisiones de relevancia dentro de una '\
-            'empresa.'
+            'empresa.',
+    pinned: true
   }, {
     question: '¿Cuáles son las áreas de investigación en minería?',
     answer: 'A nivel mundial la industria está revisando lo que se hace '\
@@ -778,7 +837,8 @@ end
             'pensando en diversos métodos como el uso de bacterias para poder '\
             'realizar una explotación más eficiente. La investigación está '\
             'apuntando a hacer una minería distinta, una mejora continua en '\
-            'los procesos y equipos, pensando en una minera inteligente.'
+            'los procesos y equipos, pensando en una minera inteligente.',
+    pinned: true
   }, {
     question: '¿Por qué elegir este Major?',
     answer: 'Porque da la opción de trabajar en una de las industrias más '\
@@ -787,6 +847,7 @@ end
             'desarrollo económico, social y tecnológico del país. También '\
             'conduce rápidamente a tomar decisiones de relevancia en la '\
             'empresa. Si gustan de los desafíos, quieren tener una mirada '\
-            'crítica y trabajar en equipo este Major los prepara para eso.'
+            'crítica y trabajar en equipo este Major los prepara para eso.',
+    pinned: true
   }]
 }

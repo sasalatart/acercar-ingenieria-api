@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response scoped_questions.answered
+    paginated_json_response scoped_questions.answered.order(pinned: :desc)
   end
 
   def pending
@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
   end
 
   def admin_question_params
-    params.permit(:id, :question, :answer, :major_id)
+    params.permit(:id, :question, :answer, :pinned, :major_id)
   end
 
   def student_question_params

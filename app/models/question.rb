@@ -9,6 +9,7 @@
 #  major_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  pinned     :boolean          default(FALSE)
 #
 
 class Question < ApplicationRecord

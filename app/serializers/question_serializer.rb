@@ -9,10 +9,14 @@
 #  major_id   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  pinned     :boolean          default(FALSE)
 #
 
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :question, :answer, :major_id, :created_at
+  attributes :id, :question, :answer, :pinned, :created_at
 
   belongs_to :author, class_name: 'User'
+
+  belongs_to :major, optional: true,
+                     serializer: MajorSummarySerializer
 end

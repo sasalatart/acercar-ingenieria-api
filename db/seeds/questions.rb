@@ -8,7 +8,8 @@ end
   { question: '¿Cómo funciona la página de Preguntas Frecuentes?',
     answer: 'Aquí podrás ver las preguntas frecuentes de la Nueva Malla. '\
             'Puedes enviar una pregunta haciendo click en el botón "Crear '\
-            'pregunta". Un administrador se encargará luego de responderlas.' },
+            'pregunta". Un administrador se encargará luego de responderlas.',
+    pinned: true },
   { question: '¿Qué es un major? ¿Cuál es la diferencia entre major '\
               'disciplinario e interdisciplinario?',
     answer: 'Un major es una concentración de cursos que equivale a 100 '\
@@ -29,7 +30,8 @@ end
             'Licenciado en Ciencias de la Ingeniería, según competencias '\
             'disciplinares y competencias transversales."'\
             "\r\nDesafiando Límites, Majors y Minors."\
-            "\r\nhttp://www.desafiandolimites.cl/majors-minors" },
+            "\r\nhttp://www.desafiandolimites.cl/majors-minors",
+    pinned: true },
   { question: '¿El major tiene que ver con mi especialidad?',
     answer: 'Esto depende solo de ti. La malla apunta a que puedas usarla '\
             'como tú sientas que más aportará a tu futuro profesional y '\
@@ -37,7 +39,8 @@ end
             'especialidad. OJO! ten cuidado que si tienes como visión '\
             'terminar la carrera en un tiempo determinado una combinación de '\
             'major, minor y título que no tengan relación entre sí es casi '\
-            'seguro que sumarán semestres en la Universidad.' },
+            'seguro que sumarán semestres en la Universidad.',
+    pinned: true },
   { question: '¿Cómo sé cuáles ramos tomar para articular con mi especialidad?',
     answer: 'Para esto debes consultar en esta página, en Desafiando Límites, '\
             'en tu SidIng, donde aparece información sobre los majors y qué '\
@@ -47,5 +50,6 @@ end
             'adquirido. Además recuerda que solo a modo de ORIENTACIÓN está '\
             'la Orientadora Académica en Dirección de Pregrado, a quién '\
             'puedes acudir si tienes dudas sobre articulaciones, pero ten '\
-            'claro que su objetivo no es armarte la malla.' }
+            'claro que su objetivo no es armarte la malla.',
+    pinned: true },
 ]
