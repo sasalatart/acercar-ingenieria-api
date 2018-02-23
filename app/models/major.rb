@@ -30,6 +30,7 @@ class Major < ApplicationRecord
 
   has_many :major_users, dependent: :destroy
   has_many :users, through: :major_users
+  has_many :questions
   has_many :articles
   has_many :comments, as: :commentable, dependent: :destroy
 
