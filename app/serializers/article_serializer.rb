@@ -19,13 +19,18 @@
 #
 
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :title, :short_description, :content, :major_id,
-             :likes_count, :comments_count, :picture, :created_at
+  attributes :id, :title, :short_description, :content, :picture,
+             :major_summary, :likes_count, :comments_count, :created_at
 
   belongs_to :author, class_name: 'User'
 
   def picture
     return nil unless object.picture.exists?
     { medium: object.picture.url(:medium) }
+  end
+
+  def major_summary
+    return nil unless object.major
+    MajorSummarySerializer.new(object.major)
   end
 end
