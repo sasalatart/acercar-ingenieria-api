@@ -13,10 +13,12 @@
 #
 
 class QuestionSerializer < ActiveModel::Serializer
-  attributes :id, :question, :answer, :pinned, :created_at
+  attributes :id, :question, :answer, :pinned, :major_summary, :created_at
 
   belongs_to :author, class_name: 'User'
 
-  belongs_to :major, optional: true,
-                     serializer: MajorSummarySerializer
+  def major_summary
+    return nil unless object.major
+    MajorSummarySerializer.new(object.major)
+  end
 end
