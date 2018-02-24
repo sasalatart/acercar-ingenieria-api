@@ -80,6 +80,8 @@ Rails.application.routes.draw do
       get :pinned
     end
 
+    resources :likes, only: %i[create destroy], controller: :likes
+    resources :comments, only: %i[index create update destroy], controller: :comments
     resources :enrollments, only: %i[create destroy]
   end
 
