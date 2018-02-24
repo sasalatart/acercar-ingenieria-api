@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   end
 
   resources :articles, only: %i[index show create update destroy] do
-    resources :likes, only: %i[index create destroy], controller: :likes
+    resources :likes, only: %i[create destroy], controller: :likes
     resources :comments, only: %i[index create update destroy], controller: :comments
     resources :enrollments, only: %i[create destroy]
   end
