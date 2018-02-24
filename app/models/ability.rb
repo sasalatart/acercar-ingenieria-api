@@ -74,6 +74,8 @@ class Ability
 
     can [:index], Question
 
+    can %i[index show], Article
+
     can [:pinned], Announcement
   end
 end
