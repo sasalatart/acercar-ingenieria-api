@@ -32,8 +32,7 @@ class Ability
       can [:destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
       can %i[update destroy], Comment, author_id: user.id
 
-      can [:create], Like
-      can [:destroy], Like, user_id: user.id
+      can %i[create destroy], Like
 
       can %i[index mine pinned show create], Discussion
       can %i[update destroy], Discussion, author_id: user.id
@@ -57,8 +56,7 @@ class Ability
       can %i[index create], Comment
       can %i[update destroy], Comment, author_id: user.id
 
-      can [:create], Like
-      can [:destroy], Like, user_id: user.id
+      can %i[create destroy], Like
 
       can %i[index mine pinned show create], Discussion
       can %i[update destroy], Discussion, author_id: user.id

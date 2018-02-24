@@ -62,7 +62,9 @@ Rails.application.routes.draw do
   end
 
   resources :articles, only: %i[index show create update destroy] do
-    resources :likes, only: %i[create destroy], controller: :likes
+    delete :likes, to: 'likes#destroy'
+
+    resources :likes, only: %i[create], controller: :likes
     resources :comments, only: %i[index create update destroy], controller: :comments
     resources :enrollments, only: %i[create destroy]
   end
@@ -70,17 +72,21 @@ Rails.application.routes.draw do
   resources :categories, only: %i[index create update destroy]
 
   resources :comments, only: [] do
-    resources :likes, only: %i[create destroy], controller: :likes
+    delete :likes, to: 'likes#destroy'
+
+    resources :likes, only: %i[create], controller: :likes
     resources :enrollments, only: %i[create destroy]
   end
 
   resources :discussions, only: %i[index show create update destroy] do
+    delete :likes, to: 'likes#destroy'
+
     collection do
       get :mine
       get :pinned
     end
 
-    resources :likes, only: %i[create destroy], controller: :likes
+    resources :likes, only: %i[create], controller: :likes
     resources :comments, only: %i[index create update destroy], controller: :comments
     resources :enrollments, only: %i[create destroy]
   end

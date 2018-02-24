@@ -10,7 +10,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like.destroy
+    find_likeable.likes.where(user: current_user).destroy_all
     head :no_content
   end
 end
