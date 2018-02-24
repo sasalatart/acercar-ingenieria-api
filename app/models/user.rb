@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
   has_many :major_users, dependent: :destroy
   has_many :majors, through: :major_users
 
+  has_many :likes, dependent: :destroy
+
   has_many :discussions, dependent: :destroy,
                          foreign_key: :author_id
 

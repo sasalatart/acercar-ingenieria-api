@@ -15,8 +15,10 @@
 #
 
 class DiscussionSerializer < ActiveModel::Serializer
+  include Likeable
+
   attributes :id, :title, :description, :pinned, :tag_list,
-             :likes_count, :comments_count, :impressions_count, :created_at
+             :comments_count, :impressions_count, :created_at
 
   belongs_to :author, class_name: 'User'
 

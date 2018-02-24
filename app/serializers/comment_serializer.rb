@@ -14,8 +14,9 @@
 #
 
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :content, :commentable_id, :commentable_type,
-             :likes_count, :created_at
+  include Likeable
+
+  attributes :id, :content, :commentable_id, :commentable_type, :created_at
 
   belongs_to :author, class_name: 'User'
 

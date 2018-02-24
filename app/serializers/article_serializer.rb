@@ -19,8 +19,10 @@
 #
 
 class ArticleSerializer < ActiveModel::Serializer
+  include Likeable
+
   attributes :id, :title, :short_description, :content, :picture,
-             :major_summary, :likes_count, :comments_count, :created_at
+             :major_summary, :comments_count, :created_at
 
   belongs_to :author, class_name: 'User'
 
