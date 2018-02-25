@@ -14,7 +14,7 @@
 #
 
 class Attachment < ApplicationRecord
-  belongs_to :attachable, polymorphic: true
+  belongs_to :attachable, polymorphic: true, inverse_of: :attachments
 
   has_attached_file :document, dependent: :destroy
 
