@@ -21,10 +21,12 @@
 class ArticleSerializer < ActiveModel::Serializer
   include Likeable
 
-  attributes :id, :title, :short_description, :content, :picture,
-             :major_summary, :comments_count, :created_at
+  attributes :id, :title, :short_description, :content, :picture, :major_id,
+             :major_summary, :category_list, :comments_count, :created_at
 
   belongs_to :author, class_name: 'User'
+
+  has_many :attachments
 
   def picture
     return nil unless object.picture.exists?
