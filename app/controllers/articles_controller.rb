@@ -42,6 +42,6 @@ class ArticlesController < ApplicationController
                   :major_id,
                   :category_list,
                   :picture,
-                  attachments_attributes: [:content])
+                  attachments_attributes: %i[document id _destroy])
   end
 end
