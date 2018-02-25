@@ -1,9 +1,9 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
   load_and_authorize_resource
 
   def index
-    paginated_json_response Category.all
+    json_response Category.all
   end
 
   def create

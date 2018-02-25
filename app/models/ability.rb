@@ -20,8 +20,11 @@ class Ability
 
       can %i[update broadcast], Major, id: majors_user_is_admin
 
-      can %i[index show], Article
-      can %i[create update destroy], Article, major_id: majors_user_is_admin
+      can %i[index show create], Article
+      can %i[update destroy], Article, major_id: majors_user_is_admin
+      can %i[update destroy], Article, author_id: user.id
+
+      can %i[index], Category
 
       can %i[index create], Question
       can %i[pending], Question if majors_user_is_admin.include? params[:major_id].to_i
@@ -51,7 +54,10 @@ class Ability
       can %i[index create], Question
       can %i[update destroy], Question, author_id: user.id
 
-      can %i[index show], Article
+      can %i[index show create], Article
+      can %i[update destroy], Article, author_id: user.id
+
+      can %i[index], Category
 
       can %i[index create], Comment
       can %i[update destroy], Comment, author_id: user.id
@@ -73,6 +79,8 @@ class Ability
     can [:index], Question
 
     can %i[index show], Article
+
+    can %i[index], Category
 
     can [:pinned], Announcement
   end
