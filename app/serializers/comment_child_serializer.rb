@@ -14,8 +14,10 @@
 #
 
 class CommentChildSerializer < ActiveModel::Serializer
+  include Likeable
+
   attributes :id, :content, :commentable_id, :commentable_type,
-             :parent_comment_id, :likes_count, :created_at
+             :parent_comment_id, :created_at
 
   belongs_to :author, class_name: 'User'
 end
