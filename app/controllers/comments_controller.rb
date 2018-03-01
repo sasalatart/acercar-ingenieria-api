@@ -9,14 +9,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    parameters = creation_params.merge(author: current_user,
-                                       commentable: find_commentable)
+    parameters = comment_params.merge(author: current_user,
+                                      commentable: find_commentable)
     @comment = Comment.create!(parameters)
     json_response @comment, :created
   end
 
   def update
-    @comment.update!(update_params)
+    @comment.update!(comment_params)
     json_response @comment
   end
 
@@ -27,11 +27,8 @@ class CommentsController < ApplicationController
 
   private
 
-  def creation_params
+  def comment_params
+    return params.permit(:content) if params[:id]
     params.permit(:content, :parent_comment_id)
-  end
-
-  def update_params
-    params.permit(:id, :content)
   end
 end
