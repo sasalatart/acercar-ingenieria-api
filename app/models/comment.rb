@@ -54,7 +54,9 @@ class Comment < ApplicationRecord
   end
 
   def enroll_to_parent
-    parent_comment.enroll!(author) if parent_comment_id
+    return unless parent_comment &&
+                  parent_comment.enrolled_users.where(id: author_id).empty?
+    parent_comment.enroll!(author)
   end
 
   def notify_interested
