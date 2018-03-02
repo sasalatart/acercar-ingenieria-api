@@ -43,6 +43,10 @@ class Comment < ApplicationRecord
 
   validate :parent_comment_can_not_have_parent_comment
 
+  def serializer
+    parent_comment_id ? CommentChildSerializer : CommentSerializer
+  end
+
   private
 
   def sanitize_attributes

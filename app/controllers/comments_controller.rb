@@ -14,12 +14,12 @@ class CommentsController < ApplicationController
     parameters = comment_params.merge(author: current_user,
                                       commentable: find_commentable)
     @comment = Comment.create!(parameters)
-    json_response @comment, :created
+    json_response @comment, :created, @comment.serializer
   end
 
   def update
     @comment.update!(comment_params)
-    json_response @comment
+    json_response @comment, :ok, @comment.serializer
   end
 
   def destroy
