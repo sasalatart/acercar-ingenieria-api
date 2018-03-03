@@ -27,7 +27,7 @@ class MajorsController < ApplicationController
 
   def broadcast
     MajorMailer.broadcast(@major, params[:subject], params[:content]).deliver
-    head :ok
+    head :no_content
   end
 
   private
