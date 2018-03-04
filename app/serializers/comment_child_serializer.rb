@@ -20,4 +20,8 @@ class CommentChildSerializer < ActiveModel::Serializer
              :parent_comment_id, :created_at
 
   belongs_to :author, class_name: 'User'
+
+  def self.eager_load_relation(relation)
+    relation.includes(:author)
+  end
 end

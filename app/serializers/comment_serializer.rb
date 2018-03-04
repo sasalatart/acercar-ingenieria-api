@@ -25,6 +25,6 @@ class CommentSerializer < ActiveModel::Serializer
                             serializer: CommentChildSerializer
 
   def self.eager_load_relation(relation)
-    relation.includes(:author, :child_comments)
+    relation.includes(:author)
   end
 end
