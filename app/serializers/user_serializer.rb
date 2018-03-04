@@ -40,7 +40,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def majors_of_interest
     ActiveModelSerializers::SerializableResource.new(
-      object.major_users,
+      object.major_users.includes(:major),
       each_serializer: MajorOfInterestSerializer
     )
   end

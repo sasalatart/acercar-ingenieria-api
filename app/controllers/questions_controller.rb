@@ -3,16 +3,18 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response scoped_questions.answered.order(pinned: :desc)
+    @questions = scoped_questions.answered.order(pinned: :desc)
+    paginated_json_response @questions, each_serializer: QuestionSerializer
   end
 
   def pending
-    paginated_json_response scoped_questions.not_answered
+    @questions = scoped_questions.not_answered
+    paginated_json_response @questions, each_serializer: QuestionSerializer
   end
 
   def create
     @question = Question.create!(question_params.merge(author: current_user))
-    json_response @question, :created
+    json_response @question, status: :created
   end
 
   def update

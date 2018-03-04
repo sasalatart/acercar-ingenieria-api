@@ -12,7 +12,7 @@ class AnnouncementsController < ApplicationController
 
   def create
     @announcement = Announcement.create!(announcement_params)
-    json_response @announcement, :created
+    json_response @announcement, status: :created
   end
 
   def update

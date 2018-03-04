@@ -6,7 +6,7 @@ class EnrollmentsController < ApplicationController
 
   def create
     @enrollment = find_enrollable.enroll!(current_user)
-    json_response @enrollment, :created
+    json_response @enrollment, status: :created
   end
 
   def destroy

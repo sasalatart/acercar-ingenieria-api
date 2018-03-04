@@ -28,6 +28,10 @@ class ArticleSerializer < ActiveModel::Serializer
 
   has_many :attachments
 
+  def self.eager_load_relation(relation)
+    relation.includes(:author, :major, :taggings, :attachments)
+  end
+
   def picture
     return nil unless object.picture.exists?
     { medium: object.picture.url(:medium) }

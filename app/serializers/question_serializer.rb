@@ -17,6 +17,10 @@ class QuestionSerializer < ActiveModel::Serializer
 
   belongs_to :author, class_name: 'User'
 
+  def self.eager_load_relation(relation)
+    relation.includes(:author, :major)
+  end
+
   def major_summary
     return nil unless object.major
     MajorSummarySerializer.new(object.major)

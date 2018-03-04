@@ -22,7 +22,7 @@ class DiscussionsController < ApplicationController
   def create
     creation_params = discussion_params.merge(author: current_user)
     @discussion = Discussion.create!(creation_params)
-    json_response @discussion, :created
+    json_response @discussion, status: :created
   end
 
   def update

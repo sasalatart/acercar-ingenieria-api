@@ -12,7 +12,7 @@ class MajorsController < ApplicationController
 
   def create
     @major = Major.create!(major_params)
-    json_response @major, :created
+    json_response @major, status: :created
   end
 
   def update

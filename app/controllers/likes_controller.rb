@@ -6,7 +6,7 @@ class LikesController < ApplicationController
 
   def create
     @like = Like.create!(user: current_user, likeable: find_likeable)
-    json_response @like, :created
+    json_response @like, status: :created
   end
 
   def destroy

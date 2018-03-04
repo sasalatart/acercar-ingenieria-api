@@ -5,21 +5,19 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response find_commentable.comments
-      .primary
-      .order(created_at: :desc)
+    @comments = find_commentable.comments.primary.order(created_at: :desc)
+    paginated_json_response @comments, each_serializer: CommentSerializer
   end
 
   def create
-    parameters = comment_params.merge(author: current_user,
-                                      commentable: find_commentable)
-    @comment = Comment.create!(parameters)
-    json_response @comment, :created, @comment.serializer
+    automatic_params = { author: current_user, commentable: find_commentable }
+    @comment = Comment.create!(comment_params.merge(automatic_params))
+    json_response @comment, status: :created, serializer: @comment.serializer
   end
 
   def update
     @comment.update!(comment_params)
-    json_response @comment, :ok, @comment.serializer
+    json_response @comment, serializer: @comment.serializer
   end
 
   def destroy

@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response scoped_articles
+    paginated_json_response scoped_articles, each_serializer: ArticleSerializer
   end
 
   def show
@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.create!(article_params.merge(author: current_user))
-    json_response @article, :created
+    json_response @article, status: :created
   end
 
   def update
