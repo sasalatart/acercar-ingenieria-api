@@ -8,7 +8,7 @@ def create_comments!(options)
 
   options[:comments][:amount].times do
     comment = Comment.create!(author_id: all_users_ids.sample,
-                              content: Faker::Lorem.paragraph,
+                              content: Faker::Lorem.paragraph(1, true, 8),
                               commentable: all_commentables.sample)
 
     likers_ids = all_users_ids.sample(rand(options[:comments][:max_likes_per]))
@@ -17,12 +17,16 @@ def create_comments!(options)
 
   all_parent_comments = Comment.all
   all_parent_comments.each do |parent_comment|
-    comment = Comment.create!(author_id: all_users_ids.sample,
-                              content: Faker::Lorem.paragraph,
-                              commentable: parent_comment.commentable,
-                              parent_comment: parent_comment)
+    number_of_children = rand(options[:comments][:max_children_per])
 
-    likers_ids = all_users_ids.sample(rand(options[:comments][:max_likes_per]))
-    add_likes_to(comment, likers_ids)
+    number_of_children.times do
+      comment = Comment.create!(author_id: all_users_ids.sample,
+                                content: Faker::Lorem.paragraph(1, true, 8),
+                                commentable: parent_comment.commentable,
+                                parent_comment: parent_comment)
+
+      likers_ids = all_users_ids.sample(rand(options[:comments][:max_likes_per]))
+      add_likes_to(comment, likers_ids)
+    end
   end
 end
