@@ -35,6 +35,7 @@ class MajorsController < ApplicationController
   def major_params
     params.permit(:name,
                   :category,
+                  :short_description,
                   :description,
                   :video_url,
                   :logo)
