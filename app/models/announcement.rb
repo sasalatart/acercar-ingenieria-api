@@ -3,7 +3,6 @@
 # Table name: announcements
 #
 #  id                   :integer          not null, primary key
-#  text                 :text
 #  pinned               :boolean          default(TRUE)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -14,10 +13,6 @@
 #
 
 class Announcement < ApplicationRecord
-  include Sanitizable
-
-  before_save :sanitize_attributes
-
   scope :pinned, -> { where(pinned: true) }
 
   has_attached_file :picture,
@@ -27,10 +22,4 @@ class Announcement < ApplicationRecord
 
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
                                  size: { in: 0..5.megabytes }
-
-  private
-
-  def sanitize_attributes
-    sanitize(:text)
-  end
 end

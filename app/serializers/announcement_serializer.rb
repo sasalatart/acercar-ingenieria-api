@@ -3,7 +3,6 @@
 # Table name: announcements
 #
 #  id                   :integer          not null, primary key
-#  text                 :text
 #  pinned               :boolean          default(TRUE)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -14,7 +13,7 @@
 #
 
 class AnnouncementSerializer < ActiveModel::Serializer
-  attributes :id, :text, :pinned, :picture, :created_at
+  attributes :id, :pinned, :picture, :created_at
 
   def picture
     { large: object.picture.url(:large) }

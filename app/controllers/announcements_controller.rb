@@ -28,6 +28,6 @@ class AnnouncementsController < ApplicationController
   private
 
   def announcement_params
-    params.permit(:text, :pinned, :picture)
+    params.permit(:pinned, :picture)
   end
 end
