@@ -20,7 +20,7 @@ def create_articles!(options)
 
     Article.create!(major: major,
                     title: "#{index}-#{Faker::Lorem.sentence(2)}",
-                    short_description: Faker::Lorem.paragraph(4),
+                    short_description: Faker::Lorem.paragraph(3),
                     content: ARTICLE_VARIANTS.sample,
                     author: author,
                     category_list: category_list)
