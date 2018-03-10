@@ -13,9 +13,11 @@
 #
 
 class AnnouncementSerializer < ActiveModel::Serializer
+  include Imageable
+
   attributes :id, :pinned, :picture, :created_at
 
   def picture
-    { large: object.picture.url(:large) }
+    image_hash(object.picture, :thumb, :medium, :large)
   end
 end

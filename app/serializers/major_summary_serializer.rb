@@ -18,10 +18,11 @@
 #
 
 class MajorSummarySerializer < ActiveModel::Serializer
+  include Imageable
+
   attributes :id, :name, :category, :logo
 
   def logo
-    return nil unless object.logo.exists?
-    { thumb: object.logo.url(:thumb), medium: object.logo.url(:medium) }
+    image_hash(object.logo, :thumb, :medium)
   end
 end

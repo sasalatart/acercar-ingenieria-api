@@ -20,6 +20,7 @@
 
 class ArticleSerializer < ActiveModel::Serializer
   include Likeable
+  include Imageable
 
   attributes :id, :title, :short_description, :content, :picture, :major_id,
              :major_summary, :category_list, :comments_count, :created_at
@@ -33,8 +34,7 @@ class ArticleSerializer < ActiveModel::Serializer
   end
 
   def picture
-    return nil unless object.picture.exists?
-    { medium: object.picture.url(:medium) }
+    image_hash(object.picture, :medium)
   end
 
   def major_summary

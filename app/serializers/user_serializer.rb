@@ -34,6 +34,8 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
+  include Imageable
+
   attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
              :active, :majors_of_interest, :admin, :admin_of_majors,
              :created_at
@@ -57,7 +59,6 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def avatar
-    return nil unless object.avatar.exists?
-    { thumb: object.avatar.url(:thumb), medium: object.avatar.url(:medium) }
+    image_hash(object.avatar, :thumb, :medium)
   end
 end
