@@ -25,7 +25,6 @@
 #  tokens                 :json
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  active                 :boolean          default(TRUE)
 #  bio                    :string
 #  avatar_file_name       :string
 #  avatar_content_type    :string
@@ -37,8 +36,7 @@ class UserSerializer < ActiveModel::Serializer
   include Imageable
 
   attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
-             :active, :majors_of_interest, :admin, :admin_of_majors,
-             :created_at
+             :majors_of_interest, :admin, :admin_of_majors, :created_at
 
   def majors_of_interest
     ActiveModelSerializers::SerializableResource.new(

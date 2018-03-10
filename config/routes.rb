@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
-  resources :users, only: %i[index show update] do
+  resources :users, only: %i[index show update destroy] do
     member do
-      patch :active
       patch :admin, to: 'admins#toggle'
     end
 

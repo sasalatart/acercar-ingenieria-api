@@ -6,7 +6,7 @@ class MajorMailer < ApplicationMailer
   #   en.major_mailer.broadcast.subject
   #
   def broadcast(major, subject, content)
-    emails = major.users.active.pluck(:email).join(',')
+    emails = major.users.pluck(:email).join(',')
     @content = content
 
     mail to: emails, subject: subject

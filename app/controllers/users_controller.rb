@@ -15,10 +15,9 @@ class UsersController < ApplicationController
     json_response @user
   end
 
-  def active
-    @user.toggle! :active
-    sign_out @user unless @user.active?
-    json_response @user
+  def destroy
+    @user.destroy
+    head :no_content
   end
 
   private

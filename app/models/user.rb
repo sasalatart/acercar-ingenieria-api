@@ -25,7 +25,6 @@
 #  tokens                 :json
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  active                 :boolean          default(TRUE)
 #  bio                    :string
 #  avatar_file_name       :string
 #  avatar_content_type    :string
@@ -45,8 +44,6 @@ class User < ActiveRecord::Base
   before_save :sanitize_attributes
   before_save :capitalize
 
-  scope :active, -> { where(active: true) }
-
   has_many :major_users, dependent: :destroy
   has_many :majors, through: :major_users
 
@@ -58,8 +55,14 @@ class User < ActiveRecord::Base
   has_many :discussions, dependent: :destroy,
                          foreign_key: :author_id
 
+  has_many :enrollments, dependent: :destroy
+
   has_many :notifications, dependent: :destroy,
                            foreign_key: :owner_id
+
+  has_many :sent_notifications, class_name: :Notification,
+                                dependent: :destroy,
+                                foreign_key: :notificator_id
 
   has_attached_file :avatar, styles: { thumb: '75x75>', medium: '200x200>' },
                              convert_options: { display: '-quality 90 -strip' },
@@ -89,14 +92,6 @@ class User < ActiveRecord::Base
 
   validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\z/ },
                                 size: { in: 0..1.megabyte }
-
-  def active_for_authentication?
-    super && active
-  end
-
-  def inactive_message
-    'Sorry, this account has been deactivated.'
-  end
 
   def token_validation_response
     UserSerializer.new(self).as_json

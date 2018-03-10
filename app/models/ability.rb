@@ -9,12 +9,13 @@ class Ability
       majors_user_is_admin = Major.with_role(:major_admin, user).pluck(:id)
     end
 
-    if user.active? && user.has_role?(:admin)
+    if user.has_role?(:admin)
       can :manage, :all
       cannot [:toggle], :admin if user.id == params[:id].to_i
-    elsif user.active? && !majors_user_is_admin.empty?
+    elsif !majors_user_is_admin.empty?
       can %i[index show], User
       can %i[update active], User, id: user.id
+      can %i[destroy], User if MajorUser.find_by(user_id: params[:id].to_i, major_id: majors_user_is_admin)
 
       can [:index], :admin
 
@@ -45,7 +46,7 @@ class Ability
 
       can %i[index seen clear], Notification
       can %i[read], Notification, owner_id: user.id
-    elsif user.active? && !user.new_record?
+    elsif !user.new_record?
       can %i[index show], User
       can %i[update active], User, id: user.id
 
