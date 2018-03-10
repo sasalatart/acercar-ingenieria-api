@@ -16,7 +16,7 @@ class Announcement < ApplicationRecord
   scope :pinned, -> { where(pinned: true) }
 
   has_attached_file :picture,
-                    styles: { large: '1440x880>' },
+                    styles: { thumb: '75x75>', medium: '200x200>', large: '1440x880>' },
                     convert_options: { display: '-quality 90 -strip' },
                     dependent: :destroy
 
