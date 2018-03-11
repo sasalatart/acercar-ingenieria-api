@@ -8,7 +8,7 @@ def create_users!(options)
                    generation: 2011)
   admin.skip_confirmation!
   admin.save!
-  admin.toggle_admin
+  admin.promote_to_admin
 
   options[:users][:amount].times do |i|
     user = User.new(email: "example-user-#{i}@uc.cl",

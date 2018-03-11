@@ -1,13 +1,11 @@
 module Adminable
-  def toggle_admin(major_id = nil)
-    unless major_id
-      has_role?(:admin) ? remove_role(:admin) : add_role(:admin)
-      return self
-    end
+  def promote_to_admin(major_id = nil)
+    major_id ? add_role(:major_admin, Major.find(major_id)) : add_role(:admin)
+    self
+  end
 
-    @major = Major.find(major_id)
-    admin = has_role?(:major_admin, @major)
-    admin ? remove_role(:major_admin, @major) : add_role(:major_admin, @major)
+  def demote_from_admin(major_id = nil)
+    major_id ? remove_role(:major_admin, Major.find(major_id)) : remove_role(:admin)
     self
   end
 

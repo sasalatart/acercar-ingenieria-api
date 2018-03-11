@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show update destroy] do
     member do
-      patch :admin, to: 'admins#toggle'
+      post :admin, to: 'admins#create'
+      delete :admin, to: 'admins#destroy'
     end
 
     collection do
@@ -43,7 +44,8 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[index] do
       member do
-        patch :admin, to: 'admins#toggle'
+        post :admin, to: 'admins#create'
+        delete :admin, to: 'admins#destroy'
       end
     end
 
