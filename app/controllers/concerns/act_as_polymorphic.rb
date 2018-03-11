@@ -2,9 +2,9 @@ module ActAsPolymorphic
   parse_model = proc { |model| "#{model.name.downcase}_id" }
 
   ID_TYPES = {
-    commentable: [Article, Major].map(&parse_model),
-    likeable: [Article, Comment].map(&parse_model),
-    enrollable: [Major, Article, Comment, Discussion].map(&parse_model)
+    commentable: [Major, Article, Discussion].map(&parse_model),
+    likeable: [Article, Discussion, Comment].map(&parse_model),
+    enrollable: [Major, Article, Discussion, Comment].map(&parse_model)
   }.freeze
 
   def method_missing(name)
