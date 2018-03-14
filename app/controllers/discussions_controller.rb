@@ -41,7 +41,8 @@ class DiscussionsController < ApplicationController
   end
 
   def discussion_params
-    permitted_params = %i[title description tag_list]
+    permitted_params = [:title, :description, :tag_list,
+                        attachments_attributes: %i[document id _destroy]]
     permitted_params.push(:pinned) if current_user.admin_of_something?
     params.permit(permitted_params)
   end

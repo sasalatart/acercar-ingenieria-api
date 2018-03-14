@@ -30,7 +30,7 @@ class Discussion < ApplicationRecord
 
   belongs_to :author, class_name: :User
 
-  has_many :attachments, as: :attachable, dependent: :destroy
+  has_many :attachments, as: :attachable, dependent: :destroy, inverse_of: :attachable
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
