@@ -39,8 +39,7 @@ class Discussion < ApplicationRecord
   validates :title, presence: true,
                     length: { minimum: 10, maximum: 255 }
 
-  validates :description, presence: true,
-                          length: { minimum: 10, maximum: 2000 }
+  validates :description, presence: true
 
   private
 
