@@ -21,8 +21,6 @@ class Discussion < ApplicationRecord
   before_save :sanitize_attributes
   after_create { |discussion| enroll!(discussion.author) }
 
-  scope :pinned, -> { where(pinned: true) }
-
   acts_as_taggable
 
   is_impressionable counter_cache: true,
