@@ -3,15 +3,13 @@ class DiscussionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response filter_with_tags(Discussion.all)
+    @discussions = filter_with_tags(Discussion.all).order(pinned: :desc)
+    paginated_json_response @discussions, each_serializer: DiscussionSerializer
   end
 
   def mine
-    paginated_json_response filter_with_tags(current_user.discussions)
-  end
-
-  def pinned
-    paginated_json_response Discussion.pinned
+    @discussions = filter_with_tags(current_user.discussions)
+    paginated_json_response @discussions, each_serializer: DiscussionSerializer
   end
 
   def show

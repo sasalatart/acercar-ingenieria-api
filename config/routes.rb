@@ -84,7 +84,6 @@ Rails.application.routes.draw do
 
     collection do
       get :mine
-      get :pinned
     end
 
     resources :likes, only: %i[create], controller: :likes

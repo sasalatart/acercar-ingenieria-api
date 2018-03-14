@@ -23,4 +23,8 @@ class DiscussionSerializer < ActiveModel::Serializer
   belongs_to :author, class_name: 'User'
 
   has_many :attachments
+
+  def self.eager_load_relation(relation)
+    relation.includes(:author, :taggings, :attachments)
+  end
 end
