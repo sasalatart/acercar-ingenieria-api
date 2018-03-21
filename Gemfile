@@ -9,6 +9,9 @@ gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 
+gem 'rails-i18n', '~> 5.1'
+gem 'devise-i18n'
+
 gem 'devise_token_auth'
 gem 'cancancan', '~> 2.0'
 gem 'rolify'

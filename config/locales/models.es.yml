@@ -1,0 +1,53 @@
+es:
+  activerecord:
+    models:
+      announcement: Anuncio
+      article: Artículo
+      attachment: Archivo
+      category: Categoría
+      comment: Comentario
+      discussion: Tema
+      enrollment: Suscripción
+      like: Me gusta
+      notification: Notificación
+      question: Pregunta
+      role: Rol
+      user: Usuario
+    attributes:
+      announcement:
+        pinned: Marcado
+        picture: Imagen
+      article:
+        title: Título
+        short_description: Breve descripción
+        content: Contenido
+        author: Autor
+        picture: Imagen
+      attachment:
+        document: Documento
+      category:
+        name: Nombre
+      comment:
+        content: Contenido
+        author: Autor
+      discussion:
+        title: Título
+        description: Descripción
+        pinned: Marcado
+        author: Autor
+      notification:
+        action_type: Tipo de acción
+        seen: Visto
+        owner: Dueño
+        notifyable: Notificable
+      question:
+        question: Pregunta
+        answer: Respuesta
+        author: Autor
+        pinned: Marcada
+      role:
+        name: Nombre
+      user:
+        first_name: Nombre
+        last_name: Apellido
+        generation: Generación

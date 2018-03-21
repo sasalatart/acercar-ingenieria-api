@@ -30,6 +30,9 @@ module AcercarIngenieria
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.i18n.available_locales = %i[es en]
+    config.i18n.default_locale = :es
+
     config.to_prepare { Devise::Mailer.layout 'mailer' }
   end
 end
