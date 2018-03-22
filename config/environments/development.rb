@@ -1,7 +1,4 @@
 Rails.application.configure do
-  HOST = Rails.application.secrets.HOST
-  PORT = Rails.application.secrets.PORT
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -32,7 +29,10 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025 }
-  config.action_mailer.default_url_options = { host: HOST, port: PORT }
+  config.action_mailer.default_url_options = {
+    host: Rails.application.secrets.CLIENT_HOST,
+    port: Rails.application.secrets.CLIENT_PORT
+  }
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = false
 

@@ -47,5 +47,5 @@ DeviseTokenAuth.setup do |config|
   # config.enable_standard_devise_support = false
 
   config.default_confirm_success_url =
-    "#{Rails.application.secrets.HOST}:#{Rails.application.secrets.PORT}"
+    "#{Rails.application.secrets.CLIENT_HOST}:#{Rails.application.secrets.CLIENT_PORT}"
 end

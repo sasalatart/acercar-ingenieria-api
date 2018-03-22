@@ -23,14 +23,17 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'acts-as-taggable-on', '~> 5.0'
 gem 'impressionist'
 
+gem 'mailgun_rails'
+
 gem 'paperclip', '~> 5.0.0'
+gem 'paperclip-cloudinary'
 
 gem 'sanitize'
 
 gem 'faker'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors', '0.4.1', :require => 'rack/cors'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
