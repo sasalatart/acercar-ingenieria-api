@@ -54,7 +54,7 @@ class Article < ApplicationRecord
   validate :only_allowed_majors
 
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
-                                 size: { in: 0..2.megabytes }
+                                 size: { in: 0..1.megabytes }
 
   def self.scoped(params)
     major_id, category_list, search = params.values_at(:major_id, :category_list, :search)
