@@ -15,11 +15,16 @@
 #
 
 class Discussion < ApplicationRecord
-  include Sanitizable
   include Enrollable
+  include PgSearch
+  include Sanitizable
 
   before_save :sanitize_attributes
   after_create { |discussion| enroll!(discussion.author) }
+
+  pg_search_scope :search_for,
+                  against: :title,
+                  using: { tsearch: { prefix: true, any_word: true } }
 
   acts_as_taggable
 
@@ -38,6 +43,13 @@ class Discussion < ApplicationRecord
                     length: { minimum: 10, maximum: 255 }
 
   validates :description, presence: true
+
+  def self.scoped(params)
+    tag_list, search = params.values_at(:tag_list, :search)
+    @discussions = tag_list ? Discussion.tagged_with(tag_list) : Discussion.all
+    @discussions = @discussions.search_for(search) if search
+    @discussions.order(pinned: :desc)
+  end
 
   private
 

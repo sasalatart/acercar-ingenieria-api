@@ -5,7 +5,7 @@ class AdminsController < ApplicationController
   before_action :set_user, only: %i[create destroy]
 
   def index
-    paginated_json_response scoped_admins
+    paginated_json_response User.scoped_admins(params)
   end
 
   def create
@@ -20,10 +20,5 @@ class AdminsController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def scoped_admins
-    return User.with_role(:admin) unless params[:major_id]
-    User.with_role :major_admin, Major.find(params[:major_id])
   end
 end

@@ -7,6 +7,7 @@ end
 
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
+gem 'pg_search'
 gem 'puma', '~> 3.7'
 
 gem 'rails-i18n', '~> 5.1'

@@ -3,8 +3,7 @@ class DiscussionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @discussions = filter_with_tags(Discussion.all).order(pinned: :desc)
-    paginated_json_response @discussions, each_serializer: DiscussionSerializer
+    paginated_json_response Discussion.scoped(params), each_serializer: DiscussionSerializer
   end
 
   def mine
@@ -34,11 +33,6 @@ class DiscussionsController < ApplicationController
   end
 
   private
-
-  def filter_with_tags(discussions)
-    return discussions unless params[:tag_list]
-    discussions.tagged_with(params[:tag_list])
-  end
 
   def discussion_params
     permitted_params = [:title, :description, :tag_list,

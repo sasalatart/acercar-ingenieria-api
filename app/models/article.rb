@@ -19,14 +19,17 @@
 #
 
 class Article < ApplicationRecord
-  include Sanitizable
   include Enrollable
   include Notifyable
+  include PgSearch
+  include Sanitizable
 
   before_save :sanitize_attributes
   after_create :notify_interested
 
-  scope :of_major, ->(major_id) { where(major_id: major_id) }
+  pg_search_scope :search_for,
+                  against: { title: 'A', short_description: 'B' },
+                  using: { tsearch: { prefix: true, any_word: true } }
 
   acts_as_taggable_on :categories
 
@@ -51,6 +54,13 @@ class Article < ApplicationRecord
 
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
                                  size: { in: 0..2.megabytes }
+
+  def self.scoped(params)
+    major_id, category_list, search = params.values_at(:major_id, :category_list, :search)
+    @articles = major_id ? Article.where(major_id: major_id) : Article.all
+    @articles = @articles.tagged_with(category_list) if category_list
+    search ? @articles.search_for(search) : @articles
+  end
 
   private
 

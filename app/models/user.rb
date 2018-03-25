@@ -36,13 +36,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable
   include DeviseTokenAuth::Concerns::User
-  include Sanitizable
   include Adminable
+  include PgSearch
+  include Sanitizable
 
   rolify
 
   before_save :sanitize_attributes
   before_save :capitalize
+
+  pg_search_scope :search_for,
+                  against: { first_name: 'A', last_name: 'B', generation: 'C' },
+                  using: { tsearch: { prefix: true, any_word: true } }
 
   has_many :major_users, dependent: :destroy
   has_many :majors, through: :major_users
@@ -98,6 +103,24 @@ class User < ActiveRecord::Base
 
   def token_validation_response
     UserSerializer.new(self).as_json
+  end
+
+  def self.scoped(params)
+    major_id, search = params.values_at(:major_id, :search)
+    @users = major_id ? Major.find(major_id).users : User.all
+    search ? @users.search_for(search) : @users
+  end
+
+  def self.scoped_admins(params)
+    major_id, search = params.values_at(:major_id, :search)
+
+    @users = if major_id
+               User.with_role :major_admin, Major.find(major_id)
+             else
+               User.with_role(:admin)
+             end
+
+    search ? @users.search_for(search) : @users
   end
 
   private

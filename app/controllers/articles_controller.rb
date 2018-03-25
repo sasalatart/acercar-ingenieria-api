@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response scoped_articles, each_serializer: ArticleSerializer
+    paginated_json_response Article.scoped(params), each_serializer: ArticleSerializer
   end
 
   def show
@@ -26,13 +26,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
-  def scoped_articles
-    categories = params[:category_list]
-    @articles = categories ? Article.tagged_with(categories) : Article.all
-    @articles = @articles.of_major(params[:major_id]) if params[:major_id]
-    @articles
-  end
 
   def article_params
     params.permit(:id,

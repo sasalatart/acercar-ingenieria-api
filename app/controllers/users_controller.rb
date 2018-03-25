@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response scoped_users
+    paginated_json_response User.scoped(params)
   end
 
   def show
@@ -21,10 +21,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def scoped_users
-    params[:major_id] ? Major.find(params[:major_id]).users : User.all
-  end
 
   def user_params
     params.permit(:email,
