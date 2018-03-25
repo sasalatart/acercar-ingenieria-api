@@ -18,7 +18,8 @@ class CommentSerializer < ActiveModel::Serializer
 
   attributes :id, :content, :commentable_id, :commentable_type, :created_at
 
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User',
+                      serializer: UserSummarySerializer
 
   has_many :child_comments, class_name: 'Comment',
                             foreign_key: 'parent_comment_id',

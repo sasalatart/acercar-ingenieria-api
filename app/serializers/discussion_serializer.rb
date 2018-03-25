@@ -20,7 +20,8 @@ class DiscussionSerializer < ActiveModel::Serializer
   attributes :id, :title, :description, :pinned, :tag_list,
              :comments_count, :impressions_count, :created_at
 
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User',
+                      serializer: UserSummarySerializer
 
   has_many :attachments
 

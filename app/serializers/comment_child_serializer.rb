@@ -19,7 +19,8 @@ class CommentChildSerializer < ActiveModel::Serializer
   attributes :id, :content, :commentable_id, :commentable_type,
              :parent_comment_id, :created_at
 
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User',
+                      serializer: UserSummarySerializer
 
   def self.eager_load_relation(relation)
     relation.includes(:author)

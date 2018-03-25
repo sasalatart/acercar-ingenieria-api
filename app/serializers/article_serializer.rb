@@ -25,7 +25,8 @@ class ArticleSerializer < ActiveModel::Serializer
   attributes :id, :title, :short_description, :content, :picture, :major_id,
              :major_summary, :category_list, :comments_count, :created_at
 
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User',
+                      serializer: UserSummarySerializer
 
   has_many :attachments
 

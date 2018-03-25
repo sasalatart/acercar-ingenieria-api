@@ -15,7 +15,8 @@
 class QuestionSerializer < ActiveModel::Serializer
   attributes :id, :question, :answer, :pinned, :major_summary, :created_at
 
-  belongs_to :author, class_name: 'User'
+  belongs_to :author, class_name: 'User',
+                      serializer: UserSummarySerializer
 
   def self.eager_load_relation(relation)
     relation.includes(:author, :major)
