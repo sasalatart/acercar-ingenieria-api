@@ -3,12 +3,12 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @questions = scoped_questions.answered.order(pinned: :desc)
+    @questions = Question.scoped(params).answered
     paginated_json_response @questions, each_serializer: QuestionSerializer
   end
 
   def pending
-    @questions = scoped_questions.not_answered
+    @questions = Question.scoped(params).not_answered
     paginated_json_response @questions, each_serializer: QuestionSerializer
   end
 
@@ -28,10 +28,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  def scoped_questions
-    params[:major_id] ? Question.of_major(params[:major_id]) : Question.general
-  end
 
   def question_params
     user_admin = Major.user_admin?(current_user, params[:major_id])

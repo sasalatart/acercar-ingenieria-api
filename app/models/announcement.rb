@@ -13,7 +13,7 @@
 #
 
 class Announcement < ApplicationRecord
-  scope :pinned, -> { where(pinned: true) }
+  scope :pinned, -> { where(pinned: true).order(created_at: :desc) }
 
   has_attached_file :picture,
                     styles: { thumb: '75x75>', medium: '200x200>', large: '1440x880>' },

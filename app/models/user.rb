@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
   include PgSearch
   include Sanitizable
 
+  DEFAULT_ORDER = [generation: :desc, last_name: :asc, first_name: :asc].freeze
+
   rolify
 
   before_save :sanitize_attributes
@@ -108,19 +110,16 @@ class User < ActiveRecord::Base
   def self.scoped(params)
     major_id, search = params.values_at(:major_id, :search)
     @users = major_id ? Major.find(major_id).users : User.all
-    search ? @users.search_for(search) : @users
+    @users = @users.search_for(search) if search
+    @users.order(DEFAULT_ORDER)
   end
 
   def self.scoped_admins(params)
     major_id, search = params.values_at(:major_id, :search)
-
-    @users = if major_id
-               User.with_role :major_admin, Major.find(major_id)
-             else
-               User.with_role(:admin)
-             end
-
-    search ? @users.search_for(search) : @users
+    @users = User.with_role(:admin) unless major_id
+    @users = User.with_role(:major_admin, Major.find(major_id)) if major_id
+    @users = @users.search_for(search) if search
+    @users.order(DEFAULT_ORDER)
   end
 
   private

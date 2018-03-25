@@ -50,7 +50,7 @@ class Discussion < ApplicationRecord
     tag_list, search = params.values_at(:tag_list, :search)
     @discussions = tag_list ? Discussion.tagged_with(tag_list) : Discussion.all
     @discussions = @discussions.search_for(search) if search
-    @discussions.order(pinned: :desc)
+    @discussions.order([pinned: :desc, created_at: :desc])
   end
 
   private

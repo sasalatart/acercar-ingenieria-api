@@ -60,7 +60,8 @@ class Article < ApplicationRecord
     major_id, category_list, search = params.values_at(:major_id, :category_list, :search)
     @articles = major_id ? Article.where(major_id: major_id) : Article.all
     @articles = @articles.tagged_with(category_list) if category_list
-    search ? @articles.search_for(search) : @articles
+    @articles = @articles.search_for(search) if search
+    @articles.order(created_at: :desc)
   end
 
   private

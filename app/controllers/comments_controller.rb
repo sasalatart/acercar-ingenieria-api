@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @comments = find_commentable.comments.primary.order(created_at: :desc)
+    @comments = find_commentable.comments.primary
     paginated_json_response @comments, each_serializer: CommentSerializer
   end
 

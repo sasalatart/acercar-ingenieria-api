@@ -22,7 +22,7 @@ class Comment < ApplicationRecord
   after_create :enroll_to_parent
   after_create :notify_interested
 
-  scope :primary, -> { where(parent_comment_id: nil) }
+  scope :primary, -> { where(parent_comment_id: nil).order(created_at: :desc) }
 
   belongs_to :author, class_name: :User
 
