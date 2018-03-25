@@ -20,4 +20,6 @@ def create_users!(options)
     user.skip_confirmation!
     user.save!
   end
+
+  User.update_all(tokens: nil)
 end
