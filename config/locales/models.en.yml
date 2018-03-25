@@ -1,0 +1,6 @@
+es:
+  activerecord:
+    errors:
+      messages:
+        inexistent_category: The category does not exist
+        author_not_in_major: The author is not associated to the major

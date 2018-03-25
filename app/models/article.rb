@@ -51,6 +51,7 @@ class Article < ApplicationRecord
   validates :content, presence: true
 
   validate :only_allowed_categories
+  validate :only_allowed_majors
 
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
                                  size: { in: 0..2.megabytes }
@@ -74,6 +75,11 @@ class Article < ApplicationRecord
 
   def only_allowed_categories
     return if (category_list - Category.all.pluck(:name)).empty?
-    errors.add :base, 'invalid categories'
+    errors.add :base, :inexistent_category
+  end
+
+  def only_allowed_majors
+    return unless major_id && major_id_changed? && !author.majors.find_by(id: major_id)
+    errors.add :major, :author_not_in_major
   end
 end
