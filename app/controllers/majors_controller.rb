@@ -3,7 +3,7 @@ class MajorsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    json_response Major.all
+    json_response Major.all.order(name: :asc)
   end
 
   def show
