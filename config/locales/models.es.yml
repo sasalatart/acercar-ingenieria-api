@@ -55,3 +55,4 @@ es:
       messages:
         inexistent_category: La categoría no existe
         author_not_in_major: El autor no está asociado al major
+        max_tags_reached: No puede tener más de %{amount} tags

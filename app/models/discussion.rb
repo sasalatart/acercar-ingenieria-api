@@ -44,6 +44,8 @@ class Discussion < ApplicationRecord
 
   validates :description, presence: true
 
+  validate :max_tags
+
   def self.scoped(params)
     tag_list, search = params.values_at(:tag_list, :search)
     @discussions = tag_list ? Discussion.tagged_with(tag_list) : Discussion.all
@@ -52,6 +54,11 @@ class Discussion < ApplicationRecord
   end
 
   private
+
+  def max_tags
+    return unless tag_list && tag_list.size > 5
+    errors.add :base, :max_tags_reached, amount: 5
+  end
 
   def sanitize_attributes
     sanitize(:title, :description)
