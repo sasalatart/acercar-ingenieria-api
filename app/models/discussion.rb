@@ -47,8 +47,9 @@ class Discussion < ApplicationRecord
   validate :max_tags
 
   def self.scoped(params)
-    tag_list, search = params.values_at(:tag_list, :search)
-    @discussions = tag_list ? Discussion.tagged_with(tag_list) : Discussion.all
+    author_id, tag_list, search = params.values_at(:author_id, :tag_list, :search)
+    @discussions = author_id ? Discussion.where(author_id: author_id) : Discussion.all
+    @discussions = @discussions.tagged_with(tag_list) if tag_list
     @discussions = @discussions.search_for(search) if search
     @discussions.order([pinned: :desc, created_at: :desc])
   end

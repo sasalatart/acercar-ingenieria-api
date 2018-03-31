@@ -7,7 +7,7 @@ class DiscussionsController < ApplicationController
   end
 
   def mine
-    @discussions = filter_with_tags(current_user.discussions)
+    @discussions = Discussion.scoped(params.merge(author_id: current_user.id))
     paginated_json_response @discussions, each_serializer: DiscussionSerializer
   end
 
