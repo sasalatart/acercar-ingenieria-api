@@ -28,6 +28,7 @@ gem 'mailgun_rails'
 
 gem 'paperclip', '~> 5.0.0'
 gem 'paperclip-cloudinary'
+gem 'paperclip-i18n'
 
 gem 'sanitize'
 
