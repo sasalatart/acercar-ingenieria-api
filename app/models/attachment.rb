@@ -16,7 +16,8 @@
 class Attachment < ApplicationRecord
   belongs_to :attachable, polymorphic: true, inverse_of: :attachments
 
-  has_attached_file :document, dependent: :destroy
+  has_attached_file :document, dependent: :destroy,
+                               cloudinary_resource_type: :raw
 
   validates_attachment_presence :document
   validates_attachment_size :document, less_than: 5.megabytes
