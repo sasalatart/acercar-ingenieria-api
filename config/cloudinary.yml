@@ -4,14 +4,6 @@ default: &default
   api_secret        : <%= ENV["CLOUDINARY_API_SECRET"] %>
   enhance_image_tag : true
 
-development:
-  << : *default
-  static_image_support: false
-
 production:
   << : *default
   static_image_support: true
-
-test:
-  << : *default
-  static_image_support: false

@@ -90,4 +90,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  paperclip_defaults = {
+    storage: :cloudinary,
+    path: 'aingenieria/:rails_env/:class/:attachment/:hash.:extension',
+    hash_secret: Rails.application.secrets.secret_key_base,
+    cloudinary_url_options: { default: { secure: true } }
+  }
+
+  paperclip_defaults.each do |key, value|
+    Paperclip::Attachment.default_options[key] = value
+  end
 end
