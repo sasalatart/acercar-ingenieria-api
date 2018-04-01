@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180310225653) do
+ActiveRecord::Schema.define(version: 20180401005437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20180310225653) do
     t.datetime "picture_updated_at"
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["major_id"], name: "index_articles_on_major_id"
+    t.index ["title", "short_description"], name: "index_articles_on_title_and_short_description"
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180310225653) do
     t.string "document_content_type"
     t.integer "document_file_size"
     t.datetime "document_updated_at"
+    t.index ["attachable_id", "attachable_type"], name: "index_attachments_on_attachable_id_and_attachable_type"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 20180310225653) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_discussions_on_author_id"
+    t.index ["title"], name: "index_discussions_on_title"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -251,6 +254,7 @@ ActiveRecord::Schema.define(version: 20180310225653) do
     t.datetime "avatar_updated_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name", "last_name", "generation"], name: "index_users_on_first_name_and_last_name_and_generation"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end

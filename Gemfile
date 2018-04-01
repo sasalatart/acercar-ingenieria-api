@@ -43,6 +43,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'lol_dba'
   gem 'bullet'
   gem 'hirb'
   gem 'listen', '>= 3.0.5', '< 3.2'
