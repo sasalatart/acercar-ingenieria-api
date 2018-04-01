@@ -97,8 +97,16 @@ Rails.application.configure do
     hash_secret: Rails.application.secrets.secret_key_base,
     cloudinary_url_options: { default: { secure: true } }
   }
-
   paperclip_defaults.each do |key, value|
     Paperclip::Attachment.default_options[key] = value
   end
+
+  exceptions_defaults = {
+    email: {
+      email_prefix: '[Acercar Ingeniería Exception] ',
+      sender_address: %("notifier" <exceptions@acercaringenieria.com>),
+      exception_recipients: [ENV['MAINTAINER_EMAIL']]
+    }
+  }
+  Rails.application.config.middleware.use ExceptionNotification::Rack, exceptions_defaults
 end

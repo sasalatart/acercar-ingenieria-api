@@ -26,6 +26,8 @@ gem 'impressionist'
 
 gem 'mailgun_rails'
 
+gem 'exception_notification'
+
 gem 'paperclip', '~> 5.0.0'
 gem 'paperclip-cloudinary'
 gem 'paperclip-i18n'

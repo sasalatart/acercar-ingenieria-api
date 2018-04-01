@@ -82,6 +82,9 @@ GEM
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.7.0)
+    exception_notification (4.2.2)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     faker (1.8.7)
       i18n (>= 0.7)
     ffi (1.9.18)
@@ -241,6 +244,7 @@ DEPENDENCIES
   cancancan (~> 2.0)
   devise-i18n
   devise_token_auth
+  exception_notification
   faker
   hirb
   impressionist
