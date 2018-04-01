@@ -29,5 +29,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+es:
+  unauthorized:
+    manage:
+      all: "You are not authorized to do this"

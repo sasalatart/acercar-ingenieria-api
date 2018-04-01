@@ -1,0 +1,4 @@
+es:
+  unauthorized:
+    manage:
+      all: "No tienes autorización para hacer esto."
