@@ -58,8 +58,6 @@ Rails.application.routes.draw do
         get :pending
       end
     end
-
-    resources :enrollments, only: %i[create destroy]
   end
 
   resources :articles, only: %i[index show create update destroy] do

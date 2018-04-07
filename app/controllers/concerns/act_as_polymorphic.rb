@@ -4,7 +4,7 @@ module ActAsPolymorphic
   ID_TYPES = {
     commentable: [Major, Article, Discussion].map(&parse_model),
     likeable: [Article, Discussion, Comment].map(&parse_model),
-    enrollable: [Major, Article, Discussion, Comment].map(&parse_model)
+    enrollable: [Article, Discussion, Comment].map(&parse_model)
   }.freeze
 
   def method_missing(name)

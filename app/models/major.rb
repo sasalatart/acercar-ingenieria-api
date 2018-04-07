@@ -19,8 +19,6 @@
 
 class Major < ApplicationRecord
   include Sanitizable
-  include Enrollable
-  include Notifyable
 
   resourcify
 
