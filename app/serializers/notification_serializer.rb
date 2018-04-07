@@ -14,9 +14,24 @@
 #
 
 class NotificationSerializer < ActiveModel::Serializer
-  attributes :id, :action_type, :seen, :notifyable_type, :created_at
+  attributes :id, :owner_id, :action_type, :notifyable_type, :notifyable_id,
+             :notifyable_meta, :seen, :created_at
 
-  belongs_to :owner, class_name: 'User'
-  belongs_to :notificator, class_name: 'User'
-  belongs_to :notifyable, polymorphic: true
+  belongs_to :notificator, class_name: 'User',
+                           serializer: UserSummarySerializer
+
+  NOTIFYABLES_META_COLUMNS = {
+    discussion: %w[title],
+    article: %w[major_id title],
+    comment: %w[commentable_type commentable_id content]
+  }.freeze
+
+  def self.eager_load_relation(relation)
+    relation.includes(:notificator, :notifyable)
+  end
+
+  def notifyable_meta
+    columns = NOTIFYABLES_META_COLUMNS[object.notifyable_type.underscore.to_sym]
+    object.notifyable.attributes.slice(*columns)
+  end
 end

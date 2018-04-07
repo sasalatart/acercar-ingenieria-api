@@ -3,11 +3,13 @@ class NotificationsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response current_user.notifications.unseen
+    @notifications = current_user.notifications.unseen.order(created_at: :desc)
+    paginated_json_response @notifications, each_serializer: NotificationSerializer
   end
 
   def seen
-    paginated_json_response current_user.notifications.seen
+    @notifications = current_user.notifications.seen.order(created_at: :desc)
+    paginated_json_response @notifications, each_serializer: NotificationSerializer
   end
 
   def read
