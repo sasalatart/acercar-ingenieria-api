@@ -16,11 +16,12 @@
 
 class Discussion < ApplicationRecord
   include Enrollable
+  include Notifyable
   include PgSearch
   include Sanitizable
 
   before_save :sanitize_attributes
-  after_create { |discussion| enroll!(discussion.author) }
+  after_create :enroll_and_notify
 
   pg_search_scope :search_for,
                   against: :title,
@@ -55,6 +56,11 @@ class Discussion < ApplicationRecord
   end
 
   private
+
+  def enroll_and_notify
+    enroll!(author)
+    notify(TYPES[:published], author, User.all.pluck(:id)) if pinned
+  end
 
   def max_tags
     return unless tag_list && tag_list.size > 5

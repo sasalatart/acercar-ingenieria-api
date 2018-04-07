@@ -19,7 +19,7 @@ class Comment < ApplicationRecord
   include Notifyable
 
   before_save :sanitize_attributes
-  after_create :enroll_to_parent
+  after_create :enroll_to_self_or_parent
   after_create :notify_interested
 
   scope :primary, -> { where(parent_comment_id: nil).order(created_at: :desc) }
@@ -54,10 +54,13 @@ class Comment < ApplicationRecord
     sanitize(:content)
   end
 
-  def enroll_to_parent
-    return unless parent_comment &&
-                  parent_comment.enrolled_users.where(id: author_id).empty?
-    parent_comment.enroll!(author)
+  def enroll_to_self_or_parent
+    if parent_comment && parent_comment.enrolled_users.find_by(id: author_id)
+      parent_comment.enroll!(author)
+      return
+    end
+
+    enroll!(author) unless parent_comment
   end
 
   def notify_interested

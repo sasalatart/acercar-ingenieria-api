@@ -25,7 +25,7 @@ class Article < ApplicationRecord
   include Sanitizable
 
   before_save :sanitize_attributes
-  after_create :notify_interested
+  after_create :enroll_and_notify
 
   pg_search_scope :search_for,
                   against: { title: 'A', short_description: 'B' },
@@ -70,8 +70,11 @@ class Article < ApplicationRecord
     sanitize(:title, :short_description, :content)
   end
 
-  def notify_interested
-    major && notify(TYPES[:published], author, major.enrolled_users.pluck(:id))
+  def enroll_and_notify
+    enroll!(author)
+
+    users = major ? major.users : User.all
+    notify(TYPES[:published], author, users.pluck(:id))
   end
 
   def only_allowed_categories
