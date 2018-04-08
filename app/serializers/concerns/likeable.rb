@@ -6,7 +6,8 @@ module Likeable
   end
 
   def liked_by_current_user
-    current_user && current_user.likes.where(likeable_type: object.class.name,
-                                             likeable_id: object.id).any?
+    return false unless current_user
+    current_user.likes.where(likeable_type: object.class.name,
+                             likeable_id: object.id).count > 0
   end
 end

@@ -19,6 +19,7 @@
 #
 
 class ArticleSerializer < ActiveModel::Serializer
+  include SelfEnrollable
   include Likeable
   include Imageable
 

@@ -14,6 +14,7 @@
 #
 
 class CommentSerializer < ActiveModel::Serializer
+  include SelfEnrollable
   include Likeable
 
   attributes :id, :content, :commentable_id, :commentable_type, :created_at

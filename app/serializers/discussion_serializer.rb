@@ -15,6 +15,7 @@
 #
 
 class DiscussionSerializer < ActiveModel::Serializer
+  include SelfEnrollable
   include Likeable
 
   attributes :id, :title, :description, :pinned, :tag_list,
