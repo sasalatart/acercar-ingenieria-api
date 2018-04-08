@@ -62,31 +62,34 @@ Rails.application.routes.draw do
 
   resources :articles, only: %i[index show create update destroy] do
     delete :likes, to: 'likes#destroy'
+    delete :enrollments, to: 'enrollments#destroy'
 
-    resources :likes, only: %i[create], controller: :likes
+    resources :likes, only: %i[create]
+    resources :enrollments, only: %i[create]
     resources :comments, only: %i[index create update destroy], controller: :comments
-    resources :enrollments, only: %i[create destroy]
   end
 
   resources :categories, only: %i[index create update destroy]
 
   resources :comments, only: [] do
     delete :likes, to: 'likes#destroy'
+    delete :enrollments, to: 'enrollments#destroy'
 
-    resources :likes, only: %i[create], controller: :likes
-    resources :enrollments, only: %i[create destroy]
+    resources :likes, only: %i[create]
+    resources :enrollments, only: %i[create]
   end
 
   resources :discussions, only: %i[index show create update destroy] do
     delete :likes, to: 'likes#destroy'
+    delete :enrollments, to: 'enrollments#destroy'
 
     collection do
       get :mine
     end
 
-    resources :likes, only: %i[create], controller: :likes
+    resources :likes, only: %i[create]
+    resources :enrollments, only: %i[create]
     resources :comments, only: %i[index create update destroy], controller: :comments
-    resources :enrollments, only: %i[create destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

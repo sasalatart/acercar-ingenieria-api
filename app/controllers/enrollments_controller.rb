@@ -10,7 +10,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def destroy
-    @enrollment.destroy
+    find_enrollable.unenroll!(current_user)
     head :no_content
   end
 end

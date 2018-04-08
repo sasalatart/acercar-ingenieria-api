@@ -10,7 +10,7 @@ module Enrollable
     enrollments.create!(user: user)
   end
 
-  def unenroll(user)
-    enrollments.where(user: user).destroy_all
+  def unenroll!(user)
+    enrollments.find_by(user: user).destroy!
   end
 end
