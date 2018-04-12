@@ -50,8 +50,7 @@ Rails.application.routes.draw do
     end
 
     resources :articles, only: %i[index show create update destroy]
-
-    resources :comments, only: %i[index create update destroy], controller: :comments
+    resources :comments, only: %i[index show create update destroy]
 
     resources :questions, only: %i[index create update destroy], controller: :questions do
       collection do
@@ -66,17 +65,18 @@ Rails.application.routes.draw do
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
-    resources :comments, only: %i[index create update destroy], controller: :comments
+    resources :comments, only: %i[index show create update destroy]
   end
 
   resources :categories, only: %i[index create update destroy]
 
-  resources :comments, only: [] do
+  resources :comments, only: %i[show] do
     delete :likes, to: 'likes#destroy'
     delete :enrollments, to: 'enrollments#destroy'
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
+    resources :comments, only: %i[index show create update destroy]
   end
 
   resources :discussions, only: %i[index show create update destroy] do
@@ -89,7 +89,7 @@ Rails.application.routes.draw do
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
-    resources :comments, only: %i[index create update destroy], controller: :comments
+    resources :comments, only: %i[index show create update destroy]
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

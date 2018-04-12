@@ -22,8 +22,7 @@ def create_comments!(options)
     number_of_children.times do
       comment = Comment.create!(author_id: all_users_ids.sample,
                                 content: Faker::Lorem.paragraph(1, true, 8),
-                                commentable: parent_comment.commentable,
-                                parent_comment: parent_comment)
+                                commentable: parent_comment)
 
       likers_ids = all_users_ids.sample(rand(options[:comments][:max_likes_per]))
       add_likes_to(comment, likers_ids)

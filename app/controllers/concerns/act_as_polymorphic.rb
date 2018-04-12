@@ -2,7 +2,7 @@ module ActAsPolymorphic
   parse_model = proc { |model| "#{model.name.downcase}_id" }
 
   ID_TYPES = {
-    commentable: [Major, Article, Discussion].map(&parse_model),
+    commentable: [Major, Article, Discussion, Comment].map(&parse_model),
     likeable: [Article, Discussion, Comment].map(&parse_model),
     enrollable: [Article, Discussion, Comment].map(&parse_model)
   }.freeze

@@ -5,7 +5,6 @@
 #  id                :integer          not null, primary key
 #  content           :text
 #  author_id         :integer
-#  parent_comment_id :integer
 #  commentable_type  :string
 #  commentable_id    :integer
 #  created_at        :datetime         not null
@@ -16,8 +15,7 @@
 class CommentChildSerializer < ActiveModel::Serializer
   include Likeable
 
-  attributes :id, :content, :commentable_id, :commentable_type,
-             :parent_comment_id, :created_at
+  attributes :id, :content, :commentable_id, :commentable_type, :created_at
 
   belongs_to :author, class_name: 'User',
                       serializer: UserSummarySerializer

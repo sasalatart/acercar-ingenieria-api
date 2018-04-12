@@ -5,8 +5,14 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @comments = find_commentable.comments.primary
+    @commentable = find_commentable
+    order = @commentable.respond_to?(:child_comments) ? :asc : :desc
+    @comments = @commentable.comments.order(created_at: order)
     paginated_json_response @comments, each_serializer: CommentSerializer
+  end
+
+  def show
+    json_response @comment, serializer: @comment.serializer
   end
 
   def create
@@ -28,7 +34,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    return params.permit(:content) if params[:id]
-    params.permit(:content, :parent_comment_id)
+    params.permit(:content)
   end
 end
