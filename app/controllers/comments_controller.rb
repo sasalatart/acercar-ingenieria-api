@@ -2,21 +2,22 @@ class CommentsController < ApplicationController
   include ActAsPolymorphic
 
   before_action :authenticate_user!
+  before_action :set_commentable, only: %i[index create]
   load_and_authorize_resource
 
   def index
-    @commentable = find_commentable
-    order = @commentable.respond_to?(:child_comments) ? :asc : :desc
     @comments = @commentable.comments.order(created_at: order)
+    Comment.read_notifications_from(current_user, @comments.pluck(:id))
     paginated_json_response @comments, each_serializer: CommentSerializer
   end
 
   def show
+    @comment.read_notifications_from(current_user)
     json_response @comment, serializer: @comment.serializer
   end
 
   def create
-    automatic_params = { author: current_user, commentable: find_commentable }
+    automatic_params = { author: current_user, commentable: @commentable }
     @comment = Comment.create!(comment_params.merge(automatic_params))
     json_response @comment, status: :created, serializer: @comment.serializer
   end
@@ -35,5 +36,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.permit(:content)
+  end
+
+  def set_commentable
+    @commentable = find_commentable
+  end
+
+  def order
+    @commentable.respond_to?(:child_comments) ? :asc : :desc
   end
 end

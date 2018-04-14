@@ -12,6 +12,7 @@ class DiscussionsController < ApplicationController
   end
 
   def show
+    @discussion.read_notifications_from(current_user)
     impressionist @discussion
     json_response @discussion
   end

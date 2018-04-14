@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article.read_notifications_from(current_user)
     json_response @article
   end
 

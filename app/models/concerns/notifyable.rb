@@ -18,4 +18,15 @@ module Notifyable
     return unless notifications_to_create.size.nonzero?
     Notification.create!(notifications_to_create)
   end
+
+  def read_notifications_from(owner)
+    notifications.where(owner: owner).update_all(seen: true)
+  end
+
+  module ClassMethods
+    def read_notifications_from(owner, notifyable_ids)
+      query = { notifyable_type: to_s, notifyable_id: notifyable_ids, owner: owner }
+      Notification.where(query).update_all(seen: true)
+    end
+  end
 end
