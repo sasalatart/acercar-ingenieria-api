@@ -20,5 +20,5 @@ development:
 
 production:
   <<      : *default
-  host    : postgres_db
+  host    : postgres
   database: acercar_production

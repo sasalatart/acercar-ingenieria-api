@@ -10,6 +10,9 @@ gem 'pg', '~> 0.18'
 gem 'pg_search'
 gem 'puma', '~> 3.7'
 
+gem 'redis', '~> 3.0'
+gem 'sidekiq'
+
 gem 'rails-i18n', '~> 5.1'
 gem 'devise-i18n'
 

@@ -74,7 +74,7 @@ class Article < ApplicationRecord
     enroll!(author)
 
     users = major ? major.users : User.all
-    notify(TYPES[:published], author, users.pluck(:id))
+    notify(TYPES[:published], author_id, users.pluck(:id))
   end
 
   def only_allowed_categories

@@ -69,7 +69,7 @@ class Comment < ApplicationRecord
   def notify_interested
     return unless commentable.respond_to?(:enrolled_users)
     type = child_comment? ? TYPES[:answered] : TYPES[:commented]
-    notify(type, author, commentable.enrolled_users.pluck(:id))
+    notify(type, author_id, commentable.enrolled_users.pluck(:id))
   end
 
   def parent_comment_can_not_have_parent_comment

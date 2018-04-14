@@ -1,4 +1,7 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   mount_devise_token_auth_for 'User', at: 'auth'
 
   resources :users, only: %i[index show update destroy] do

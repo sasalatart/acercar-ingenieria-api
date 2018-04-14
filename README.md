@@ -7,30 +7,37 @@ API built on top of Ruby on Rails for a project of the Centro de Alumnos de Inge
 ## Technologies Used
 
 - Ruby 2.4
-- Ruby on Rails 5.1.4
+- Rails 5.1.4
 - PostgreSQL 10 (including full text search via `pg_search` gem)
+- Redis 4 (for background processing via `sidekiq` gem)
 - Mailgun (mailing API)
 - Cloudinary (cloud storage)
 
 ## Development Setup
 
 1. Clone and cd into this repository.
-2. Make sure to have both [Ruby](https://rvm.io/) and [PostgreSQL](https://www.postgresql.org/) on your machine.
+2. Make sure to have [Ruby](https://rvm.io/), [PostgreSQL](https://www.postgresql.org/) and [Redis](https://redis.io/) on your machine.
 3. Make sure to have [Mailcatcher](https://github.com/sj26/mailcatcher) (or similar) running for email debugging.
 4. Make sure to have [ImageMagick](https://github.com/ImageMagick/ImageMagick) installed for image processing.
 5. Run `bundle install` to install ruby dependencies.
 6. Setup the database by running `rails db:reset`.
 7. Run `rails s -p 3001` to run the application on port 3001.
+8. Run `bundle exec sidekiq` in the same dir, but in a new shell to start Sidekiq.
 
-## Docker Setup
+## Docker (Compose) Setup
 
-First, make sure to have a file called `.env.list` with the following environment variables in the form of `KEY=VALUE`:
+First, make sure to rename the file `.env.example` to `.env`, and complete it with the following environment variables in the form of `KEY=VALUE`:
 
 <table>
   <tr>
     <th>ENV Variables</th>
     <th>Description</th>
   </tr>
+  <tr>
+    <td>API_HOST</td>
+    <td rowspan="2">host and port for the API</td>
+  </tr>
+  <tr><td>API_PORT</td></tr>
   <tr>
     <td>SECRET_KEY_BASE</td>
     <td>for verifying the integrity of signed cookies</td>
@@ -51,10 +58,10 @@ First, make sure to have a file called `.env.list` with the following environmen
   <tr><td>CLOUDINARY_API_KEY</td></tr>
   <tr><td>CLOUDINARY_API_SECRET</td></tr>
   <tr>
-    <td>API_HOST</td>
-    <td rowspan="2">host and port for the API</td>
+    <td>SIDEKIQ_USERNAME</td>
+    <td rowspan="2">custom credentials for accessing Sidekiq UI</td>
   </tr>
-  <tr><td>API_PORT</td></tr>
+  <tr><td>SIDEKIQ_PASSWORD</td></tr>
 </table>
 
 You can visit https://www.mailgun.com/ and https://cloudinary.com/ to get your Mailgun and Cloudinary credentials.
@@ -62,20 +69,53 @@ You can visit https://www.mailgun.com/ and https://cloudinary.com/ to get your M
 Then, run the following commands:
 
 ```sh
-# Run the database
-$ docker run -d --name=postgres_db postgres:10.0
-
-# Run the API
-$ docker run -d --name=acercarapi -p 3000:3000 --env-file ./.env.list \
-             --link=postgres_db:postgres_db sasalatart/acercar-ingenieria-api
+# Run the app (backend, frontend & databases)
+$ docker-compose up -d
 
 # Setup the database
-$ docker exec acercarapi rails db:reset
+$ docker-compose exec acercarapi rails db:reset
 ```
 
-The server's machine should now be redirecting its port 3000 to the container's port 3000.
+You should now be able to:
 
+- Access the web client via http://0.0.0.0:5000/
 
-## Frontend APP
+- Access API endpoints via http://0.0.0.0:3001/
 
-React frontend app can be found [in this repo](https://github.com/sasalatart/acercar-ingenieria-client).
+- Access Sidekiq UI via http://0.0.0.0:3001/sidekiq
+
+__You must take into account the fact that the [Frontend Docker Image](https://github.com/sasalatart/acercar-ingenieria-client) needs to be built considering the API's URL.__
+
+## Production
+
+1) Make sure to have https enabled.
+
+2) You can setup custom domain names by adding `nginx-proxy` to the Docker composition:
+
+```sh
+services:
+  ...
+
+  proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - 443:443
+```
+
+Also, you should remember to add the corresponding virtual hosts to each service. For example:
+
+```sh
+  acercarapi:
+    ...
+    environment:
+      VIRTUAL_HOST: acercar-api.salatart.com
+      VIRTUAL_PORT: 3000
+
+  acercarclient:
+    environment:
+      VIRTUAL_HOST: acercaringenieria.salatart.com
+      VIRTUAL_PORT: 5000
+```

@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:10
+    restart: always
+
+  redis:
+    image: redis:4-alpine
+    restart: always
+
+  acercarclient:
+    image: sasalatart/acercar-ingenieria-client
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - acercarapi
+
+  acercarapi:
+    image: sasalatart/acercar-ingenieria-api
+    restart: always
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - redis
+      - sidekiq
+
+  sidekiq:
+    image: sasalatart/acercar-ingenieria-api
+    command: bundle exec sidekiq
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - redis
