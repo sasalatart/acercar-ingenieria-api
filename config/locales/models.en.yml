@@ -5,3 +5,6 @@ es:
         inexistent_category: The category does not exist
         author_not_in_major: The author is not associated to the major
         max_tags_reached: Can not have more than %{amount} tags
+        invalid_enrollable_type: Can not enroll to this resource
+        invalid_parent_comment: Can not reply to another reply
+        invalid_format: Invalid file format

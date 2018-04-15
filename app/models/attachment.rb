@@ -23,12 +23,12 @@ class Attachment < ApplicationRecord
   validates_attachment_size :document, less_than: 5.megabytes
   do_not_validate_attachment_file_type :document
 
-  validate :file_format
+  validate :correct_file_format
 
   private
 
-  def file_format
+  def correct_file_format
     return unless document_file_name =~ /(.*\.?(php|pl|exe|pm|cfm|asp|js))/
-    errors.add(:document_content_type, 'Invalid format')
+    errors.add(:document_content_type, :invalid_format)
   end
 end

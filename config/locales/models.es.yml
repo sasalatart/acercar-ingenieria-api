@@ -56,3 +56,6 @@ es:
         inexistent_category: La categoría no existe
         author_not_in_major: El autor no está asociado al major
         max_tags_reached: No puede tener más de %{amount} tags
+        invalid_enrollable_type: No se puede suscribir a este recurso
+        invalid_parent_comment: No se puede responder a una respuesta
+        invalid_format: Formato de archivo inválido

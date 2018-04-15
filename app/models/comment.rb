@@ -70,6 +70,6 @@ class Comment < ApplicationRecord
 
   def no_replies_to_replies
     return unless child_comment? && commentable.child_comment?
-    errors.add(:commentable_id, "can't reply to another reply")
+    errors.add(:commentable_id, :invalid_parent_comment)
   end
 end
