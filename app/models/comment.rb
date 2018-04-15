@@ -29,9 +29,6 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true,
                            counter_cache: true
 
-  belongs_to :parent_comment, class_name: :Comment,
-                              optional: true
-
   has_many :comments, class_name: :Comment,
                       as: :commentable,
                       dependent: :destroy
@@ -41,7 +38,7 @@ class Comment < ApplicationRecord
   validates :content, presence: true,
                       length: { maximum: 1000 }
 
-  validate :parent_comment_can_not_have_parent_comment
+  validate :no_replies_to_replies
 
   def child_comment?
     commentable_type == Comment.to_s
@@ -58,12 +55,11 @@ class Comment < ApplicationRecord
   end
 
   def enroll_to_self_or_parent
-    if parent_comment && !parent_comment.enrolled_users.find_by(id: author_id)
-      parent_comment.enroll!(author)
-      return
+    if child_comment? && !commentable.enrolled_users.find_by(id: author_id)
+      return commentable.enroll!(author)
     end
 
-    enroll!(author) unless parent_comment
+    enroll!(author) unless child_comment?
   end
 
   def notify_interested
@@ -72,8 +68,8 @@ class Comment < ApplicationRecord
     notify(type, author_id, commentable.enrolled_users.pluck(:id))
   end
 
-  def parent_comment_can_not_have_parent_comment
-    return unless parent_comment && parent_comment.child_comment?
+  def no_replies_to_replies
+    return unless child_comment? && commentable.child_comment?
     errors.add(:commentable_id, "can't reply to another reply")
   end
 end
