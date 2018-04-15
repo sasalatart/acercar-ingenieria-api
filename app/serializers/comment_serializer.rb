@@ -30,7 +30,7 @@ class CommentSerializer < ActiveModel::Serializer
   end
 
   def child_comments
-    ActiveModel::SerializableResource.new(
+    ActiveModelSerializers::SerializableResource.new(
       object.child_comments.limit(MAX_CHILD_COMMENTS_TO_RENDER),
       scope: current_user,
       scope_name: :current_user,
