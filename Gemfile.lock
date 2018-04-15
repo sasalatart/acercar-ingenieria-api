@@ -144,7 +144,7 @@ GEM
     nokogumbo (1.5.0)
       nokogiri
     orm_adapter (0.5.0)
-    paperclip (5.0.0)
+    paperclip (5.2.1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -205,7 +205,7 @@ GEM
       netrc (~> 0.8)
     rolify (5.2.0)
     ruby_dep (1.5.0)
-    sanitize (4.6.0)
+    sanitize (4.6.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
       nokogumbo (~> 1.4)
@@ -261,7 +261,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   lol_dba
   mailgun_rails
-  paperclip (~> 5.0.0)
+  paperclip (~> 5.2.0)
   paperclip-cloudinary
   paperclip-i18n
   pg (~> 0.18)
@@ -272,7 +272,7 @@ DEPENDENCIES
   rails-i18n (~> 5.1)
   redis (~> 3.0)
   rolify
-  sanitize
+  sanitize (~> 4.6.3)
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)

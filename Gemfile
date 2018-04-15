@@ -31,11 +31,11 @@ gem 'mailgun_rails'
 
 gem 'exception_notification'
 
-gem 'paperclip', '~> 5.0.0'
+gem 'paperclip', '~> 5.2.0'
 gem 'paperclip-cloudinary'
 gem 'paperclip-i18n'
 
-gem 'sanitize'
+gem 'sanitize', '~> 4.6.3'
 
 gem 'faker'
 
