@@ -15,10 +15,13 @@
 #
 
 class Discussion < ApplicationRecord
+  include Attachable
   include Enrollable
   include Notifyable
   include PgSearch
   include Sanitizable
+
+  MAX_TAGS = 5
 
   before_save :sanitize_attributes
   after_create :enroll_and_notify
@@ -34,11 +37,8 @@ class Discussion < ApplicationRecord
 
   belongs_to :author, class_name: :User
 
-  has_many :attachments, as: :attachable, dependent: :destroy, inverse_of: :attachable
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
-
-  accepts_nested_attributes_for :attachments, allow_destroy: true
 
   validates :title, presence: true,
                     length: { minimum: 10, maximum: 255 }
@@ -63,8 +63,8 @@ class Discussion < ApplicationRecord
   end
 
   def max_tags
-    return unless tag_list && tag_list.size > 5
-    errors.add :base, :max_tags_reached, amount: 5
+    return unless tag_list && tag_list.size > MAX_TAGS
+    errors.add :base, :max_tags_reached, amount: MAX_TAGS
   end
 
   def sanitize_attributes

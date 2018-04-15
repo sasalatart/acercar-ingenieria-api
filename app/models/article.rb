@@ -19,6 +19,7 @@
 #
 
 class Article < ApplicationRecord
+  include Attachable
   include Enrollable
   include Notifyable
   include PgSearch
@@ -36,15 +37,12 @@ class Article < ApplicationRecord
   belongs_to :author, class_name: :User
   belongs_to :major, optional: true
 
-  has_many :attachments, as: :attachable, dependent: :destroy, inverse_of: :attachable
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
   has_attached_file :picture, styles: { medium: '200x200>' },
                               convert_options: { display: '-quality 90 -strip' },
                               dependent: :destroy
-
-  accepts_nested_attributes_for :attachments, allow_destroy: true
 
   validates :title, presence: true, uniqueness: true
   validates :short_description, presence: true, length: { maximum: 300 }
