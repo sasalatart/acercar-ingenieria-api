@@ -7,6 +7,10 @@ class NotificationsController < ApplicationController
     paginated_json_response @notifications, each_serializer: NotificationSerializer
   end
 
+  def count
+    json_response count: current_user.notifications.unseen.count
+  end
+
   def seen
     @notifications = current_user.notifications.seen.order(created_at: :desc)
     paginated_json_response @notifications, each_serializer: NotificationSerializer
