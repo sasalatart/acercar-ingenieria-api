@@ -2,7 +2,7 @@
 
 ## About
 
-API built on top of Ruby on Rails for a project of the Centro de Alumnos de Ingeniería UC (CAi) that started in 2014 because of a detected need of new students to approach the professional reality of Engineering. With a new curriculum come new challenges, and the wide variety of opportunities that are currently offered to students according to their interests and abilities can sometimes confuse and disorient them. This project seeks to gather in the same portal articles, news, videos, research and interesting projects so that students can make a better decision about what Major to follow.
+API built on top of Ruby on Rails for a project of the Centro de Alumnos de Ingeniería UC (CAi) that started in 2014 because of a detected need of new students to approach the professional reality of Engineering. This project seeks to gather in the same portal articles, news, videos, research and interesting projects so that students can make a better decision about what Major to follow.
 
 ## Technologies Used
 
@@ -12,6 +12,7 @@ API built on top of Ruby on Rails for a project of the Centro de Alumnos de Inge
 - Redis 4 (for background processing via `sidekiq` gem)
 - Mailgun (mailing API)
 - Cloudinary (cloud storage)
+- Pusher (real-time features)
 
 ## Development Setup
 
@@ -23,6 +24,8 @@ API built on top of Ruby on Rails for a project of the Centro de Alumnos de Inge
 6. Setup the database by running `rails db:reset`.
 7. Run `rails s -p 3001` to run the application on port 3001.
 8. Run `bundle exec sidekiq` in the same dir, but in a new shell to start Sidekiq.
+
+If you wish to use real-time features, you will also need to export your Pusher credentials environment variables, as explained in the next section.
 
 ## Docker (Compose) Setup
 
@@ -62,9 +65,20 @@ First, make sure to rename the file `.env.example` to `.env`, and complete it wi
     <td rowspan="2">custom credentials for accessing Sidekiq UI</td>
   </tr>
   <tr><td>SIDEKIQ_PASSWORD</td></tr>
+  <tr>
+    <td>PUSHER_APP_ID</td>
+    <td rowspan="4">your Pusher credentials</td>
+  </tr>
+  <tr><td>PUSHER_KEY</td></tr>
+  <tr><td>PUSHER_SECRET</td></tr>
+  <tr><td>PUSHER_CLUSTER</td></tr>
+  <tr>
+    <td>WS_ENABLED</td>
+    <td>whether or not you want to activate real-time features (true/false)</td>
+  </tr>
 </table>
 
-You can visit https://www.mailgun.com/ and https://cloudinary.com/ to get your Mailgun and Cloudinary credentials.
+You can visit https://www.mailgun.com/, https://cloudinary.com/ and https://pusher.com/ to get your Mailgun, Cloudinary and Pusher credentials.
 
 Then, run the following commands:
 
@@ -84,7 +98,7 @@ You should now be able to:
 
 - Access Sidekiq UI via http://0.0.0.0:3001/sidekiq
 
-__You must take into account the fact that the [Frontend Docker Image](https://github.com/sasalatart/acercar-ingenieria-client) needs to be built considering the API's URL.__
+__You must take into account the fact that the [Frontend Docker Image](https://github.com/sasalatart/acercar-ingenieria-client) needs to be built considering the API's URL, as well as your Pusher credentials.__
 
 ## Production
 

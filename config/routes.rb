@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
   mount_devise_token_auth_for 'User', at: 'auth'
 
+  post '/pusher/auth', to: 'pusher#auth'
+
   resources :users, only: %i[index show update destroy] do
     member do
       post :admin, to: 'admins#create'

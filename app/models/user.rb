@@ -107,6 +107,10 @@ class User < ActiveRecord::Base
     UserSerializer.new(self).as_json
   end
 
+  def send_notifications_count
+    Notification.trigger_send_count_for(id, notifications.unseen.count)
+  end
+
   def self.scoped(params)
     major_id, search = params.values_at(:major_id, :search)
     @users = major_id ? Major.find(major_id).users : User.all

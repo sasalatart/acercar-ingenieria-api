@@ -13,5 +13,8 @@ class NotifyWorker
 
     return unless to_create.size.nonzero?
     ActiveRecord::Base.transaction { Notification.create!(to_create) }
+
+    to_ids.delete(notificator_id)
+    NotificationsCountWorker.perform_async(to_ids)
   end
 end

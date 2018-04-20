@@ -19,13 +19,21 @@ module Notifyable
   end
 
   def read_notifications_from(owner)
-    notifications.where(owner: owner).update_all(seen: true)
+    updated_amount = notifications.where(owner: owner, seen: false)
+                                  .update_all(seen: true)
+    owner.send_notifications_count if updated_amount > 0
   end
 
   module ClassMethods
     def read_notifications_from(owner, notifyable_ids)
-      query = { notifyable_type: to_s, notifyable_id: notifyable_ids, owner: owner }
-      Notification.where(query).update_all(seen: true)
+      query = { notifyable_type: to_s,
+                notifyable_id: notifyable_ids,
+                owner: owner,
+                seen: false }
+
+      updated_amount = Notification.where(query)
+                                   .update_all(seen: true)
+      owner.send_notifications_count if updated_amount > 0
     end
   end
 end
