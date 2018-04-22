@@ -6,8 +6,8 @@ def create_majors!(options)
   @majors.each do |key, data|
     @majors[key] = Major.create!(data)
 
-    min_users_per = options[:majors][:min_users_per]
-    max_users_per = options[:majors][:max_users_per]
+    min_users_per = options[:min_users_per]
+    max_users_per = options[:max_users_per]
     users_in_major = min_users_per + rand(max_users_per - min_users_per)
     @majors[key].users << User.all.sample(users_in_major)
 

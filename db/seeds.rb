@@ -24,7 +24,8 @@ options = {
   articles: {
     amount: 100,
     majors_proportion: 0.4,
-    max_categories_per: 3
+    max_categories_per: 3,
+    max_likes_per: 10
   },
   comments: {
     amount: 2000,
@@ -39,14 +40,14 @@ options = {
 }
 
 create_announcements!
-create_users! options
+create_users! options[:users]
 create_questions!
-create_majors! options
-create_admins! options
+create_majors! options[:majors]
+create_admins! options[:admins]
 create_categories!
-create_articles! options
-create_discussions! options
-create_comments! options
+create_articles! options[:articles]
+create_discussions! options[:discussions]
+create_comments! options[:comments]
 create_credits!
 
 puts('Done.')
