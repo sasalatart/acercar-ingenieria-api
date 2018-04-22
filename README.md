@@ -133,3 +133,33 @@ Also, you should remember to add the corresponding virtual hosts to each service
       VIRTUAL_HOST: acercaringenieria.salatart.com
       VIRTUAL_PORT: 5000
 ```
+
+## Credits
+
+Some of the assets used in the project are licensed as Creative Commons CCBY, from [The Noun Project](https://thenounproject.com/). These are:
+
+- [Analysis](https://thenounproject.com/term/analysis/588602/) by Artem Kovyazin
+- [Architecture](https://thenounproject.com/term/architecture/354603/) by John T. Garcia
+- [Article](https://thenounproject.com/term/article/1091930/) by Creative Stall
+- [Chemistry](https://thenounproject.com/term/chemistry/465908/) by Rockicon
+- [Computer](https://thenounproject.com/term/computer/1688783/) by Susannanova
+- [Construction](https://thenounproject.com/term/construction/141949/) by Sergey Novosyolov
+- [Construction Manager](https://thenounproject.com/term/construction_manager/881227/) by by Gan Khoon Lay
+- [DNA](https://thenounproject.com/term/dna/96527/) by Lloyd Humphreys
+- [Environment](https://thenounproject.com/term/environment/1458371/) by Becris
+- [Environmental](https://thenounproject.com/term/environmental/1091773/) by Made
+- [Gears](https://thenounproject.com/term/gears/200525/) by Alexander Skowalsky
+- [Geode](https://thenounproject.com/term/geode/18107/) by Drue McCurdy
+- [Innovation](https://thenounproject.com/term/innovation/447435/) by Gregor Cresnar
+- [Pi](https://thenounproject.com/term/pi/607391/) by Davo Sime
+- [Pickaxe](https://thenounproject.com/term/pickaxe/1404159/) by Creaticca Creative Agency
+- [Robot](https://thenounproject.com/term/robot/960157/) by Creaticca Creative Agency
+- [Rock](https://thenounproject.com/term/rock/5846/) by Anuar Zhumaev
+- [School](https://thenounproject.com/term/school/1276289/) by AliWijaya
+- [Transmission Tower](https://thenounproject.com/term/transmission_tower/4747/) by Olivier Guin
+- [Transport](https://thenounproject.com/term/transport/1352224/) by Made
+- [User](https://thenounproject.com/term/user/1688840/) by Alena Artemova
+- [Waves](https://thenounproject.com/term/waves/1352914/) by Natasja Buer Toldam
+- [X Ray](https://thenounproject.com/term/x_ray/1066122/) by H Alberto Gongora
+
+If you wish to use them, you must give credit to their authors.

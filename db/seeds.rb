@@ -7,6 +7,7 @@ require_relative './seeds/categories'
 require_relative './seeds/articles'
 require_relative './seeds/discussions'
 require_relative './seeds/comments'
+require_relative './seeds/credits'
 
 options = {
   admins: {
@@ -46,5 +47,6 @@ create_categories!
 create_articles! options
 create_discussions! options
 create_comments! options
+create_credits!
 
 puts('Done.')

@@ -98,5 +98,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[index show create update destroy]
   end
 
+  resources :credits, only: %i[index create update destroy]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

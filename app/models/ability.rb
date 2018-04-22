@@ -11,13 +11,13 @@ class Ability
 
     if user.has_role?(:admin)
       can :manage, :all
-      cannot [:destroy], :admin if user.id == params[:id].to_i
+      cannot %i[destroy], :admin if user.id == params[:id].to_i
     elsif !majors_user_is_admin.empty?
       can %i[index show], User
       can %i[update active], User, id: user.id
       can %i[destroy], User if MajorUser.find_by(user_id: params[:id].to_i, major_id: majors_user_is_admin)
 
-      can [:index], :admin
+      can %i[index], :admin
 
       can %i[update broadcast], Major, id: majors_user_is_admin
 
@@ -33,7 +33,7 @@ class Ability
       can %i[update destroy], Question, author_id: user.id
 
       can %i[index create], Comment
-      can [:destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
+      can %i[destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
       can %i[update destroy], Comment, author_id: user.id
 
       can %i[create destroy], Like
@@ -50,7 +50,7 @@ class Ability
       can %i[index show], User
       can %i[update active], User, id: user.id
 
-      can [:index], :admin
+      can %i[index], :admin
 
       can %i[index create], Question
       can %i[update destroy], Question, author_id: user.id
@@ -77,12 +77,14 @@ class Ability
 
     can %i[index show], Major
 
-    can [:index], Question
+    can %i[index], Question
 
     can %i[index show], Article
 
     can %i[index], Category
 
-    can [:pinned], Announcement
+    can %i[pinned], Announcement
+
+    can %i[index], Credit
   end
 end
