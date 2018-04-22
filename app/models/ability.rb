@@ -44,8 +44,7 @@ class Ability
       can %i[create], Enrollment
       can %i[destroy], Enrollment, user_id: user.id
 
-      can %i[index count seen clear], Notification
-      can %i[read], Notification, owner_id: user.id
+      can %i[index count seen], Notification
     elsif !user.new_record?
       can %i[index show], User
       can %i[update active], User, id: user.id
@@ -71,8 +70,7 @@ class Ability
       can %i[create], Enrollment
       can %i[destroy], Enrollment, user_id: user.id
 
-      can %i[index count seen clear], Notification
-      can %i[read], Notification, owner_id: user.id
+      can %i[index count seen], Notification
     end
 
     can %i[index show], Major

@@ -15,14 +15,4 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.seen.order(created_at: :desc)
     paginated_json_response @notifications, each_serializer: NotificationSerializer
   end
-
-  def read
-    @notification.update(seen: true)
-    json_response @notification
-  end
-
-  def clear
-    current_user.notifications.update_all(seen: true)
-    head :no_content
-  end
 end
