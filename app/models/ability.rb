@@ -32,7 +32,7 @@ class Ability
       can %i[update destroy], Question, major_id: majors_user_is_admin
       can %i[update destroy], Question, author_id: user.id
 
-      can %i[index create], Comment
+      can %i[index show create], Comment
       can %i[destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
       can %i[update destroy], Comment, author_id: user.id
 
@@ -59,7 +59,7 @@ class Ability
 
       can %i[index], Category
 
-      can %i[index create], Comment
+      can %i[index show create], Comment
       can %i[update destroy], Comment, author_id: user.id
 
       can %i[create destroy], Like
