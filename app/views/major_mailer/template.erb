@@ -1,0 +1,3 @@
+<% content_for :body do %>
+  <%= render partial: '/layouts/paragraph', locals: { content: @body.html_safe } %>
+<% end %>

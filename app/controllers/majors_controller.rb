@@ -25,12 +25,26 @@ class MajorsController < ApplicationController
     head :no_content
   end
 
-  def broadcast
-    MajorMailer.broadcast(@major, params[:subject], params[:content]).deliver
+  def email
+    contact(@major.users.pluck(:email))
+    head :no_content
+  end
+
+  def personal_email
+    contact(@major.admins.pluck(:email))
     head :no_content
   end
 
   private
+
+  def contact(to_emails)
+    MajorMailer.contact(
+      current_user.email,
+      to_emails - [current_user.email],
+      Sanitize.fragment(params[:subject], Sanitize::Config::RELAXED),
+      Sanitize.fragment(params[:body], Sanitize::Config::RELAXED)
+    ).deliver
+  end
 
   def major_params
     params.permit(:name,

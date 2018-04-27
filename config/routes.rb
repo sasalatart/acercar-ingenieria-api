@@ -40,7 +40,8 @@ Rails.application.routes.draw do
     get :admins, to: 'admins#index'
 
     member do
-      post :broadcast
+      post :email
+      post 'personal-email'
     end
 
     resources :users, only: %i[index] do

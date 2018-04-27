@@ -19,7 +19,8 @@ class Ability
 
       can %i[index], :admin
 
-      can %i[update broadcast], Major, id: majors_user_is_admin
+      can %i[update email], Major, id: majors_user_is_admin
+      can %i[personal_email], Major
 
       can %i[index show create], Article
       can %i[update destroy], Article, major_id: majors_user_is_admin
@@ -50,6 +51,8 @@ class Ability
       can %i[update active], User, id: user.id
 
       can %i[index], :admin
+
+      can %i[personal_email], Major
 
       can %i[index create], Question
       can %i[update destroy], Question, author_id: user.id

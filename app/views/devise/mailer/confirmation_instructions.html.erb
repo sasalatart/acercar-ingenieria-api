@@ -13,3 +13,7 @@
                                                            redirect_url: message['redirect-url'] }).html_safe,
                        text: t('.confirm_account_link') } %>
 <% end %>
+
+<% content_for :signature do %>
+  <%= render partial: '/layouts/signature' %>
+<% end %>

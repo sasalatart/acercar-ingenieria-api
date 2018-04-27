@@ -120,8 +120,7 @@ class User < ActiveRecord::Base
 
   def self.scoped_admins(params)
     major_id, search = params.values_at(:major_id, :search)
-    @users = User.with_role(:admin) unless major_id
-    @users = User.with_role(:major_admin, Major.find(major_id)) if major_id
+    @users = major_id ? Major.find(major_id).admins : User.with_role(:admin)
     @users = @users.search_for(search) if search
     @users.order(DEFAULT_ORDER)
   end

@@ -1,14 +1,6 @@
 class MajorMailer < ApplicationMailer
-
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.major_mailer.broadcast.subject
-  #
-  def broadcast(major, subject, content)
-    emails = major.users.pluck(:email).join(',')
-    @content = content
-
-    mail to: emails, subject: subject
+  def contact(from_email, to_emails, subject, body)
+    @body = body
+    mail to: to_emails, cc: from_email, subject: subject, template_name: 'template'
   end
 end
