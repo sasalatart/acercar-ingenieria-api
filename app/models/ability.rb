@@ -80,8 +80,6 @@ class Ability
 
     can %i[index], Question
 
-    can %i[index show], Article
-
     can %i[index], Category
 
     can %i[pinned], Announcement
