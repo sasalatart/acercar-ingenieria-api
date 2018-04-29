@@ -51,10 +51,11 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :video_links, only: %i[index create update destroy]
     resources :articles, only: %i[index show create update destroy]
     resources :comments, only: %i[index show create update destroy]
 
-    resources :questions, only: %i[index create update destroy], controller: :questions do
+    resources :questions, only: %i[index create update destroy] do
       collection do
         get :pending
       end

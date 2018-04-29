@@ -4,11 +4,12 @@ module ActAsPolymorphic
   ID_TYPES = {
     commentable: [Major, Article, Discussion, Comment].map(&parse_model),
     likeable: [Article, Discussion, Comment].map(&parse_model),
-    enrollable: [Article, Discussion, Comment].map(&parse_model)
+    enrollable: [Article, Discussion, Comment].map(&parse_model),
+    video_linkable: [Major].map(&parse_model)
   }.freeze
 
   def method_missing(name)
-    name =~ /find_(commentable|likeable|enrollable)/
+    name =~ /find_(commentable|likeable|enrollable|video_linkable)/
     match = Regexp.last_match(1)
     match ? find_belongs_to(ID_TYPES[match.to_sym]) : super
   end
@@ -18,8 +19,8 @@ module ActAsPolymorphic
   end
 
   def find_belongs_to(id_types)
-    commentable_id_type = (params.keys & id_types).first
-    id = params[commentable_id_type.to_sym]
-    commentable_id_type.gsub('_id', '').classify.constantize.find(id)
+    id_type = (params.keys & id_types).first
+    id = params[id_type.to_sym]
+    id_type.gsub('_id', '').classify.constantize.find(id)
   end
 end

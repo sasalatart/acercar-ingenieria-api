@@ -31,6 +31,7 @@ class Major < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :video_links, as: :video_linkable, dependent: :destroy
 
   has_attached_file :logo, styles: { thumb: '75x75>', medium: '200x200>' },
                            convert_options: { display: '-quality 90 -strip' },

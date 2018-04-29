@@ -37,6 +37,8 @@ class Ability
       can %i[destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
       can %i[update destroy], Comment, author_id: user.id
 
+      can %i[create update destroy], VideoLink, video_linkable_type: Major.name, video_linkable_id: majors_user_is_admin
+
       can %i[create destroy], Like
 
       can %i[index mine pinned show create], Discussion
@@ -83,6 +85,8 @@ class Ability
     can %i[index], Category
 
     can %i[pinned], Announcement
+
+    can %i[index], VideoLink
 
     can %i[index], Credit
   end

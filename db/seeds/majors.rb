@@ -1,20 +1,31 @@
 require_relative './uploads'
 
+def add_users(major, options)
+  min_users_per = options[:min_users_per]
+  max_users_per = options[:max_users_per]
+
+  users_in_major = min_users_per + rand(max_users_per - min_users_per)
+  major.users << User.all.sample(users_in_major)
+end
+
+def add_video_link(major, video_url)
+  video_data = { title: 'Video Introductorio', url: video_url, pinned: true }
+  major.video_links.create!(video_data)
+end
+
 def create_majors!(options)
   puts 'Creating majors...'
+  admin = User.with_role(:admin).first
 
   @majors.each do |key, data|
     @majors[key] = Major.create!(data)
-
-    min_users_per = options[:min_users_per]
-    max_users_per = options[:max_users_per]
-    users_in_major = min_users_per + rand(max_users_per - min_users_per)
-    @majors[key].users << User.all.sample(users_in_major)
+    add_users(@majors[key], options)
+    add_video_link(@majors[key], data[:video_url])
 
     next unless @major_questions[key]
 
-    @major_questions[key].each do |major_data|
-      Question.create!(major_data.merge(major: @majors[key], author_id: 1))
+    @major_questions[key].each do |question_data|
+      @majors[key].questions.create!(question_data.merge(author: admin))
     end
   end
 end

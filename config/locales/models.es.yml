@@ -13,6 +13,7 @@ es:
       question: Pregunta
       role: Rol
       user: Usuario
+      video_link: Link de video
     attributes:
       announcement:
         pinned: Marcado
@@ -51,6 +52,9 @@ es:
         first_name: Nombre
         last_name: Apellido
         generation: Generación
+      video_link:
+        title: Título
+        pinned: Marcado
     errors:
       messages:
         inexistent_category: La categoría no existe
