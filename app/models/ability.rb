@@ -37,7 +37,7 @@ class Ability
       can %i[destroy], Comment, commentable_type: Major.name, commentable_id: majors_user_is_admin
       can %i[update destroy], Comment, author_id: user.id
 
-      can %i[create update destroy], VideoLink, video_linkable_type: Major.name, video_linkable_id: majors_user_is_admin
+      can %i[create update destroy], VideoLink if majors_user_is_admin.include? params[:major_id].to_i
 
       can %i[create destroy], Like
 
