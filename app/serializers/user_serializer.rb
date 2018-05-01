@@ -33,9 +33,10 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
+  include EmailViewable
   include Imageable
 
-  attributes :id, :email, :first_name, :last_name, :generation, :bio, :avatar,
+  attributes :id, :first_name, :last_name, :generation, :bio, :avatar,
              :majors_of_interest, :admin, :admin_of_majors, :created_at
 
   def majors_of_interest

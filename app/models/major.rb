@@ -57,9 +57,13 @@ class Major < ApplicationRecord
     User.with_role(:major_admin, self)
   end
 
+  def self.ids_where_is_admin(user)
+    Major.with_role(:major_admin, user).pluck(:id)
+  end
+
   def self.user_admin?(user, major_id)
     return true if user.has_role? :admin
-    Major.with_role(:major_admin, user).pluck(:id).include? major_id.to_i
+    Major.ids_where_is_admin(user).include? major_id.to_i
   end
 
   private

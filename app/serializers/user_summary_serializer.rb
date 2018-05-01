@@ -33,10 +33,10 @@
 #
 
 class UserSummarySerializer < ActiveModel::Serializer
+  include EmailViewable
   include Imageable
 
-  attributes :id, :email, :first_name, :last_name, :generation, :avatar,
-             :created_at
+  attributes :id, :first_name, :last_name, :generation, :avatar, :created_at
 
   def avatar
     image_hash(object.avatar, :thumb, :medium)

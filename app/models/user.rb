@@ -104,11 +104,17 @@ class User < ActiveRecord::Base
                                 size: { in: 0..1.megabyte }
 
   def token_validation_response
-    UserSerializer.new(self).as_json
+    UserSerializer.new(self, scope: self, scope_name: :current_user).as_json
   end
 
   def send_notifications_count
     Notification.trigger_send_count_for(id, notifications.unseen.count)
+  end
+
+  def can_see_email_for?(user)
+    return true if id == user.id
+    return true if has_role?(:admin)
+    MajorUser.find_by(user_id: user.id, major_id: Major.ids_where_is_admin(self))
   end
 
   def self.scoped(params)
