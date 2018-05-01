@@ -13,4 +13,10 @@ class LikesController < ApplicationController
     find_likeable.likes.where(user: current_user).destroy_all
     head :no_content
   end
+
+  private
+
+  def current_ability
+    @current_ability ||= Abilities::LikesAbility.new(current_user, params)
+  end
 end

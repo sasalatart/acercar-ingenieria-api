@@ -31,4 +31,8 @@ class UsersController < ApplicationController
                   :avatar,
                   major_users_attributes: %i[id major_id _destroy])
   end
+
+  def current_ability
+    @current_ability ||= Abilities::UsersAbility.new(current_user, params)
+  end
 end

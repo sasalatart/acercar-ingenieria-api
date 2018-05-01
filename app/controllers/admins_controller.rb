@@ -21,4 +21,8 @@ class AdminsController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  def current_ability
+    @current_ability ||= Abilities::AdminsAbility.new(current_user, params)
+  end
 end

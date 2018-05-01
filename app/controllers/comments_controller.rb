@@ -45,4 +45,8 @@ class CommentsController < ApplicationController
   def order
     @commentable.respond_to?(:child_comments) ? :asc : :desc
   end
+
+  def current_ability
+    @current_ability ||= Abilities::CommentsAbility.new(current_user, params)
+  end
 end

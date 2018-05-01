@@ -41,4 +41,8 @@ class QuestionsController < ApplicationController
   def student_question_params
     params.permit(:id, :question, :major_id)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::QuestionsAbility.new(current_user, params)
+  end
 end

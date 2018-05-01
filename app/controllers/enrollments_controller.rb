@@ -13,4 +13,10 @@ class EnrollmentsController < ApplicationController
     find_enrollable.unenroll!(current_user)
     head :no_content
   end
+
+  private
+
+  def current_ability
+    @current_ability ||= Abilities::EnrollmentsAbility.new(current_user, params)
+  end
 end

@@ -29,4 +29,8 @@ class CreditsController < ApplicationController
                   :author_name,
                   :resource)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::CreditsAbility.new(current_user, params)
+  end
 end

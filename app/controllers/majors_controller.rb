@@ -54,4 +54,8 @@ class MajorsController < ApplicationController
                   :video_url,
                   :logo)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::MajorsAbility.new(current_user, params)
+  end
 end

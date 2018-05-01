@@ -38,4 +38,8 @@ class ArticlesController < ApplicationController
                   :picture,
                   attachments_attributes: %i[document id _destroy])
   end
+
+  def current_ability
+    @current_ability ||= Abilities::ArticlesAbility.new(current_user, params)
+  end
 end

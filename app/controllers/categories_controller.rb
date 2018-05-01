@@ -26,4 +26,8 @@ class CategoriesController < ApplicationController
   def category_params
     params.permit(:name)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::CategoriesAbility.new(current_user, params)
+  end
 end

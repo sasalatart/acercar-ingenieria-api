@@ -41,4 +41,8 @@ class DiscussionsController < ApplicationController
     permitted_params.push(:pinned) if current_user.admin_of_something?
     params.permit(permitted_params)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::DiscussionsAbility.new(current_user, params)
+  end
 end

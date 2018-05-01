@@ -15,4 +15,10 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications.seen.order(created_at: :desc)
     paginated_json_response @notifications, each_serializer: NotificationSerializer
   end
+
+  private
+
+  def current_ability
+    @current_ability ||= Abilities::NotificationsAbility.new(current_user, params)
+  end
 end

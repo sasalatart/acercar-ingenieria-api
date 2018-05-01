@@ -35,4 +35,8 @@ class VideoLinksController < ApplicationController
   def video_link_params
     params.permit(:title, :url, :pinned)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::VideoLinksAbility.new(current_user, params)
+  end
 end

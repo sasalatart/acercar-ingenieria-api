@@ -30,4 +30,8 @@ class AnnouncementsController < ApplicationController
   def announcement_params
     params.permit(:pinned, :picture)
   end
+
+  def current_ability
+    @current_ability ||= Abilities::AnnouncementsAbility.new(current_user, params)
+  end
 end
