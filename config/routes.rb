@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     end
 
     resources :admins, only: %i[index]
-    resources :users, only: %i[index] do
+    resources :users, only: %i[index destroy] do
       member do
         post :admin, to: 'admins#promote'
         delete :admin, to: 'admins#demote'
