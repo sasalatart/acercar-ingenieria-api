@@ -2,17 +2,17 @@ class AdminsController < ApplicationController
   before_action :authenticate_user!
   authorize_resource class: false
 
-  before_action :set_user, only: %i[create destroy]
+  before_action :set_user, only: %i[promote demote]
 
   def index
     paginated_json_response User.scoped_admins(params)
   end
 
-  def create
+  def promote
     json_response @user.promote_to_admin params[:major_id]
   end
 
-  def destroy
+  def demote
     json_response @user.demote_from_admin params[:major_id]
   end
 

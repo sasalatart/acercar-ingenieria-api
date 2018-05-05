@@ -6,7 +6,7 @@ module Abilities
       return if @user.new_record?
 
       if @user.has_role?(:admin)
-        cannot %i[destroy], :admin if @user.id == params[:id].to_i
+        cannot %i[demote], :admin if @user.id == params[:id].to_i
       end
 
       can %i[index], :admin

@@ -6,14 +6,11 @@ Rails.application.routes.draw do
 
   post '/pusher/auth', to: 'pusher#auth'
 
+  resources :admins, only: %i[index]
   resources :users, only: %i[index show update destroy] do
     member do
-      post :admin, to: 'admins#create'
-      delete :admin, to: 'admins#destroy'
-    end
-
-    collection do
-      get :admins, to: 'admins#index'
+      post :admin, to: 'admins#promote'
+      delete :admin, to: 'admins#demote'
     end
   end
 
@@ -37,17 +34,16 @@ Rails.application.routes.draw do
   end
 
   resources :majors, only: %i[index show create update destroy] do
-    get :admins, to: 'admins#index'
-
     member do
       post :email
       post 'personal-email'
     end
 
+    resources :admins, only: %i[index]
     resources :users, only: %i[index] do
       member do
-        post :admin, to: 'admins#create'
-        delete :admin, to: 'admins#destroy'
+        post :admin, to: 'admins#promote'
+        delete :admin, to: 'admins#demote'
       end
     end
 
