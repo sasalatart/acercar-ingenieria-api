@@ -34,7 +34,5 @@ module AcercarIngenieria
     config.i18n.default_locale = :es
 
     config.to_prepare { Devise::Mailer.layout 'mailer' }
-
-    config.autoload_paths << "#{Rails.root}/lib"
   end
 end
