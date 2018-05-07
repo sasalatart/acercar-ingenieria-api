@@ -7,7 +7,7 @@ API built on top of Ruby on Rails for a project of the Centro de Alumnos de Inge
 ## Technologies Used
 
 - Ruby 2.4
-- Rails 5.1.4
+- Rails 5.2
 - PostgreSQL 10 (including full text search via `pg_search` gem)
 - Redis 4 (for background processing via `sidekiq` gem)
 - Mailgun (mailing API)

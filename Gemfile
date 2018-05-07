@@ -5,7 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2'
+gem 'bootsnap', require: false
 gem 'pg', '~> 0.18'
 gem 'pg_search'
 gem 'puma', '~> 3.7'
@@ -26,7 +27,7 @@ gem 'kaminari'
 gem 'api-pagination'
 gem 'active_model_serializers', '~> 0.10.0'
 
-gem 'acts-as-taggable-on', '~> 5.0'
+gem 'acts-as-taggable-on', git: 'git://github.com/Fodoj/acts-as-taggable-on.git', ref: 'b0e734b'
 gem 'impressionist'
 
 gem 'mailgun_rails'
