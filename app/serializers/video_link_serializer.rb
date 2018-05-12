@@ -2,12 +2,12 @@
 #
 # Table name: video_links
 #
-#  id                  :integer          not null, primary key
+#  id                  :bigint(8)        not null, primary key
 #  title               :string
 #  url                 :string
 #  pinned              :boolean          default(FALSE)
 #  video_linkable_type :string
-#  video_linkable_id   :integer
+#  video_linkable_id   :bigint(8)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #

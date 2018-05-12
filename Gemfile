@@ -34,9 +34,8 @@ gem 'mailgun_rails'
 
 gem 'exception_notification'
 
-gem 'paperclip', '~> 5.2.0'
-gem 'paperclip-cloudinary'
-gem 'paperclip-i18n'
+gem 'mini_magick'
+gem 'aws-sdk-s3'
 
 gem 'sanitize', '~> 4.6.3'
 

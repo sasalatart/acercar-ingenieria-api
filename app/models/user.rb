@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint(8)        not null, primary key
 #  provider               :string           default("email"), not null
 #  uid                    :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
@@ -26,19 +26,15 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  bio                    :string
-#  avatar_file_name       :string
-#  avatar_content_type    :string
-#  avatar_file_size       :integer
-#  avatar_updated_at      :datetime
 #
 
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable
   include DeviseTokenAuth::Concerns::User
-  include Adminable
+  include AdminableModel
+  include SanitizableModel
   include PgSearch
-  include Sanitizable
 
   DEFAULT_ORDER = [generation: :desc, last_name: :asc, first_name: :asc].freeze
 
@@ -74,9 +70,7 @@ class User < ActiveRecord::Base
                                 dependent: :destroy,
                                 foreign_key: :notificator_id
 
-  has_attached_file :avatar, styles: { thumb: '75x75>', medium: '200x200>' },
-                             convert_options: { display: '-quality 90 -strip' },
-                             dependent: :destroy
+  has_one_attached :avatar
 
   accepts_nested_attributes_for :major_users, allow_destroy: true
 
@@ -100,8 +94,7 @@ class User < ActiveRecord::Base
   validates :bio, allow_blank: true,
                   length: { maximum: 255 }
 
-  validates_attachment :avatar, content_type: { content_type: /\Aimage\/.*\z/ },
-                                size: { in: 0..1.megabyte }
+  validates :avatar, image: { max_size: 1.megabyte }
 
   def token_validation_response
     UserSerializer.new(self, scope: self, scope_name: :current_user).as_json

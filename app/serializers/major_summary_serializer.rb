@@ -9,18 +9,18 @@
 #  video_url         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  logo_file_name    :string
-#  logo_content_type :string
-#  logo_file_size    :integer
-#  logo_updated_at   :datetime
 #  comments_count    :integer          default(0)
 #  short_description :text
 #
 
 class MajorSummarySerializer < ActiveModel::Serializer
-  include Imageable
+  include ImageableSerializer
 
   attributes :id, :name, :category, :logo
+
+  def self.eager_load_relation(relation)
+    relation.with_attached_logo
+  end
 
   def logo
     image_hash(object.logo, :thumb, :medium)

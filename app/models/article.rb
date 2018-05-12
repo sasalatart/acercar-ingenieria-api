@@ -2,28 +2,24 @@
 #
 # Table name: articles
 #
-#  id                   :integer          not null, primary key
-#  title                :string
-#  short_description    :text
-#  content              :text
-#  major_id             :integer
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  likes_count          :integer          default(0)
-#  comments_count       :integer          default(0)
-#  author_id            :integer
-#  picture_file_name    :string
-#  picture_content_type :string
-#  picture_file_size    :integer
-#  picture_updated_at   :datetime
+#  id                :bigint(8)        not null, primary key
+#  title             :string
+#  short_description :text
+#  content           :text
+#  major_id          :bigint(8)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  likes_count       :integer          default(0)
+#  comments_count    :integer          default(0)
+#  author_id         :bigint(8)
 #
 
 class Article < ApplicationRecord
-  include Attachable
-  include Enrollable
-  include Notifyable
+  include AttachableModel
+  include EnrollableModel
+  include NotifyableModel
+  include SanitizableModel
   include PgSearch
-  include Sanitizable
 
   before_save :sanitize_attributes
   after_create :enroll_and_notify
@@ -40,19 +36,13 @@ class Article < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
-  has_attached_file :picture, styles: { medium: '200x200>' },
-                              convert_options: { display: '-quality 90 -strip' },
-                              dependent: :destroy
-
   validates :title, presence: true, uniqueness: true
   validates :short_description, presence: true, length: { maximum: 300 }
   validates :content, presence: true
+  validates :attachments, attachments: { max_amount: 5, max_total_size: 10.megabytes }
 
   validate :only_allowed_categories
   validate :only_allowed_majors
-
-  validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\z/ },
-                                 size: { in: 0..1.megabytes }
 
   def self.scoped(params)
     major_id, category_list, search = params.values_at(:major_id, :category_list, :search)

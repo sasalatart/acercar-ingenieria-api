@@ -25,6 +25,7 @@ class DiscussionsController < ApplicationController
 
   def update
     @discussion.update!(discussion_params)
+    @discussion.purge_attachments(params[:destroyed_attachments])
     json_response @discussion
   end
 
@@ -36,8 +37,7 @@ class DiscussionsController < ApplicationController
   private
 
   def discussion_params
-    permitted_params = [:title, :description, :tag_list,
-                        attachments_attributes: %i[document id _destroy]]
+    permitted_params = [:title, :description, :tag_list, attachments: []]
     permitted_params.push(:pinned) if current_user.admin_of_something?
     params.permit(permitted_params)
   end

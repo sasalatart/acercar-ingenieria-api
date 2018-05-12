@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
 
   def update
     @article.update!(article_params)
+    @article.purge_attachments(params[:destroyed_attachments])
     json_response @article
   end
 
@@ -36,7 +37,7 @@ class ArticlesController < ApplicationController
                   :major_id,
                   :category_list,
                   :picture,
-                  attachments_attributes: %i[document id _destroy])
+                  attachments: [])
   end
 
   def current_ability

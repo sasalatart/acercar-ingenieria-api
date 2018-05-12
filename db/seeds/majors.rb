@@ -17,10 +17,11 @@ def create_majors!(options)
   puts 'Creating majors...'
   admin = User.with_role(:admin).first
 
-  @majors.each do |key, data|
-    @majors[key] = Major.create!(data)
+  @majors.each do |key, raw_data|
+    @majors[key] = Major.create!(raw_data.except(:logo_meta))
     add_users(@majors[key], options)
-    add_video_link(@majors[key], data[:video_url])
+    add_video_link(@majors[key], raw_data[:video_url])
+    add_uploaded_image(@majors[key], :logo, *raw_data[:logo_meta])
 
     next unless @major_questions[key]
 
@@ -41,7 +42,7 @@ end
                      'soluciones a las problemáticas ambientales.',
   video_url: 'https://youtu.be/p4F2LEFXpQ8',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'environmental_made', 'png')
+  logo_meta: %w[major_logos environmental_made png]
 }
 
 @majors[:computacion] = {
@@ -54,7 +55,7 @@ end
                      'computacionales.',
   video_url: 'https://youtu.be/NFUkXwYSgPA',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'computer_susannanova', 'png')
+  logo_meta: %w[major_logos computer_susannanova png]
 }
 
 @majors[:ing_ambiental] = {
@@ -66,7 +67,7 @@ end
                      'de energía.',
   video_url: 'https://youtu.be/pwv8CtOpN_8',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'environment_becris', 'png')
+  logo_meta: %w[major_logos environment_becris png]
 }
 
 @majors[:ing_civil] = {
@@ -79,7 +80,7 @@ end
                      'desarrollo de proyectos y obras de infraestructura.',
   video_url: 'https://youtu.be/F4IigtLR1Ag',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'construction_sergey_novosyolov', 'png')
+  logo_meta: %w[major_logos construction_sergey_novosyolov png]
 }
 
 @majors[:ing_construccion] = {
@@ -90,7 +91,7 @@ end
                      'las fases del desarrollo de obras de construcción.',
   video_url: 'https://youtu.be/ytfexTyTCwA',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'construction_manager_gan_khoon_lay', 'png')
+  logo_meta: %w[major_logos construction_manager_gan_khoon_lay png]
 }
 
 @majors[:ing_electrica] = {
@@ -103,7 +104,7 @@ end
                      'también sus interacciones.',
   video_url: 'https://youtu.be/bh8btllzGZU',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'transmission_tower_olivier_guin', 'png')
+  logo_meta: %w[major_logos transmission_tower_olivier_guin png]
 }
 
 @majors[:ing_estructural] = {
@@ -114,7 +115,7 @@ end
                      'estructural de obras civiles.',
   video_url: 'https://youtu.be/jpbxuxlXwis',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'beam_bakunetsu_kaito', 'png')
+  logo_meta: %w[major_logos beam_bakunetsu_kaito png]
 }
 
 @majors[:ing_geotecnica] = {
@@ -127,7 +128,7 @@ end
                      'infraestructura.',
   video_url: 'https://youtu.be/JOSrqwek3jg',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'rock_anuar_zhumaev', 'png')
+  logo_meta: %w[major_logos rock_anuar_zhumaev png]
 }
 
 @majors[:ing_hidraulica] = {
@@ -139,7 +140,7 @@ end
                      'artificiales.',
   video_url: 'https://youtu.be/FgKtmUTbLvM',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'waves_natasja_buer_toldam', 'png')
+  logo_meta: %w[major_logos waves_natasja_buer_toldam png]
 }
 
 @majors[:ing_mecanica] = {
@@ -150,7 +151,7 @@ end
                      'mecánicos.',
   video_url: 'https://youtu.be/y3J264gptEg',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'gears_alexander_skowalsky', 'png')
+  logo_meta: %w[major_logos gears_alexander_skowalsky png]
 }
 
 @majors[:ing_quimica] = {
@@ -162,7 +163,7 @@ end
                      'materiales.',
   video_url: 'https://youtu.be/tXiJ_uzXfXk',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'chemistry_rockicon', 'png')
+  logo_meta: %w[major_logos chemistry_rockicon png]
 }
 
 @majors[:investigacion_operativa] = {
@@ -174,7 +175,7 @@ end
                      'una perspectiva crítica y sistémica.',
   video_url: 'https://youtu.be/syAglylSd7c',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'analysis_artem_kovyazin', 'png')
+  logo_meta: %w[major_logos analysis_artem_kovyazin png]
 }
 
 @majors[:mineria] = {
@@ -185,7 +186,7 @@ end
                      'explotación y operaciones mineras.',
   video_url: 'https://youtu.be/6Mmrb8ZqDGY',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'pickaxe_creaticca_creative_agency', 'png')
+  logo_meta: %w[major_logos pickaxe_creaticca_creative_agency png]
 }
 
 @majors[:sistemas_transporte] = {
@@ -197,7 +198,7 @@ end
                      'transporte.',
   video_url: 'https://youtu.be/erXWL6zBJ30',
   category: :disciplinary,
-  logo: create_uploaded_image('major_logos', 'transport_made', 'png')
+  logo_meta: %w[major_logos transport_made png]
 }
 
 @majors[:geociencias] = {
@@ -209,7 +210,7 @@ end
                      'Geociencias y las áreas de Ingeniería.',
   video_url: 'https://youtu.be/tJNrrxo4FW4',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'geode_drue_mc_curdy', 'png')
+  logo_meta: %w[major_logos geode_drue_mc_curdy png]
 }
 
 @majors[:ing_biologica] = {
@@ -222,7 +223,7 @@ end
                      'tecnologías eficientes inspiradas en la biología.',
   video_url: 'https://youtu.be/GxExEaTPVoA',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'dna_lloyd_humphreys', 'png')
+  logo_meta: %w[major_logos dna_lloyd_humphreys png]
 }
 
 @majors[:ing_biomedica] = {
@@ -236,7 +237,7 @@ end
                      'formulación y aplicación de modelos matemáticos.',
   video_url: 'https://youtu.be/AjfGBVzbmA0',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'x_ray_h_alberto_gongora', 'png')
+  logo_meta: %w[major_logos x_ray_h_alberto_gongora png]
 }
 
 @majors[:ing_diseno_innovacion] = {
@@ -250,7 +251,7 @@ end
                      'emprendimiento.',
   video_url: 'https://youtu.be/cl6JsUoEkLc',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'innovation_gregor_cresnar', 'png')
+  logo_meta: %w[major_logos innovation_gregor_cresnar png]
 }
 
 @majors[:ing_matematica] = {
@@ -261,7 +262,7 @@ end
                      'uso de matemáticas de alto nivel.',
   video_url: 'https://youtu.be/mbXFnRepnss',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'pi_davo_sime', 'png')
+  logo_meta: %w[major_logos pi_davo_sime png]
 }
 
 @majors[:ing_arquitectura] = {
@@ -272,7 +273,7 @@ end
                      'y construcción más fluidos, factibles y sustentables.',
   video_url: 'https://youtu.be/nS2r7bE2qt8',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'architecture_john_t_garcia', 'png')
+  logo_meta: %w[major_logos architecture_john_t_garcia png]
 }
 
 @majors[:sistemas_autonomos_roboticos] = {
@@ -286,7 +287,7 @@ end
                      'Computacional.',
   video_url: 'https://youtu.be/QBdDwVH8s3g',
   category: :interdisciplinary,
-  logo: create_uploaded_image('major_logos', 'robot_creaticca_creative_agency', 'png')
+  logo_meta: %w[major_logos robot_creaticca_creative_agency png]
 }
 
 @major_questions = {

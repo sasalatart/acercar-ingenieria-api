@@ -10,19 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180428124656) do
+ActiveRecord::Schema.define(version: 2018_05_12_132259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "announcements", force: :cascade do |t|
     t.boolean "pinned", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "picture_file_name"
-    t.string "picture_content_type"
-    t.integer "picture_file_size"
-    t.datetime "picture_updated_at"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -35,25 +52,9 @@ ActiveRecord::Schema.define(version: 20180428124656) do
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
     t.bigint "author_id"
-    t.string "picture_file_name"
-    t.string "picture_content_type"
-    t.integer "picture_file_size"
-    t.datetime "picture_updated_at"
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["major_id"], name: "index_articles_on_major_id"
     t.index ["title", "short_description"], name: "index_articles_on_title_and_short_description"
-  end
-
-  create_table "attachments", force: :cascade do |t|
-    t.string "attachable_type"
-    t.integer "attachable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "document_file_name"
-    t.string "document_content_type"
-    t.integer "document_file_size"
-    t.datetime "document_updated_at"
-    t.index ["attachable_id", "attachable_type"], name: "index_attachments_on_attachable_id_and_attachable_type"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -82,10 +83,6 @@ ActiveRecord::Schema.define(version: 20180428124656) do
     t.string "author_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "resource_file_name"
-    t.string "resource_content_type"
-    t.integer "resource_file_size"
-    t.datetime "resource_updated_at"
   end
 
   create_table "discussions", force: :cascade do |t|
@@ -165,10 +162,6 @@ ActiveRecord::Schema.define(version: 20180428124656) do
     t.string "video_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "logo_file_name"
-    t.string "logo_content_type"
-    t.integer "logo_file_size"
-    t.datetime "logo_updated_at"
     t.integer "comments_count", default: 0
     t.text "short_description"
   end
@@ -259,10 +252,6 @@ ActiveRecord::Schema.define(version: 20180428124656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bio"
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.integer "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["first_name", "last_name", "generation"], name: "index_users_on_first_name_and_last_name_and_generation"

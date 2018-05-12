@@ -2,18 +2,18 @@
 #
 # Table name: questions
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  question   :string
 #  answer     :text
-#  author_id  :integer
-#  major_id   :integer
+#  author_id  :bigint(8)
+#  major_id   :bigint(8)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  pinned     :boolean          default(FALSE)
 #
 
 class Question < ApplicationRecord
-  include Sanitizable
+  include SanitizableModel
 
   DEFAULT_ORDER = [pinned: :desc, created_at: :desc].freeze
 

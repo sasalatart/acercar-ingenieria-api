@@ -3,11 +3,11 @@ class AnnouncementsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response Announcement.all
+    paginated_json_response Announcement.all, each_serializer: AnnouncementSerializer
   end
 
   def pinned
-    json_response Announcement.pinned
+    json_response Announcement.pinned, each_serializer: AnnouncementSerializer
   end
 
   def create

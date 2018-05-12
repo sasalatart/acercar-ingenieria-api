@@ -23,7 +23,7 @@ es:
         short_description: Breve descripción
         content: Contenido
         author: Autor
-        picture: Imagen
+        attachments: Adjuntos
       attachment:
         document: Documento
       category:
@@ -36,6 +36,7 @@ es:
         description: Descripción
         pinned: Marcado
         author: Autor
+        attachments: Adjuntos
       notification:
         action_type: Tipo de acción
         seen: Visto
@@ -60,8 +61,9 @@ es:
         inexistent_category: La categoría no existe
         author_not_in_major: El autor no está asociado al major
         max_tags_reached: No puede tener más de %{amount} tags
-        max_attachments_reached: No puede tener más de %{amount} adjuntos
-        max_attachments_size_reached: El peso total de los adjuntos no puede ser mayor a %{amount}MB
         invalid_enrollable_type: No se puede suscribir a este recurso
         invalid_parent_comment: No se puede responder a una respuesta
-        invalid_format: Formato de archivo inválido
+        not_an_image: No es una imagen
+        not_media: Solo está permitido archivos de texto, imágenes, video y audio
+        max_size_reached: No puede pesar más de %{size}MB
+        max_count_reached: No puede tener más de %{count} adjuntos

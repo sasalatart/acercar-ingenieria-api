@@ -1,4 +1,4 @@
-module Enrollable
+module EnrollableModel
   extend ActiveSupport::Concern
 
   included do

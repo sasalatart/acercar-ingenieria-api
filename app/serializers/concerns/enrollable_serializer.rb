@@ -1,4 +1,4 @@
-module SelfEnrollable
+module EnrollableSerializer
   extend ActiveSupport::Concern
 
   included do

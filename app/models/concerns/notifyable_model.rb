@@ -1,4 +1,4 @@
-module Notifyable
+module NotifyableModel
   extend ActiveSupport::Concern
 
   TYPES = { commented: 1, answered: 2, published: 3 }.freeze

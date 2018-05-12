@@ -2,19 +2,19 @@
 #
 # Table name: notifications
 #
-#  id              :integer          not null, primary key
+#  id              :bigint(8)        not null, primary key
 #  action_type     :integer
 #  seen            :boolean          default(FALSE)
-#  owner_id        :integer
-#  notificator_id  :integer
+#  owner_id        :bigint(8)
+#  notificator_id  :bigint(8)
 #  notifyable_type :string
-#  notifyable_id   :integer
+#  notifyable_id   :bigint(8)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 
 class Notification < ApplicationRecord
-  enum action_type: Notifyable::TYPES
+  enum action_type: NotifyableModel::TYPES
 
   scope :seen, -> { where(seen: true) }
   scope :unseen, -> { where(seen: false) }

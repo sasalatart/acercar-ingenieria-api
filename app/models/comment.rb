@@ -2,11 +2,11 @@
 #
 # Table name: comments
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  content          :text
-#  author_id        :integer
+#  author_id        :bigint(8)
 #  commentable_type :string
-#  commentable_id   :integer
+#  commentable_id   :bigint(8)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  likes_count      :integer          default(0)
@@ -14,9 +14,9 @@
 #
 
 class Comment < ApplicationRecord
-  include Sanitizable
-  include Enrollable
-  include Notifyable
+  include EnrollableModel
+  include NotifyableModel
+  include SanitizableModel
 
   alias_attribute :child_comments, :comments
 

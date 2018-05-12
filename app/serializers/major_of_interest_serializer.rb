@@ -1,5 +1,5 @@
 class MajorOfInterestSerializer < ActiveModel::Serializer
-  include Imageable
+  include ImageableSerializer
 
   delegate :name, :category, to: 'object.major'
 

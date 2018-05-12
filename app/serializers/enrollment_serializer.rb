@@ -2,10 +2,10 @@
 #
 # Table name: enrollments
 #
-#  id              :integer          not null, primary key
-#  user_id         :integer
+#  id              :bigint(8)        not null, primary key
+#  user_id         :bigint(8)
 #  enrollable_type :string
-#  enrollable_id   :integer
+#  enrollable_id   :bigint(8)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #

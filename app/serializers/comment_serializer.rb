@@ -2,11 +2,11 @@
 #
 # Table name: comments
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  content          :text
-#  author_id        :integer
+#  author_id        :bigint(8)
 #  commentable_type :string
-#  commentable_id   :integer
+#  commentable_id   :bigint(8)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  likes_count      :integer          default(0)
@@ -14,8 +14,8 @@
 #
 
 class CommentSerializer < ActiveModel::Serializer
-  include SelfEnrollable
-  include Likeable
+  include EnrollableSerializer
+  include LikeableSerializer
 
   MAX_CHILD_COMMENTS_TO_RENDER = 10
 
@@ -26,12 +26,13 @@ class CommentSerializer < ActiveModel::Serializer
                       serializer: UserSummarySerializer
 
   def self.eager_load_relation(relation)
-    relation.includes(:author)
+    relation.includes(author: { avatar_attachment: :blob })
   end
 
   def child_comments
+    children = object.child_comments.includes(author: { avatar_attachment: :blob })
     ActiveModelSerializers::SerializableResource.new(
-      object.child_comments.limit(MAX_CHILD_COMMENTS_TO_RENDER),
+      children.limit(MAX_CHILD_COMMENTS_TO_RENDER),
       scope: current_user,
       scope_name: :current_user,
       each_serializer: CommentChildSerializer

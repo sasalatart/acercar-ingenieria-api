@@ -2,24 +2,24 @@
 #
 # Table name: discussions
 #
-#  id                :integer          not null, primary key
+#  id                :bigint(8)        not null, primary key
 #  title             :string
 #  description       :text
 #  pinned            :boolean          default(FALSE)
 #  likes_count       :integer          default(0)
 #  comments_count    :integer          default(0)
 #  impressions_count :integer          default(0)
-#  author_id         :integer
+#  author_id         :bigint(8)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
 
 class Discussion < ApplicationRecord
-  include Attachable
-  include Enrollable
-  include Notifyable
+  include AttachableModel
+  include EnrollableModel
+  include NotifyableModel
+  include SanitizableModel
   include PgSearch
-  include Sanitizable
 
   MAX_TAGS = 5
 
@@ -44,6 +44,7 @@ class Discussion < ApplicationRecord
                     length: { minimum: 10, maximum: 255 }
 
   validates :description, presence: true
+  validates :attachments, attachments: { max_amount: 5, max_total_size: 10.megabytes }
 
   validate :max_tags
 

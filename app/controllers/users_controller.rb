@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response User.scoped(params)
+    paginated_json_response User.scoped(params), each_serializer: UserSerializer
   end
 
   def show

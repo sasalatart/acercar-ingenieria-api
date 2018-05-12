@@ -1,4 +1,4 @@
-module Likeable
+module LikeableSerializer
   extend ActiveSupport::Concern
 
   included do

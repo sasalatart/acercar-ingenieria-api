@@ -1,5 +1,6 @@
 .env.list
 public
+storage
 
 # Created by https://www.gitignore.io/api/osx,linux,rails,windows
 

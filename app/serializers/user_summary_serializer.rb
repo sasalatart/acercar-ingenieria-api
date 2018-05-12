@@ -26,17 +26,17 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  bio                    :string
-#  avatar_file_name       :string
-#  avatar_content_type    :string
-#  avatar_file_size       :integer
-#  avatar_updated_at      :datetime
 #
 
 class UserSummarySerializer < ActiveModel::Serializer
-  include EmailViewable
-  include Imageable
+  include EmailViewableSerializer
+  include ImageableSerializer
 
   attributes :id, :first_name, :last_name, :generation, :avatar, :created_at
+
+  def self.eager_load_relation(relation)
+    relation.with_attached_avatar
+  end
 
   def avatar
     image_hash(object.avatar, :thumb, :medium)

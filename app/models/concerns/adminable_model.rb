@@ -1,4 +1,4 @@
-module Adminable
+module AdminableModel
   def promote_to_admin(major_id = nil)
     major_id ? add_role(:major_admin, Major.find(major_id)) : add_role(:admin)
     self

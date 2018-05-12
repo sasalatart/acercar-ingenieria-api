@@ -4,14 +4,14 @@
 
 API built on top of Ruby on Rails for a project of the Centro de Alumnos de Ingeniería UC (CAi) that started in 2014 because of a detected need of new students to approach the professional reality of Engineering. This project seeks to gather in the same portal articles, news, videos, research and interesting projects so that students can make a better decision about what Major to follow.
 
-## Technologies Used
+## Technologies and Services Used
 
 - Ruby 2.4
 - Rails 5.2
 - PostgreSQL 10 (including full text search via `pg_search` gem)
 - Redis 4 (for background processing via `sidekiq` gem)
 - Mailgun (mailing API)
-- Cloudinary (cloud storage)
+- Digital Ocean Spaces (cloud storage)
 - Pusher (real-time features)
 
 ## Development Setup
@@ -55,11 +55,12 @@ First, make sure to rename the file `.env.example` to `.env`, and complete it wi
     <td>target email for exception notifications</td>
   </tr>
   <tr>
-    <td>CLOUDINARY_CLOUD_NAME</td>
-    <td rowspan="3">your Cloudinary credentials</td>
+    <td>SPACES_ACCESS_KEY</td>
+    <td rowspan="4">your Digital Ocean Spaces credentials</td>
   </tr>
-  <tr><td>CLOUDINARY_API_KEY</td></tr>
-  <tr><td>CLOUDINARY_API_SECRET</td></tr>
+  <tr><td>SPACES_SECRET_KEY</td></tr>
+  <tr><td>SPACES_REGION</td></tr>
+  <tr><td>SPACES_BUCKET</td></tr>
   <tr>
     <td>SIDEKIQ_USERNAME</td>
     <td rowspan="2">custom credentials for accessing Sidekiq UI</td>
@@ -78,7 +79,7 @@ First, make sure to rename the file `.env.example` to `.env`, and complete it wi
   </tr>
 </table>
 
-You can visit https://www.mailgun.com/, https://cloudinary.com/ and https://pusher.com/ to get your Mailgun, Cloudinary and Pusher credentials.
+You can visit https://www.mailgun.com/, https://www.digitalocean.com/ and https://pusher.com/ to get your Mailgun, Digital Ocean Spaces and Pusher credentials.
 
 Then, run the following commands:
 
@@ -125,12 +126,12 @@ Also, you should remember to add the corresponding virtual hosts to each service
   acercarapi:
     ...
     environment:
-      VIRTUAL_HOST: acercar-api.salatart.com
+      VIRTUAL_HOST: api.acercaringenieria.cl
       VIRTUAL_PORT: 3000
 
   acercarclient:
     environment:
-      VIRTUAL_HOST: acercaringenieria.salatart.com
+      VIRTUAL_HOST: acercaringenieria.cl
       VIRTUAL_PORT: 5000
 ```
 

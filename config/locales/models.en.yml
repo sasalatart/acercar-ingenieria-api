@@ -5,8 +5,9 @@ es:
         inexistent_category: The category does not exist
         author_not_in_major: The author is not associated to the major
         max_tags_reached: Can not have more than %{amount} tags
-        max_attachments_reached: Can not have more than %{amount} attachments
-        max_attachments_size_reached: Total attachment size can not be more than %{amount}MB
         invalid_enrollable_type: Can not enroll to this resource
         invalid_parent_comment: Can not reply to another reply
-        invalid_format: Invalid file format
+        not_an_image: Not an image
+        not_media: Only text, images, video and audio files are supported
+        max_size_reached: Can not be more than %{size}MB
+        max_count_reached: Can not have more than %{count} attachments

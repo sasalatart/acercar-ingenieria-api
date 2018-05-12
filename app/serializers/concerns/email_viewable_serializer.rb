@@ -1,4 +1,4 @@
-module EmailViewable
+module EmailViewableSerializer
   extend ActiveSupport::Concern
 
   included do

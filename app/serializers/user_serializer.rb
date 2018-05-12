@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint(8)        not null, primary key
 #  provider               :string           default("email"), not null
 #  uid                    :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
@@ -26,22 +26,22 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  bio                    :string
-#  avatar_file_name       :string
-#  avatar_content_type    :string
-#  avatar_file_size       :integer
-#  avatar_updated_at      :datetime
 #
 
 class UserSerializer < ActiveModel::Serializer
-  include EmailViewable
-  include Imageable
+  include EmailViewableSerializer
+  include ImageableSerializer
 
   attributes :id, :first_name, :last_name, :generation, :bio, :avatar,
              :majors_of_interest, :admin, :admin_of_majors, :created_at
 
+  def self.eager_load_relation(relation)
+    relation.with_attached_avatar
+  end
+
   def majors_of_interest
     ActiveModelSerializers::SerializableResource.new(
-      object.major_users.includes(:major),
+      object.major_users.includes(major: { logo_attachment: :blob }),
       each_serializer: MajorOfInterestSerializer
     )
   end

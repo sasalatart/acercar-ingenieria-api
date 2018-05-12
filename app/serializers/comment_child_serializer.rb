@@ -13,7 +13,7 @@
 #
 
 class CommentChildSerializer < ActiveModel::Serializer
-  include Likeable
+  include LikeableSerializer
 
   attributes :id, :content, :commentable_id, :commentable_type, :created_at
 

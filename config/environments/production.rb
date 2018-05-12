@@ -1,6 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  DEFAULT_URL_OPTIONS = {
+    host: Rails.application.secrets.API_HOST,
+    port: Rails.application.secrets.API_PORT
+  }.freeze
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -30,7 +35,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
+  config.active_storage.default_url_options = DEFAULT_URL_OPTIONS
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -91,16 +97,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  paperclip_defaults = {
-    storage: :cloudinary,
-    path: 'aingenieria/:rails_env/:class/:attachment/:hash.:extension',
-    hash_secret: Rails.application.secrets.secret_key_base,
-    cloudinary_url_options: { default: { secure: true } }
-  }
-  paperclip_defaults.each do |key, value|
-    Paperclip::Attachment.default_options[key] = value
-  end
 
   exceptions_defaults = {
     email: {
