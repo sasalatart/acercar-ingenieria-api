@@ -36,5 +36,7 @@ module AcercarIngenieria
     config.i18n.default_locale = :es
 
     config.to_prepare { Devise::Mailer.layout 'mailer' }
+
+    config.active_storage.variant_processor = :vips
   end
 end

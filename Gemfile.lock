@@ -116,6 +116,9 @@ GEM
     httpclient (2.8.3)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
+    image_processing (1.2.0)
+      mini_magick (~> 4.0)
+      ruby-vips (>= 2.0.10, < 3)
     impressionist (1.6.1)
       nokogiri (~> 1)
     jmespath (1.4.0)
@@ -227,6 +230,8 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rolify (5.2.0)
+    ruby-vips (2.0.12)
+      ffi (~> 1.9)
     ruby_dep (1.5.0)
     sanitize (4.6.4)
       crass (~> 1.0.2)
@@ -281,12 +286,12 @@ DEPENDENCIES
   exception_notification
   faker
   hirb
+  image_processing (~> 1.2)
   impressionist
   kaminari
   listen (>= 3.0.5, < 3.2)
   lol_dba
   mailgun_rails
-  mini_magick
   pg (~> 0.18)
   pg_search
   puma (~> 3.7)

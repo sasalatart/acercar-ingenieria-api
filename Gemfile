@@ -34,7 +34,7 @@ gem 'mailgun_rails'
 
 gem 'exception_notification'
 
-gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
 gem 'aws-sdk-s3'
 
 gem 'sanitize', '~> 4.6.3'
