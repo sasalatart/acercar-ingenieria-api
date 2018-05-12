@@ -4,6 +4,8 @@ services:
   postgres:
     image: postgres:10
     restart: always
+    volumes:
+      - postgresql:/var/lib/postgresql
 
   redis:
     image: redis:4-alpine
@@ -24,6 +26,8 @@ services:
       - 3000:3000
     env_file:
       - .env
+    volumes:
+      - aingenieria-storage:/usr/src/app/storage
     depends_on:
       - postgres
       - redis
@@ -37,3 +41,7 @@ services:
       - .env
     depends_on:
       - redis
+
+volumes:
+  aingenieria-storage:
+  postgresql:
