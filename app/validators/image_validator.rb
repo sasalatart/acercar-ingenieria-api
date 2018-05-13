@@ -1,10 +1,10 @@
 class ImageValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    required, max_size = options.values_at(:required, :max_size)
+    presence, max_size = options.values_at(:presence, :max_size)
 
-    return if !required && !value.attached?
+    return if !presence && !value.attached?
 
-    if required && !value.attached?
+    if presence && !value.attached?
       record.errors.add attribute, :required
       return
     end
