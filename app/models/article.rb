@@ -36,10 +36,13 @@ class Article < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
+  has_one_attached :preview
+
   validates :title, presence: true, uniqueness: true
   validates :short_description, presence: true, length: { maximum: 300 }
   validates :content, presence: true
   validates :attachments, attachments: { max_amount: 5, max_total_size: 10.megabytes }
+  validates :preview, image: { max_size: 2.megabytes }
 
   validate :only_allowed_categories
   validate :only_allowed_majors

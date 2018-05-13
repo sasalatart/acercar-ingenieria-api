@@ -17,6 +17,7 @@
 class ArticleSerializer < ActiveModel::Serializer
   include EnrollableSerializer
   include LikeableSerializer
+  include ImageableSerializer
   include AttachableSerializer
 
   attributes :id, :title, :short_description, :content, :major_id, :major_summary,
@@ -27,6 +28,7 @@ class ArticleSerializer < ActiveModel::Serializer
 
   def self.eager_load_relation(relation)
     relation.with_attached_attachments
+            .with_attached_preview
             .includes(:taggings,
                       author: { avatar_attachment: :blob },
                       major: { logo_attachment: :blob })
@@ -38,6 +40,8 @@ class ArticleSerializer < ActiveModel::Serializer
   end
 
   def preview_url
+    return image_hash(object.preview, :medium)[:medium] if object.preview.attached?
+
     picture = object.attachments.detect do |attachment|
       attachment.variable? || attachment.previewable?
     end
