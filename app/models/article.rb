@@ -74,6 +74,7 @@ class Article < ApplicationRecord
   end
 
   def only_allowed_majors
+    return if author.has_role?(:admin)
     return unless major_id && major_id_changed? && !author.majors.find_by(id: major_id)
     errors.add :major, :author_not_in_major
   end
