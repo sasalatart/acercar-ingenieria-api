@@ -23,6 +23,7 @@ es:
         short_description: Breve descripción
         content: Contenido
         author: Autor
+        preview: Imagen
         attachments: Adjuntos
       attachment:
         document: Documento
@@ -56,6 +57,11 @@ es:
       video_link:
         title: Título
         pinned: Marcado
+      credit:
+        resource_name: Nombre del recurso
+        resource_url: URL del recurso
+        author_name: Nombre del autor
+        resource: Recurso
     errors:
       messages:
         inexistent_category: La categoría no existe
@@ -67,3 +73,4 @@ es:
         not_media: Solo está permitido archivos de texto, imágenes, video y audio
         max_size_reached: No puede pesar más de %{size}MB
         max_count_reached: No puede tener más de %{count} adjuntos
+        required: Debe estar presente
