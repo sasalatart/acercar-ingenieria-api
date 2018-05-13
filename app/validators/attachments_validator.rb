@@ -13,10 +13,11 @@ class AttachmentsValidator < ActiveModel::EachValidator
     return unless value.attached?
 
     max_amount, max_total_size = options.values_at(:max_amount, :max_total_size)
+    all_attachments = record.attachments
 
-    max_count_reached = value.count > max_amount
+    max_count_reached = all_attachments.count > max_amount
 
-    max_size_reached = value.reduce(0) do |acc, attachment|
+    max_size_reached = all_attachments.reduce(0) do |acc, attachment|
       acc + attachment.blob.byte_size
     end > max_total_size
 

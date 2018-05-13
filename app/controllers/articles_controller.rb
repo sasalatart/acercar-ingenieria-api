@@ -17,8 +17,8 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    @article.update!(article_params)
     @article.purge_attachments(params[:destroyed_attachments])
+    @article.update!(article_params)
     json_response @article
   end
 

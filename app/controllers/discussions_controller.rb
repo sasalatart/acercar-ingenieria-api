@@ -24,8 +24,8 @@ class DiscussionsController < ApplicationController
   end
 
   def update
-    @discussion.update!(discussion_params)
     @discussion.purge_attachments(params[:destroyed_attachments])
+    @discussion.update!(discussion_params)
     json_response @discussion
   end
 
