@@ -42,7 +42,7 @@ class Major < ApplicationRecord
 
   validates :description, presence: true
   validates :video_url, presence: true
-  validates :logo, image: { presence: true, max_size: 2.megabytes }
+  validates :logo, image: { max_size: 2.megabytes }
 
   def admins
     User.with_role(:major_admin, self)
