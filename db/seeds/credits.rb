@@ -144,7 +144,8 @@ require_relative './uploads'
 def create_credits!
   puts 'Creating credits...'
   @credits.each do |raw_data|
-    credit = Credit.create!(raw_data.except(:resource_meta))
+    credit = Credit.new(raw_data.except(:resource_meta))
     add_uploaded_image(credit, :resource, *raw_data[:resource_meta])
+    credit.save!
   end
 end
