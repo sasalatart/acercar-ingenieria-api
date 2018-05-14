@@ -5,7 +5,7 @@ README.md
 .env.list
 log
 tmp
-public/system
+storage
 
 .bundle
 
