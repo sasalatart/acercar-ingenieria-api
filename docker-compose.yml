@@ -26,8 +26,6 @@ services:
       - 3000:3000
     env_file:
       - .env
-    volumes:
-      - aingenieria-storage:/usr/src/app/storage
     depends_on:
       - postgres
       - redis
@@ -43,5 +41,4 @@ services:
       - redis
 
 volumes:
-  aingenieria-storage:
   postgresql:
