@@ -10,12 +10,14 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  likes_count       :integer          default(0)
+#  approved_commentable :boolean          default(TRUE)
 #
 
 class CommentChildSerializer < ActiveModel::Serializer
   include LikeableSerializer
 
-  attributes :id, :content, :commentable_id, :commentable_type, :created_at
+  attributes :id, :commentable_type, :commentable_id, :approved_commentable,
+             :content, :created_at
 
   belongs_to :author, class_name: 'User',
                       serializer: UserSummarySerializer

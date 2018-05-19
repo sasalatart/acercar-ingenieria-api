@@ -21,13 +21,13 @@ class NotificationSerializer < ActiveModel::Serializer
                            serializer: UserSummarySerializer
 
   NOTIFYABLES_META_COLUMNS = {
-    discussion: %w[title],
-    article: %w[major_id title],
-    comment: %w[commentable_type commentable_id content]
+    discussion: %w[author_id title],
+    article: %w[author_id major_id title approved],
+    comment: %w[commentable_type commentable_id approved_commentable content]
   }.freeze
 
   def self.eager_load_relation(relation)
-    relation.includes(:notificator, :notifyable)
+    relation.includes(:notifyable, notificator: { avatar_attachment: :blob })
   end
 
   def notifyable_meta

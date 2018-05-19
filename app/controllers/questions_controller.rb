@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    user_admin = Major.user_admin?(current_user, params[:major_id])
+    user_admin = current_user.admin?(params[:major_id])
     user_admin ? admin_question_params : student_question_params
   end
 

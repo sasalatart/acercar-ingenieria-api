@@ -12,12 +12,14 @@
 #  likes_count       :integer          default(0)
 #  comments_count    :integer          default(0)
 #  author_id         :bigint(8)
+#  approved          :boolean          default(FALSE)
 #
 
 class Article < ApplicationRecord
   include AttachableModel
   include EnrollableModel
   include NotifyableModel
+  include ApprovableModel
   include SanitizableModel
   include PgSearch
 
@@ -27,6 +29,9 @@ class Article < ApplicationRecord
   pg_search_scope :search_for,
                   against: { title: 'A', short_description: 'B' },
                   using: { tsearch: { prefix: true, any_word: true } }
+
+  scope :approved, -> { where(approved: true) }
+  scope :pending, -> { where(approved: false) }
 
   acts_as_taggable_on :categories
 
@@ -64,8 +69,8 @@ class Article < ApplicationRecord
   def enroll_and_notify
     enroll!(author)
 
-    users = major ? major.users : User.all
-    notify(TYPES[:published], author_id, users.pluck(:id))
+    to_users = major ? User.with_role(:admin) + major.users : User.all
+    notify(NOTIFICATION_TYPES[:published], author_id, to_users.pluck(:id).uniq)
   end
 
   def only_allowed_categories

@@ -52,11 +52,6 @@ class Major < ApplicationRecord
     Major.with_role(:major_admin, user).pluck(:id)
   end
 
-  def self.user_admin?(user, major_id)
-    return true if user.has_role? :admin
-    Major.ids_where_is_admin(user).include? major_id.to_i
-  end
-
   private
 
   def sanitize_attributes

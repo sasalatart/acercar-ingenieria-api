@@ -12,16 +12,18 @@
 #  likes_count       :integer          default(0)
 #  comments_count    :integer          default(0)
 #  author_id         :bigint(8)
+#  approved          :boolean          default(FALSE)
 #
 
 class ArticleSerializer < ActiveModel::Serializer
+  include MajorSummarizableSerializer
   include EnrollableSerializer
   include LikeableSerializer
   include ImageableSerializer
   include AttachableSerializer
 
-  attributes :id, :title, :short_description, :content, :major_id, :major_summary,
-             :category_list, :comments_count, :preview_url, :created_at
+  attributes :id, :major_id, :title, :preview_url, :short_description, :content,
+             :category_list, :comments_count, :approved, :created_at
 
   belongs_to :author, class_name: 'User',
                       serializer: UserSummarySerializer
@@ -32,11 +34,6 @@ class ArticleSerializer < ActiveModel::Serializer
             .includes(:taggings,
                       author: { avatar_attachment: :blob },
                       major: { logo_attachment: :blob })
-  end
-
-  def major_summary
-    return nil unless object.major
-    MajorSummarySerializer.new(object.major)
   end
 
   def preview_url

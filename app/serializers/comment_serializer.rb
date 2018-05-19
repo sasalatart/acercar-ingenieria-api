@@ -2,15 +2,16 @@
 #
 # Table name: comments
 #
-#  id               :bigint(8)        not null, primary key
-#  content          :text
-#  author_id        :bigint(8)
-#  commentable_type :string
-#  commentable_id   :bigint(8)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  likes_count      :integer          default(0)
-#  comments_count   :integer          default(0)
+#  id                   :bigint(8)        not null, primary key
+#  content              :text
+#  author_id            :bigint(8)
+#  commentable_type     :string
+#  commentable_id       :bigint(8)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  likes_count          :integer          default(0)
+#  comments_count       :integer          default(0)
+#  approved_commentable :boolean          default(TRUE)
 #
 
 class CommentSerializer < ActiveModel::Serializer
@@ -19,8 +20,8 @@ class CommentSerializer < ActiveModel::Serializer
 
   MAX_CHILD_COMMENTS_TO_RENDER = 10
 
-  attributes :id, :content, :commentable_id, :commentable_type,
-             :child_comments, :extra_comments, :created_at
+  attributes :id, :commentable_type, :commentable_id, :approved_commentable,
+             :content, :child_comments, :extra_comments, :created_at
 
   belongs_to :author, class_name: 'User',
                       serializer: UserSummarySerializer

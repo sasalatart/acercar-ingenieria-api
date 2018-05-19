@@ -2,15 +2,16 @@
 #
 # Table name: comments
 #
-#  id               :bigint(8)        not null, primary key
-#  content          :text
-#  author_id        :bigint(8)
-#  commentable_type :string
-#  commentable_id   :bigint(8)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  likes_count      :integer          default(0)
-#  comments_count   :integer          default(0)
+#  id                   :bigint(8)        not null, primary key
+#  content              :text
+#  author_id            :bigint(8)
+#  commentable_type     :string
+#  commentable_id       :bigint(8)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  likes_count          :integer          default(0)
+#  comments_count       :integer          default(0)
+#  approved_commentable :boolean          default(TRUE)
 #
 
 class Comment < ApplicationRecord
@@ -19,6 +20,7 @@ class Comment < ApplicationRecord
   include SanitizableModel
 
   alias_attribute :child_comments, :comments
+  alias_attribute :approved?, :approved_commentable?
 
   before_save :sanitize_attributes
   after_create :enroll_to_self_or_parent
@@ -64,7 +66,7 @@ class Comment < ApplicationRecord
 
   def notify_interested
     return unless commentable.respond_to?(:enrolled_users)
-    type = child_comment? ? TYPES[:answered] : TYPES[:commented]
+    type = child_comment? ? NOTIFICATION_TYPES[:answered] : NOTIFICATION_TYPES[:commented]
     notify(type, author_id, commentable.enrolled_users.pluck(:id))
   end
 

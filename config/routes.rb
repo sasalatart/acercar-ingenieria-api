@@ -48,7 +48,12 @@ Rails.application.routes.draw do
     end
 
     resources :video_links, only: %i[index create update destroy]
-    resources :articles, only: %i[index show create update destroy]
+
+    resources :articles, only: %i[index show create update destroy] do
+      member { put :approval }
+      collection { get :pending }
+    end
+
     resources :comments, only: %i[index show create update destroy]
 
     resources :questions, only: %i[index create update destroy] do
@@ -59,6 +64,9 @@ Rails.application.routes.draw do
   end
 
   resources :articles, only: %i[index show create update destroy] do
+    member { put :approval }
+    collection { get :pending }
+
     delete :likes, to: 'likes#destroy'
     delete :enrollments, to: 'enrollments#destroy'
 

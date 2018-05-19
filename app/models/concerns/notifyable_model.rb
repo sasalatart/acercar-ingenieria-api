@@ -1,7 +1,9 @@
 module NotifyableModel
   extend ActiveSupport::Concern
 
-  TYPES = { commented: 1, answered: 2, published: 3 }.freeze
+  NOTIFICATION_TYPES = {
+    commented: 1, answered: 2, published: 3, approved: 4, rejected: 5
+  }.freeze
 
   included do
     has_many :notifications, as: :notifyable, dependent: :destroy

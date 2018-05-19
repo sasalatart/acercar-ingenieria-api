@@ -14,7 +14,7 @@
 #
 
 class Notification < ApplicationRecord
-  enum action_type: NotifyableModel::TYPES
+  enum action_type: NotifyableModel::NOTIFICATION_TYPES
 
   scope :seen, -> { where(seen: true) }
   scope :unseen, -> { where(seen: false) }

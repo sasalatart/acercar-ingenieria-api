@@ -27,7 +27,8 @@ def create_articles!(options)
       short_description: Faker::Lorem.paragraph(3),
       content: ARTICLE_VARIANTS.sample,
       author_id: author_id,
-      category_list: category_list
+      category_list: category_list,
+      approved: rand <= options[:approved_proportion]
     )
 
     likers_ids = all_user_ids.sample(rand(options[:max_likes_per]))

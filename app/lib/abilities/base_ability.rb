@@ -1,6 +1,7 @@
 module Abilities
   class BaseAbility
     include CanCan::Ability
+    include ActAsPolymorphic
 
     def initialize(user, params)
       @user = user || User.new # guest user (not logged in)

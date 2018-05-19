@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_12_132259) do
+ActiveRecord::Schema.define(version: 2018_05_19_022230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_05_12_132259) do
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
     t.bigint "author_id"
+    t.boolean "approved", default: false
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["major_id"], name: "index_articles_on_major_id"
     t.index ["title", "short_description"], name: "index_articles_on_title_and_short_description"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 2018_05_12_132259) do
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0
     t.integer "comments_count", default: 0
+    t.boolean "approved_commentable", default: true
     t.index ["author_id"], name: "index_comments_on_author_id"
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"

@@ -25,7 +25,8 @@ options = {
     amount: 100,
     majors_proportion: 0.4,
     max_categories_per: 3,
-    max_likes_per: 10
+    max_likes_per: 10,
+    approved_proportion: 0.9
   },
   comments: {
     amount: 2000,

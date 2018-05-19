@@ -60,7 +60,8 @@ class Discussion < ApplicationRecord
 
   def enroll_and_notify
     enroll!(author)
-    notify(TYPES[:published], author_id, User.all.pluck(:id)) if pinned
+    return unless pinned
+    notify(NOTIFICATION_TYPES[:published], author_id, User.all.pluck(:id))
   end
 
   def max_tags
