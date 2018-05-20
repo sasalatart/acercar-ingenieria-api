@@ -18,6 +18,7 @@ class Discussion < ApplicationRecord
   include AttachableModel
   include EnrollableModel
   include NotifyableModel
+  include ReportableModel
   include SanitizableModel
   include PgSearch
 

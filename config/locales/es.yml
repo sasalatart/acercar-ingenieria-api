@@ -1,4 +1,6 @@
 es:
+  report: "Alguien ha reportado contenido"
+  resource_url: "URL del recurso"
   unauthorized:
     manage:
       all: "No tienes autorización para hacer esto."

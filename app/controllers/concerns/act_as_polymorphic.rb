@@ -5,11 +5,12 @@ module ActAsPolymorphic
     commentable: [Major, Article, Discussion, Comment].map(&parse_model),
     likeable: [Article, Discussion, Comment].map(&parse_model),
     enrollable: [Article, Discussion, Comment].map(&parse_model),
-    video_linkable: [Major].map(&parse_model)
+    video_linkable: [Major].map(&parse_model),
+    reportable: [Article, Discussion].map(&parse_model)
   }.freeze
 
   def method_missing(name, *args)
-    name =~ /find_(commentable|likeable|enrollable|video_linkable)/
+    name =~ /find_(commentable|likeable|enrollable|video_linkable|reportable)/
     match = Regexp.last_match(1)
     match ? find_belongs_to(ID_TYPES[match.to_sym], *args) : super
   end

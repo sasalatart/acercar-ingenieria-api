@@ -20,6 +20,7 @@ class Article < ApplicationRecord
   include EnrollableModel
   include NotifyableModel
   include ApprovableModel
+  include ReportableModel
   include SanitizableModel
   include PgSearch
 

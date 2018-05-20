@@ -67,6 +67,7 @@ Rails.application.routes.draw do
     member { put :approval }
     collection { get :pending }
 
+    post :reports, to: 'reports#report'
     delete :likes, to: 'likes#destroy'
     delete :enrollments, to: 'enrollments#destroy'
 
@@ -87,6 +88,7 @@ Rails.application.routes.draw do
   end
 
   resources :discussions, only: %i[index show create update destroy] do
+    post :reports, to: 'reports#report'
     delete :likes, to: 'likes#destroy'
     delete :enrollments, to: 'enrollments#destroy'
 

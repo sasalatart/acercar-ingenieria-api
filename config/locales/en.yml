@@ -30,6 +30,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  report: "Somebody has reported content"
+  resource_url: "Resource URL"
   unauthorized:
     manage:
       all: "You are not authorized to do this"

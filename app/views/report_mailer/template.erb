@@ -1,0 +1,6 @@
+<% content_for :body do %>
+  <%= render partial: '/layouts/paragraph', locals: { content: @body.html_safe } %>
+
+  <%= render partial: '/layouts/call_to_action',
+             locals: { href: @resource_url, text: I18n.t(:resource_url) } %>
+<% end %>
