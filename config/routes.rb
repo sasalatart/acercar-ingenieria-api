@@ -51,7 +51,11 @@ Rails.application.routes.draw do
 
     resources :articles, only: %i[index show create update destroy] do
       member { put :approval }
-      collection { get :pending }
+
+      collection do
+        get :mine
+        get :pending
+      end
     end
 
     resources :comments, only: %i[index show create update destroy]
@@ -65,7 +69,11 @@ Rails.application.routes.draw do
 
   resources :articles, only: %i[index show create update destroy] do
     member { put :approval }
-    collection { get :pending }
+
+    collection do
+      get :mine
+      get :pending
+    end
 
     post :reports, to: 'reports#report'
     delete :likes, to: 'likes#destroy'

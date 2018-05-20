@@ -3,11 +3,18 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response Article.scoped(params).approved, each_serializer: ArticleSerializer
+    @articles = Article.scoped(params).approved
+    paginated_json_response @articles, each_serializer: ArticleSerializer
+  end
+
+  def mine
+    @articles = Article.scoped(params.merge(author_id: current_user.id))
+    paginated_json_response @articles, each_serializer: ArticleSerializer
   end
 
   def pending
-    paginated_json_response Article.scoped(params).pending, each_serializer: ArticleSerializer
+    @articles = Article.scoped(params).pending
+    paginated_json_response @articles, each_serializer: ArticleSerializer
   end
 
   def show

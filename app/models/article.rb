@@ -54,10 +54,11 @@ class Article < ApplicationRecord
   validate :only_allowed_majors
 
   def self.scoped(params)
-    major_id, category_list, search = params.values_at(:major_id, :category_list, :search)
+    major_id, category_list, search, author_id = params.values_at(:major_id, :category_list, :search, :author_id)
     @articles = major_id ? Article.where(major_id: major_id) : Article.all
     @articles = @articles.tagged_with(category_list) if category_list
     @articles = @articles.search_for(search) if search
+    @articles = @articles.where(author_id: author_id) if author_id
     @articles.order(created_at: :desc)
   end
 
