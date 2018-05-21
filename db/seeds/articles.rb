@@ -28,10 +28,19 @@ def create_articles!(options)
       content: ARTICLE_VARIANTS.sample,
       author_id: author_id,
       category_list: category_list,
-      approved: rand <= options[:approved_proportion]
+      approved: true
     )
 
     likers_ids = all_user_ids.sample(rand(options[:max_likes_per]))
     add_likes_to(article, likers_ids)
+  end
+end
+
+def reject_articles(options)
+  puts 'Rejecting some articles...'
+
+  admin = User.with_role(:admin).first
+  Article.find_each do |article|
+    article.update_approval(false, admin) if rand > options[:approved_proportion]
   end
 end

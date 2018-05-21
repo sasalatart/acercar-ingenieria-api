@@ -50,5 +50,6 @@ create_articles! options[:articles]
 create_discussions! options[:discussions]
 create_comments! options[:comments]
 create_credits!
+reject_articles options[:articles]
 
 puts('Done.')
