@@ -3,7 +3,7 @@
 # Table name: announcements
 #
 #  id         :bigint(8)        not null, primary key
-#  pinned     :boolean          default(TRUE)
+#  pinned     :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_19_022230) do
+ActiveRecord::Schema.define(version: 2018_05_21_213737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2018_05_19_022230) do
   end
 
   create_table "announcements", force: :cascade do |t|
-    t.boolean "pinned", default: true
+    t.boolean "pinned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
