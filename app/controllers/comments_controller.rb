@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   def index
     @comments = @commentable.comments.order(created_at: order)
     Comment.read_notifications_from(current_user, @comments.pluck(:id))
-    paginated_json_response @comments, each_serializer: CommentSerializer
+    paginated_json_response @comments, per_page: 15, each_serializer: CommentSerializer
   end
 
   def show

@@ -18,7 +18,7 @@ class CommentSerializer < ActiveModel::Serializer
   include EnrollableSerializer
   include LikeableSerializer
 
-  MAX_CHILD_COMMENTS_TO_RENDER = 10
+  MAX_CHILD_COMMENTS_TO_RENDER = 8
 
   attributes :id, :commentable_type, :commentable_id, :approved_commentable,
              :content, :child_comments, :extra_comments, :created_at
