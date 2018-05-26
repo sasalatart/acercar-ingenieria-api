@@ -3,12 +3,11 @@ class DiscussionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    paginated_json_response Discussion.scoped(params), each_serializer: DiscussionSerializer
+    paginated_response Discussion.scoped(params)
   end
 
   def mine
-    @discussions = Discussion.scoped(params.merge(author_id: current_user.id))
-    paginated_json_response @discussions, each_serializer: DiscussionSerializer
+    paginated_response Discussion.scoped(params.merge(author_id: current_user.id))
   end
 
   def show
@@ -40,6 +39,10 @@ class DiscussionsController < ApplicationController
     permitted_params = [:title, :description, :tag_list, attachments: []]
     permitted_params.push(:pinned) if current_user.admin_of_something?
     params.permit(permitted_params)
+  end
+
+  def paginated_response(discussions)
+    paginated_json_response discussions, each_serializer: DiscussionSummarySerializer
   end
 
   def current_ability

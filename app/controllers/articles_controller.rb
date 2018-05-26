@@ -3,18 +3,15 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @articles = Article.scoped(params).approved
-    paginated_json_response @articles, each_serializer: ArticleSerializer
+    paginated_response Article.scoped(params).approved
   end
 
   def mine
-    @articles = Article.scoped(params.merge(author_id: current_user.id))
-    paginated_json_response @articles, each_serializer: ArticleSerializer
+    paginated_response Article.scoped(params.merge(author_id: current_user.id))
   end
 
   def pending
-    @articles = Article.scoped(params).pending
-    paginated_json_response @articles, each_serializer: ArticleSerializer
+    paginated_response Article.scoped(params).pending
   end
 
   def show
@@ -54,6 +51,10 @@ class ArticlesController < ApplicationController
                   :category_list,
                   :preview,
                   attachments: [])
+  end
+
+  def paginated_response(articles)
+    paginated_json_response articles, each_serializer: ArticleSummarySerializer
   end
 
   def extra_params

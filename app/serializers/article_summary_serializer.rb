@@ -15,22 +15,19 @@
 #  approved          :boolean          default(FALSE)
 #
 
-class ArticleSerializer < ActiveModel::Serializer
+class ArticleSummarySerializer < ActiveModel::Serializer
   include MajorSummarizableSerializer
   include PreviewableSerializer
-  include EnrollableSerializer
-  include LikeableSerializer
-  include AttachableSerializer
 
-  attributes :id, :title, :short_description, :content, :category_list,
+  attributes :id, :title, :short_description, :category_list, :likes_count,
              :comments_count, :approved, :created_at
 
   belongs_to :author, class_name: 'User',
                       serializer: UserSummarySerializer
 
   def self.eager_load_relation(relation)
-    relation.with_attached_attachments
-            .with_attached_preview
+    relation.with_attached_preview
+            .with_attached_attachments
             .includes(:taggings,
                       author: { avatar_attachment: :blob },
                       major: { logo_attachment: :blob })
