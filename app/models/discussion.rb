@@ -61,7 +61,7 @@ class Discussion < ApplicationRecord
 
   def enroll_and_notify
     enroll!(author)
-    return unless pinned
+    return unless pinned?
     notify(NOTIFICATION_TYPES[:published], author_id, User.all.pluck(:id))
   end
 
