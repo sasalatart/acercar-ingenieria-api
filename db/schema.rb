@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_140139) do
+ActiveRecord::Schema.define(version: 2018_05_26_140533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_140139) do
     t.index ["notifyable_id", "notifyable_type"], name: "index_notifications_on_notifyable_id_and_notifyable_type"
     t.index ["notifyable_type", "notifyable_id"], name: "index_notifications_on_notifyable_type_and_notifyable_id"
     t.index ["owner_id"], name: "index_notifications_on_owner_id"
+    t.index ["seen"], name: "index_notifications_on_seen"
   end
 
   create_table "questions", force: :cascade do |t|
