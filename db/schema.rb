@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_140928) do
+ActiveRecord::Schema.define(version: 2018_05_26_141424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -284,6 +284,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_140928) do
     t.bigint "video_linkable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pinned", "created_at"], name: "index_video_links_on_pinned_and_created_at"
     t.index ["video_linkable_type", "video_linkable_id"], name: "index_video_links_on_video_linkable_type_and_video_linkable_id"
   end
 
