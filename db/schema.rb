@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_140751) do
+ActiveRecord::Schema.define(version: 2018_05_26_140928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 2018_05_26_140751) do
     t.index ["answer"], name: "index_questions_on_answer"
     t.index ["author_id"], name: "index_questions_on_author_id"
     t.index ["major_id"], name: "index_questions_on_major_id"
+    t.index ["pinned"], name: "index_questions_on_pinned"
   end
 
   create_table "roles", force: :cascade do |t|
