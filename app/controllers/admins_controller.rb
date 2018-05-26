@@ -5,7 +5,8 @@ class AdminsController < ApplicationController
   before_action :set_user, only: %i[promote demote]
 
   def index
-    paginated_json_response User.scoped_admins(params)
+    @admins = User.scoped_admins(params)
+    paginated_json_response @admins, each_serializer: UserSerializer
   end
 
   def promote
