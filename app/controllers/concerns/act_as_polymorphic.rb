@@ -22,6 +22,9 @@ module ActAsPolymorphic
   def find_belongs_to(id_types, *args)
     final_params = (args && args[0]) || params
     id_type = (final_params.keys & id_types).first
+
+    return nil unless id_type
+
     id = final_params[id_type.to_sym]
     id_type.gsub('_id', '').classify.constantize.find(id)
   end
