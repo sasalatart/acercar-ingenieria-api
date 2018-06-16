@@ -11,8 +11,8 @@ module Abilities
 
       can %i[index show], Comment if author_of_commentable?(params)
       can %i[index create], Comment if approved_commentable?(params)
-      can %i[show update], Comment, approved_commentable: true
-      can %i[destroy], Comment, approved_commentable: true, author_id: @user.id
+      can %i[show], Comment, approved_commentable: true
+      can %i[update destroy], Comment, approved_commentable: true, author_id: @user.id
     end
 
     def author_of_commentable?(params)
