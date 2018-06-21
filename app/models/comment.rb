@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
   alias_attribute :approved?, :approved_commentable?
 
   before_save :sanitize_attributes
-  after_create :enroll_to_self_or_parent
+  after_create :enroll_to_self_and_commentable
   after_create :notify_interested
 
   belongs_to :author, class_name: :User
@@ -56,12 +56,12 @@ class Comment < ApplicationRecord
     sanitize(:content)
   end
 
-  def enroll_to_self_or_parent
-    if child_comment? && !commentable.enrolled_users.find_by(id: author_id)
-      return commentable.enroll!(author)
-    end
-
+  def enroll_to_self_and_commentable
     enroll!(author) unless child_comment?
+
+    return unless commentable.respond_to?(:enroll!)
+
+    commentable.enroll!(author) unless commentable.enrolled_users.find_by(id: author_id)
   end
 
   def notify_interested
