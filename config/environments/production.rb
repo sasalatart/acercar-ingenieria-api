@@ -37,7 +37,7 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :amazon
   config.active_storage.default_url_options = DEFAULT_URL_OPTIONS
-  ActiveStorage::Service.url_expires_in = 12.hours
+  ActiveStorage::Service.url_expires_in = 7.days
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
