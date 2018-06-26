@@ -5,7 +5,7 @@ module Abilities
 
       return if @user.new_record?
 
-      can %i[index count seen], Notification
+      can %i[index seen count set_all_as_seen], Notification
     end
   end
 end

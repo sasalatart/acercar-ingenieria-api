@@ -100,6 +100,11 @@ class User < ActiveRecord::Base
     UserSerializer.new(self, scope: self, scope_name: :current_user).as_json
   end
 
+  def set_all_notifications_as_seen
+    notifications.unseen.update_all(seen: true)
+    send_notifications_count
+  end
+
   def send_notifications_count
     Notification.trigger_send_count_for(id, notifications.unseen.count)
   end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     collection do
       get :count
       get :seen
+      put :seen, to: 'notifications#set_all_as_seen'
     end
   end
 
