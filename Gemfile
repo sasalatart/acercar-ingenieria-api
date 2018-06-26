@@ -27,7 +27,7 @@ gem 'kaminari'
 gem 'api-pagination'
 gem 'active_model_serializers', '~> 0.10.0'
 
-gem 'acts-as-taggable-on', git: 'git://github.com/Fodoj/acts-as-taggable-on.git', ref: 'b0e734b'
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'impressionist'
 
 gem 'mailgun_rails'
