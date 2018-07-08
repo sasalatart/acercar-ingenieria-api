@@ -26,6 +26,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  bio                    :string
+#  allow_password_change  :boolean          default(FALSE), not null
 #
 
 class User < ActiveRecord::Base
