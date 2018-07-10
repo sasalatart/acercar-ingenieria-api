@@ -6,7 +6,7 @@ def commentable_meta_from(models)
   end.flatten
 end
 
-def create_comment!(all_user_ids, commentable, max_likes_per)
+def create_random_comment!(all_user_ids, commentable, max_likes_per)
   commentable_type, commentable_id = commentable.values_at(:type, :id)
 
   comment = Comment.create!(
@@ -20,21 +20,21 @@ def create_comment!(all_user_ids, commentable, max_likes_per)
   add_likes_to(comment, likers_ids)
 end
 
-def create_comments!(options)
+def create_random_comments!(options)
   puts 'Creating comments...'
 
   all_user_ids = User.all.pluck(:id)
   all_commentables = commentable_meta_from([Major, Article, Discussion])
 
   options[:amount].times do
-    create_comment!(all_user_ids, all_commentables.sample, options[:max_likes_per])
+    create_random_comment!(all_user_ids, all_commentables.sample, options[:max_likes_per])
   end
 
   parent_commentables = commentable_meta_from([Comment])
   parent_commentables.each do |commentable|
     number_of_children = rand(options[:max_children_per])
     number_of_children.times do
-      create_comment!(all_user_ids, commentable, options[:max_likes_per])
+      create_random_comment!(all_user_ids, commentable, options[:max_likes_per])
     end
   end
 end

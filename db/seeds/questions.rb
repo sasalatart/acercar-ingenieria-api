@@ -1,7 +1,8 @@
 def create_questions!
   puts 'Creating general questions...'
 
-  @questions.each { |data| Question.create!(data.merge(author_id: 1)) }
+  admin = User.with_role(:admin).first
+  @questions.each { |data| Question.create!(data.merge(author: admin)) }
 end
 
 line_skip = "\r\n\r\n"

@@ -1,13 +1,13 @@
-require_relative './seeds/announcements'
 require_relative './seeds/users'
+require_relative './seeds/announcements'
 require_relative './seeds/questions'
 require_relative './seeds/majors'
-require_relative './seeds/admins'
 require_relative './seeds/categories'
+require_relative './seeds/credits'
+require_relative './seeds/admins'
 require_relative './seeds/articles'
 require_relative './seeds/discussions'
 require_relative './seeds/comments'
-require_relative './seeds/credits'
 
 options = {
   admins: {
@@ -15,11 +15,8 @@ options = {
     majors_amount: 3
   },
   users: {
-    amount: 700
-  },
-  majors: {
-    min_users_per: 5,
-    max_users_per: 45
+    amount: 700,
+    max_majors: 3
   },
   articles: {
     amount: 100,
@@ -40,16 +37,20 @@ options = {
   }
 }
 
+create_main_admin!
 create_announcements!
-create_users! options[:users]
 create_questions!
-create_majors! options[:majors]
-create_admins! options[:admins]
+create_majors!
 create_categories!
-create_articles! options[:articles]
-create_discussions! options[:discussions]
-create_comments! options[:comments]
 create_credits!
-reject_articles options[:articles]
+
+if ENV['EXTENDED']
+  create_random_users! options[:users]
+  create_random_admins! options[:admins]
+  create_random_articles! options[:articles]
+  create_random_discussions! options[:discussions]
+  create_random_comments! options[:comments]
+  reject_random_articles options[:articles]
+end
 
 puts('Done.')

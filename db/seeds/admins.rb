@@ -1,4 +1,4 @@
-def create_admins!(options)
+def create_random_admins!(options)
   puts 'Creating platform admins...'
   User.all.sample(options[:amount]).each(&:promote_to_admin)
 

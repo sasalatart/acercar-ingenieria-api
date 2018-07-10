@@ -21,7 +21,7 @@ API built on top of Ruby on Rails for a project of the Centro de Alumnos de Inge
 3. Make sure to have [Mailcatcher](https://github.com/sj26/mailcatcher) (or similar) running for email debugging.
 4. Make sure to have [ImageMagick](https://github.com/ImageMagick/ImageMagick) installed for image processing.
 5. Run `bundle install` to install ruby dependencies.
-6. Setup the database by running `rails db:reset`.
+6. Setup the database by running `rails db:reset`. You can additionally use the `EXTENDED=true` env variable to seed with extra random users, articles, discussions, etc. If this env variable is not used, the seeds will add the minimum data required to release the app in production.
 7. Run `rails s -p 3001` to run the application on port 3001.
 8. Run `bundle exec sidekiq` in the same dir, but in a new shell to start Sidekiq.
 
