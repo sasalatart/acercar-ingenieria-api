@@ -19,17 +19,19 @@ class Notification < ApplicationRecord
   scope :seen, -> { where(seen: true) }
   scope :unseen, -> { where(seen: false) }
 
-  belongs_to :owner, class_name: :User
+  belongs_to :owner, class_name: :User,
+                     inverse_of: :notifications
 
   belongs_to :notificator, class_name: :User,
-                           optional: true
+                           optional: true,
+                           inverse_of: :sent_notifications
 
   belongs_to :notifyable, polymorphic: true
 
   def self.trigger_send_count_for(user_id, count)
     return unless ENV['WS_ENABLED']
 
-    data = { count: count, timestamp: Time.now }
+    data = { count: count, timestamp: Time.now.utc }
     Pusher.trigger("private-user-#{user_id}", 'notifications-count', data)
   end
 
@@ -41,9 +43,5 @@ class Notification < ApplicationRecord
     counts_per_user.each do |owner_id, count|
       trigger_send_count_for(owner_id, count)
     end
-  end
-
-  def self.remove_old
-    Notification.where('created_at < ?', Time.now - 1.month).destroy
   end
 end

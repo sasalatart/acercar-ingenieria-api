@@ -29,7 +29,7 @@
 #  allow_password_change  :boolean          default(FALSE), not null
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable
   include DeviseTokenAuth::Concerns::User
@@ -52,27 +52,33 @@ class User < ActiveRecord::Base
   has_many :majors, through: :major_users
 
   has_many :questions, dependent: :destroy,
-                       foreign_key: :author_id
+                       foreign_key: :author_id,
+                       inverse_of: :author
 
   has_many :comments, dependent: :destroy,
-                      foreign_key: :author_id
+                      foreign_key: :author_id,
+                      inverse_of: :author
 
   has_many :likes, dependent: :destroy
 
   has_many :articles, dependent: :destroy,
-                      foreign_key: :author_id
+                      foreign_key: :author_id,
+                      inverse_of: :author
 
   has_many :discussions, dependent: :destroy,
-                         foreign_key: :author_id
+                         foreign_key: :author_id,
+                         inverse_of: :author
 
   has_many :enrollments, dependent: :destroy
 
   has_many :notifications, dependent: :destroy,
-                           foreign_key: :owner_id
+                           foreign_key: :owner_id,
+                           inverse_of: :owner
 
   has_many :sent_notifications, class_name: :Notification,
                                 dependent: :destroy,
-                                foreign_key: :notificator_id
+                                foreign_key: :notificator_id,
+                                inverse_of: :notificator
 
   has_one_attached :avatar
 
@@ -93,7 +99,7 @@ class User < ActiveRecord::Base
 
   validates :generation, presence: true,
                          numericality: { greater_than_or_equal_to: 1904,
-                                         less_than_or_equal_to: Time.now.year }
+                                         less_than_or_equal_to: Time.now.utc.year }
 
   validates :bio, allow_blank: true,
                   length: { maximum: 255 }

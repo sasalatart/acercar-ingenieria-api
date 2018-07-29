@@ -36,7 +36,9 @@ class Article < ApplicationRecord
 
   acts_as_taggable_on :categories
 
-  belongs_to :author, class_name: :User
+  belongs_to :author, class_name: :User,
+                      inverse_of: :articles
+
   belongs_to :major, optional: true
 
   has_many :comments, as: :commentable, dependent: :destroy

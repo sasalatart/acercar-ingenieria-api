@@ -36,7 +36,8 @@ class Discussion < ApplicationRecord
   is_impressionable counter_cache: true,
                     unique: true
 
-  belongs_to :author, class_name: :User
+  belongs_to :author, class_name: :User,
+                      inverse_of: :discussions
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy

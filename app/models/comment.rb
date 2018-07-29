@@ -26,7 +26,8 @@ class Comment < ApplicationRecord
   after_create :enroll_to_self_and_commentable
   after_create :notify_interested
 
-  belongs_to :author, class_name: :User
+  belongs_to :author, class_name: :User,
+                      inverse_of: :comments
 
   belongs_to :commentable, polymorphic: true,
                            counter_cache: true

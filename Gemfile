@@ -49,6 +49,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rubocop', require: false
   gem 'annotate'
   gem 'lol_dba'
   gem 'bullet'

@@ -24,7 +24,9 @@ class Question < ApplicationRecord
   scope :not_answered, -> { where(answer: [nil, '']).order(DEFAULT_ORDER) }
   scope :answered, -> { where.not(answer: [nil, '']).order(DEFAULT_ORDER) }
 
-  belongs_to :author, class_name: :User
+  belongs_to :author, class_name: :User,
+                      inverse_of: :questions
+
   belongs_to :major, optional: true
 
   validates :question, presence: true,
