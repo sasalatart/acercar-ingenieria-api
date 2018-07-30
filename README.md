@@ -42,6 +42,10 @@ First, make sure to rename the file `.env.example` to `.env`, and complete it wi
   </tr>
   <tr><td>API_PORT</td></tr>
   <tr>
+    <td>DB_PASSWORD</td>
+    <td>the database's user password (must be the same as the postgres container's POSTGRES_PASSWORD env variable)</td>
+  </tr>
+  <tr>
     <td>SECRET_KEY_BASE</td>
     <td>for verifying the integrity of signed cookies</td>
   </tr>
@@ -80,6 +84,8 @@ First, make sure to rename the file `.env.example` to `.env`, and complete it wi
 </table>
 
 You can visit https://www.mailgun.com/, https://www.digitalocean.com/ and https://pusher.com/ to get your Mailgun, Digital Ocean Spaces and Pusher credentials.
+
+Do not forget to also set the `POSTGRES_PASSWORD` env variable to the `postgres` container in `docker-compose.yml` file.
 
 Then, run the following commands:
 
