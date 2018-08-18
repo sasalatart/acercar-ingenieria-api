@@ -1,7 +1,8 @@
 require 'sidekiq'
 require 'sidekiq/web'
 
-sidekiq_config = { url: ENV['JOB_WORKER_URL'] }
+redis_host = Rails.env.development? || Rails.env.test? ? 'localhost' : 'redis'
+sidekiq_config = { url: "redis://#{redis_host}:6379/0" }
 
 Sidekiq.configure_server do |config|
   config.redis = sidekiq_config
@@ -12,6 +13,6 @@ Sidekiq.configure_client do |config|
 end
 
 Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
-  user == Rails.application.secrets.sidekiq_username &&
-    password == Rails.application.secrets.sidekiq_password
+  user == Rails.application.credentials[:sidekiq][:username] &&
+    password == Rails.application.credentials[:sidekiq][:password]
 end

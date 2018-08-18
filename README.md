@@ -20,16 +20,59 @@ API built on top of Ruby on Rails for a project of the Centro de Alumnos de Inge
 2. Make sure to have [Ruby](https://rvm.io/), [PostgreSQL](https://www.postgresql.org/) and [Redis](https://redis.io/) on your machine.
 3. Make sure to have [Mailcatcher](https://github.com/sj26/mailcatcher) (or similar) running for email debugging.
 4. Make sure to have [ImageMagick](https://github.com/ImageMagick/ImageMagick) installed for image processing.
-5. Run `bundle install` to install ruby dependencies.
-6. Setup the database by running `rails db:reset`. You can additionally use the `EXTENDED=true` env variable to seed with extra random users, articles, discussions, etc. If this env variable is not used, the seeds will add the minimum data required to release the app in production.
-7. Run `rails s -p 3001` to run the application on port 3001.
-8. Run `bundle exec sidekiq` in the same dir, but in a new shell to start Sidekiq.
+5. Make sure you have access to the application's credentials, as explained in the next section.
+6. Run `bundle install` to install ruby dependencies.
+7. Setup the database by running `rails db:reset`. You can additionally use the `EXTENDED=true` env variable to seed with extra random users, articles, discussions, etc. If this env variable is not used, the seeds will add the minimum data required to release the app in production.
+8. Run `rails s -p 3001` to run the application on port 3001.
+9. Run `bundle exec sidekiq` in the same dir, but in a new shell to start Sidekiq.
 
-If you wish to use real-time features, you will also need to export your Pusher credentials environment variables, as explained in the next section.
+## Credentials Setup
 
-## Docker (Compose) Setup
+In order to use Mailgun, Digital Ocean Spaces, Pusher and access Sidekiq's dashboard, you need to have access to the encrypted credentials.
 
-First, make sure to rename the file `.env.example` to `.env`, and complete it with the following environment variables in the form of `KEY=VALUE`:
+If you are going to use the ones in this project, just make sure that `RAILS_MASTER_KEY` env variable is available, and has the corresponding value.
+
+If you wish to edit them, just run:
+
+```sh
+$ EDITOR=vim rails credentials:edit
+```
+
+The secrets that will be needed are:
+
+```yml
+secret_key_base:
+
+sidekiq:
+  username:
+  password:
+
+pusher:
+  app_id:
+  key:
+  secret:
+  cluster:
+
+### production only ###
+
+db_password: # must be the same as the postgres container's POSTGRES_PASSWORD env variable
+
+mailgun:
+  api_key:
+  domain:
+
+spaces:
+  access_key:
+  secret_key:
+  region:
+  bucket:
+```
+
+You can visit https://www.mailgun.com/, https://www.digitalocean.com/ and https://pusher.com/ to get your own Mailgun, Digital Ocean Spaces and Pusher credentials.
+
+## Environment Variables Setup
+
+The following is a list of environment variables that the application needs in order to work:
 
 <table>
   <tr>
@@ -37,57 +80,32 @@ First, make sure to rename the file `.env.example` to `.env`, and complete it wi
     <th>Description</th>
   </tr>
   <tr>
+    <td>RAILS_MASTER_KEY</td>
+    <td>decrypts secret credentials</td>
+  </tr>
+  <tr>
     <td>API_HOST</td>
-    <td rowspan="2">host and port for the API</td>
-  </tr>
-  <tr><td>API_PORT</td></tr>
-  <tr>
-    <td>DB_PASSWORD</td>
-    <td>the database's user password (must be the same as the postgres container's POSTGRES_PASSWORD env variable)</td>
+    <td>defaults to localhost in development, and https://api.acercaringenieria.cl in production</td>
   </tr>
   <tr>
-    <td>SECRET_KEY_BASE</td>
-    <td>for verifying the integrity of signed cookies</td>
+    <td>API_PORT</td>
+    <td>defaults to 3001 in development, and 443 in production</td>
   </tr>
-  <tr>
-    <td>MAILGUN_DOMAIN</td>
-    <td rowspan="2">your Mailgun credentials</td>
-  </tr>
-  <tr><td>MAILGUN_API_KEY</td></tr>
   <tr>
     <td>MAINTAINER_EMAIL</td>
     <td>target email for exception notifications</td>
   </tr>
-  <tr>
-    <td>SPACES_ACCESS_KEY</td>
-    <td rowspan="4">your Digital Ocean Spaces credentials</td>
-  </tr>
-  <tr><td>SPACES_SECRET_KEY</td></tr>
-  <tr><td>SPACES_REGION</td></tr>
-  <tr><td>SPACES_BUCKET</td></tr>
-  <tr>
-    <td>SIDEKIQ_USERNAME</td>
-    <td rowspan="2">custom credentials for accessing Sidekiq UI</td>
-  </tr>
-  <tr><td>SIDEKIQ_PASSWORD</td></tr>
-  <tr>
-    <td>PUSHER_APP_ID</td>
-    <td rowspan="4">your Pusher credentials</td>
-  </tr>
-  <tr><td>PUSHER_KEY</td></tr>
-  <tr><td>PUSHER_SECRET</td></tr>
-  <tr><td>PUSHER_CLUSTER</td></tr>
   <tr>
     <td>WS_ENABLED</td>
     <td>whether or not you want to activate real-time features (true/false)</td>
   </tr>
 </table>
 
-You can visit https://www.mailgun.com/, https://www.digitalocean.com/ and https://pusher.com/ to get your Mailgun, Digital Ocean Spaces and Pusher credentials.
+If you will be using the `docker-compose.yml` sample file in the project, make sure to rename the file `.env.example` to `.env`, and complete it with the missing values.
 
-Do not forget to also set the `POSTGRES_PASSWORD` env variable to the `postgres` container in `docker-compose.yml` file.
+## Running With `docker-compose`
 
-Then, run the following commands:
+After completing the previous steps, run the following commands:
 
 ```sh
 # Run the app (backend, frontend & databases)
@@ -105,9 +123,9 @@ You should now be able to:
 
 - Access Sidekiq UI via http://0.0.0.0:3001/sidekiq
 
-__You must take into account the fact that the [Frontend Docker Image](https://github.com/sasalatart/acercar-ingenieria-client) needs to be built considering the API's URL, as well as your Pusher credentials.__
+__You must take into account the fact that the [Frontend Docker Image](https://github.com/sasalatart/acercar-ingenieria-client) needs to be built considering the API's URL, as well as some of your Pusher credentials.__
 
-## Production
+## `docker-compose` in Production
 
 1) Make sure to have https enabled.
 

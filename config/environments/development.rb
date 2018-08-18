@@ -2,8 +2,8 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   DEFAULT_URL_OPTIONS = {
-    host: Rails.application.secrets.API_HOST,
-    port: Rails.application.secrets.API_PORT
+    host: ENV['API_HOST'] || 'http://localhost',
+    port: ENV['API_PORT'] || 3001
   }.freeze
 
   # In the development environment your application's code is reloaded on
@@ -16,6 +16,10 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+
+  # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
+  # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
+  config.require_master_key = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

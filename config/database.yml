@@ -22,4 +22,4 @@ production:
   <<      : *default
   host    : postgres
   database: acercar_production
-  password: <%= Rails.application.secrets.db_password %>
+  password: <%= Rails.application.credentials.db_password %>
