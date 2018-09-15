@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
     paginated_json_response @questions, each_serializer: QuestionSerializer
   end
 
-  def pending
+  def unanswered
     @questions = Question.scoped(params).not_answered
     paginated_json_response @questions, each_serializer: QuestionSerializer
   end

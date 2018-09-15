@@ -10,8 +10,8 @@ class ArticlesController < ApplicationController
     paginated_response Article.scoped(params.merge(author_id: current_user.id))
   end
 
-  def pending
-    paginated_response Article.scoped(params).pending
+  def unapproved
+    paginated_response Article.scoped(params).unapproved
   end
 
   def show

@@ -6,7 +6,7 @@ module Abilities
       return if @user.new_record?
 
       unless @majors_user_is_admin.empty?
-        can %i[pending], Article if @majors_user_is_admin.include? params[:major_id].to_i
+        can %i[unapproved], Article if @majors_user_is_admin.include? params[:major_id].to_i
         can %i[show update approval destroy], Article, major_id: @majors_user_is_admin
       end
 

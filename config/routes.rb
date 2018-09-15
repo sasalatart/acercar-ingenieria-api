@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/pusher/auth', to: 'pusher#auth'
 
   resources :admins, only: %i[index]
+
   resources :users, only: %i[index show update destroy] do
     member do
       post :admin, to: 'admins#promote'
@@ -30,50 +31,20 @@ Rails.application.routes.draw do
 
   resources :questions, only: %i[index create update destroy] do
     collection do
-      get :pending
+      get :unanswered
     end
   end
 
-  resources :majors, only: %i[index show create update destroy] do
-    member do
-      post :email
-      post 'personal-email'
-    end
-
-    resources :admins, only: %i[index]
-    resources :users, only: %i[index destroy] do
-      member do
-        post :admin, to: 'admins#promote'
-        delete :admin, to: 'admins#demote'
-      end
-    end
-
-    resources :video_links, only: %i[index create update destroy]
-
-    resources :articles, only: %i[index show create update destroy] do
-      member { put :approval }
-
-      collection do
-        get :mine
-        get :pending
-      end
-    end
-
-    resources :comments, only: %i[index show create update destroy]
-
-    resources :questions, only: %i[index create update destroy] do
-      collection do
-        get :pending
-      end
-    end
-  end
+  resources :video_links, only: %i[update destroy]
+  resources :categories, only: %i[index create update destroy]
+  resources :credits, only: %i[index create update destroy]
 
   resources :articles, only: %i[index show create update destroy] do
     member { put :approval }
 
     collection do
       get :mine
-      get :pending
+      get :unapproved
     end
 
     post :reports, to: 'reports#report'
@@ -82,18 +53,16 @@ Rails.application.routes.draw do
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
-    resources :comments, only: %i[index show create update destroy]
+    resources :comments, only: %i[index create]
   end
 
-  resources :categories, only: %i[index create update destroy]
-
-  resources :comments, only: %i[show] do
+  resources :comments, only: %i[show update destroy] do
     delete :likes, to: 'likes#destroy'
     delete :enrollments, to: 'enrollments#destroy'
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
-    resources :comments, only: %i[index show create update destroy]
+    resources :comments, only: %i[index create]
   end
 
   resources :discussions, only: %i[index show create update destroy] do
@@ -107,10 +76,42 @@ Rails.application.routes.draw do
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
-    resources :comments, only: %i[index show create update destroy]
+    resources :comments, only: %i[index create]
   end
 
-  resources :credits, only: %i[index create update destroy]
+  resources :majors, only: %i[index show create update destroy] do
+    member do
+      post :email
+      post 'personal-email'
+    end
+
+    resources :admins, only: %i[index]
+
+    resources :users, only: %i[index] do
+      member do
+        post :admin, to: 'admins#promote'
+        delete :admin, to: 'admins#demote'
+      end
+    end
+
+    resources :questions, only: %i[index create] do
+      collection do
+        get :unanswered
+      end
+    end
+
+    resources :articles, only: %i[index create] do
+      member { put :approval }
+
+      collection do
+        get :mine
+        get :unapproved
+      end
+    end
+
+    resources :video_links, only: %i[index create]
+    resources :comments, only: %i[index create]
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -32,7 +32,7 @@ class Article < ApplicationRecord
                   using: { tsearch: { prefix: true, any_word: true } }
 
   scope :approved, -> { where(approved: true) }
-  scope :pending, -> { where(approved: false) }
+  scope :unapproved, -> { where(approved: false) }
 
   acts_as_taggable_on :categories
 
