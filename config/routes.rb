@@ -24,15 +24,11 @@ Rails.application.routes.draw do
   end
 
   resources :announcements, only: %i[index create update destroy] do
-    collection do
-      get :pinned
-    end
+    collection { get :pinned }
   end
 
   resources :questions, only: %i[index create update destroy] do
-    collection do
-      get :unanswered
-    end
+    collection { get :unanswered }
   end
 
   resources :video_links, only: %i[update destroy]
@@ -70,9 +66,7 @@ Rails.application.routes.draw do
     delete :likes, to: 'likes#destroy'
     delete :enrollments, to: 'enrollments#destroy'
 
-    collection do
-      get :mine
-    end
+    collection { get :mine }
 
     resources :likes, only: %i[create]
     resources :enrollments, only: %i[create]
@@ -83,6 +77,8 @@ Rails.application.routes.draw do
     member do
       post :email
       post 'personal-email'
+      post :subscription, to: 'major_subscriptions#subscribe'
+      delete :subscription, to: 'major_subscriptions#unsubscribe'
     end
 
     resources :admins, only: %i[index]
@@ -95,9 +91,7 @@ Rails.application.routes.draw do
     end
 
     resources :questions, only: %i[index create] do
-      collection do
-        get :unanswered
-      end
+      collection { get :unanswered }
     end
 
     resources :articles, only: %i[index create] do
